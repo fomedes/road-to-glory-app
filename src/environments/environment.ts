@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  apiBaseUrl: 'http://127.0.0.1:8000/api/',
+  production: true,
+  apiBaseUrl: 'https://road-to-glory-db-fdce9392c43f.herokuapp.com/api',
 };
