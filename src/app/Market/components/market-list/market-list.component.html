@@ -1,0 +1,111 @@
+<div class="form-container">
+  <h1>Mercado de Jugadores</h1>
+  <h2 class="market-header">
+      <div>
+        <p>Reinicio del mercado</p>
+        <ng-container *ngIf="marketEnding; else Countdown">&lt; 1min</ng-container>
+        <ng-template #Countdown>{{ countdown }}</ng-template>
+      </div>
+      <div>
+        <p>Presupuesto</p>
+        <p>{{ userFunds | formatNumber}}€</p>
+      </div>
+  </h2>
+  
+  <div class='table-container'>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Id Column // not in use for TFM -->
+        <ng-container matColumnDef="playerId">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let player">{{ player.id }}</mat-cell>
+        </ng-container>
+    
+        <!-- Avatar Column -->
+        <ng-container matColumnDef="avatar">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let player"><a href="http://localhost:4200/players/{{player.id}}"><img class="player-list_photo" [src]='player.photo'></a></mat-cell>
+        </ng-container>
+    
+        <!-- Positions Column -->
+        <ng-container matColumnDef="positions">
+          <mat-header-cell *matHeaderCellDef>Posiciones</mat-header-cell>
+          <mat-cell *matCellDef="let player">
+            <p>{{player.pref_position.join(' ')}}</p>
+          </mat-cell>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+          <mat-cell *matCellDef="let player"><a href="http://localhost:4200/players/{{player.id}}">{{player.short_name}}</a></mat-cell>
+        </ng-container>
+    
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
+          <mat-cell *matCellDef="let player">{{playerPrices[player.overall] | formatNumber }}€</mat-cell>
+        </ng-container>
+    
+        <!-- Overall Column -->
+        <ng-container matColumnDef="overall">
+          <mat-header-cell *matHeaderCellDef>Valoración</mat-header-cell>
+          <mat-cell *matCellDef="let player">{{ player.overall }}</mat-cell>
+        </ng-container>
+    
+        <!-- Country Column // not in use for TFM -->
+        <ng-container matColumnDef="country">
+          <mat-header-cell *matHeaderCellDef>País</mat-header-cell>
+          <mat-cell *matCellDef="let player">{{ player.country }}</mat-cell>
+        </ng-container>
+    
+        <!-- Weak Foot Column -->
+        <ng-container matColumnDef="weakFoot">
+          <mat-header-cell *matHeaderCellDef>Pierna Mala</mat-header-cell>
+          <mat-cell *matCellDef="let player">{{ player.weak_foot + '&#9733;' }}</mat-cell>
+        </ng-container>
+    
+        <!-- Skills Column -->
+        <ng-container matColumnDef="skills">
+          <mat-header-cell *matHeaderCellDef>Filigranas</mat-header-cell>
+          <mat-cell *matCellDef="let player">{{ player.skill_moves+ '&#9733;' }}</mat-cell>
+        </ng-container>
+    
+        <!-- Bidding Column -->
+        <ng-container matColumnDef="bidAmount">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let player">
+            <!--
+            <input class="bid-input" type="number" placeholder="0€"/>
+            -->
+            <button  mat-raised-button color="primary"  (click)="bidPlayerOverlay(player)">Pujar</button>
+          </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+  </div>  
+</div>
+
+<ng-template #bidOverlay>
+  <div class="overlay">
+    <h2>{{player.short_name}}</h2>
+    <img class="player-overlay_photo" [src]='player.photo'>
+    <h3>Valor: {{playerPrices[player.overall] | formatNumber }}€</h3>
+    <form [formGroup]="bidForm" (ngSubmit)="sendBid(player)">
+      <div class="flex-container">
+        <mat-form-field appearance="fill" class="flex-item">
+          <mat-label>Puja</mat-label>
+          <input matInput formControlName="bidAmount">
+          <mat-error *ngIf="bidAmount.invalid && bidAmount.touched">
+            {{ getValidationMessage('bidAmount') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="button-container">
+        <button mat-raised-button color="primary"  type="submit" [disabled]="!bidForm.valid">Aceptar</button>
+      </div>
+    </form>
+    <button mat-raised-button color="warn" (click)="closeOverlay(dialogRef)">Atrás</button>
+  </div>
+</ng-template>

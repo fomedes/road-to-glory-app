@@ -1,0 +1,73 @@
+<ng-container *ngIf="showNoAuthSection">
+  <div class="form-container">
+    <h1>Bienvenido a Road to Glory!</h1>
+  
+    <p>
+      <button mat-raised-button color="primary" (click)="navigationTo('login')">Login</button>
+    </p>
+    <p><button mat-raised-button color="primary" (click)="navigationTo('register')">Registrarse</button></p>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="showAuthSection">
+  <div class="form-container">
+    <h1>Si el usuario esta identificado satisfactoriamente</h1>
+  
+    <p>Tabla con últimos fichajes y resultados de la comunidad</p>
+  
+    <p>
+      <button mat-raised-button color="primary" (click)="navigationTo('results')">Introducir resultados</button>
+    </p>
+  
+    <div>
+      <table mat-table  [dataSource]="teams" class="mat-elevation-z8">
+  
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <mat-header-cell *matHeaderCellDef>Posición</mat-header-cell>
+          <mat-cell *matCellDef="let team">{{ team.position }}</mat-cell>
+        </ng-container>
+  
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Club</mat-header-cell>
+          <mat-cell *matCellDef="let team">{{ team.name }}</mat-cell>
+        </ng-container>
+  
+        <!-- Played Column -->
+        <ng-container matColumnDef="played">
+          <mat-header-cell *matHeaderCellDef>Jugados</mat-header-cell>
+          <mat-cell *matCellDef="let team">{{ team.played }}</mat-cell>
+        </ng-container>
+  
+        <!-- Won Column -->
+        <ng-container matColumnDef="won">
+          <mat-header-cell *matHeaderCellDef>Ganados</mat-header-cell>
+          <mat-cell *matCellDef="let team">{{ team.won }}</mat-cell>
+        </ng-container>
+  
+        <!-- Drawn Column -->
+        <ng-container matColumnDef="drawn">
+          <mat-header-cell *matHeaderCellDef>Empatados</mat-header-cell>
+          <mat-cell *matCellDef="let team">{{ team.drawn }}</mat-cell>
+        </ng-container>
+  
+        <!-- Lost Column -->
+        <ng-container matColumnDef="lost">
+          <mat-header-cell *matHeaderCellDef>Perdidos</mat-header-cell>
+          <mat-cell *matCellDef="let team">{{ team.lost }}</mat-cell>
+        </ng-container>
+  
+        <!-- Points Column -->
+        <ng-container matColumnDef="points">
+          <mat-header-cell *matHeaderCellDef>Puntos</mat-header-cell>
+          <mat-cell *matCellDef="let team">{{ team.points }}</mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="['position', 'name', 'played', 'won', 'drawn', 'lost', 'points']"></mat-header-row>
+        <mat-row *matRowDef="let team; columns: ['position', 'name', 'played', 'won', 'drawn', 'lost', 'points']"></mat-row>
+      </table>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,101 @@
+<div class="player-stats">
+  <div class="player-header">
+    <img class="player-avatar" [src]='player.photo'>
+    <div>
+      <p>{{player.short_name}}</p>
+      <p *ngFor="let pos of player.pref_position">{{pos}}</p>
+      <p>{{player.overall}}</p>
+      <p>{{playerPrices[player.overall]}}€</p>
+    </div>
+  </div>
+  <div>
+    <p>Pierna hábil: {{player.preferred_foot}}</p>
+    <p>{{player.weak_foot}}&#9733; Pierna mala</p>
+    <p>{{player.skill_moves}}&#9733; Filigranas</p>
+    <p>Rendimiento: {{player.attacking_WR}}/{{player.defensive_WR}}</p>
+    <p>Tipo de cuerpo: {{player.body_type}}</p>
+    <p>Cara real: {{player.real_face}}</p>
+    <p>Club Actual: {{player.current_club}}</p>
+  
+  </div>
+  
+  
+  <div class="grid-container">
+    <div class="attributes_block">
+      <p>OFENSIVA</p>
+      <ul>
+        <li>{{player.crossing}} Centros</li>
+        <li>{{player.finishing}} Definición</li>
+        <li>{{player.heading_accuracy}} Precisión cabeza</li>
+        <li>{{player.short_passing}} Pases cortos</li>
+        <li>{{player.volleys}} Voleas</li>
+      </ul>
+    </div>
+    <div class="attributes_block">
+      <p>TÉCNICA</p>
+      <ul>
+        <li>{{player.dribbling}} Regates</li>
+        <li>{{player.curve}} Efecto</li>
+        <li>{{player.free_kick}} Precisión faltas</li>
+        <li>{{player.long_passing}} Pases largos</li>
+        <li>{{player.ball_control}} Control del Balón</li>
+      </ul>
+    </div>
+    <div class="attributes_block">
+      <p>MOVIMIENTO</p>
+      <ul>
+        <li>{{player.acceleration}} Aceleración</li>
+        <li>{{player.sprint}} Velocidad</li>
+        <li>{{player.agility}} Agilidad</li>
+        <li>{{player.reactions}} Reflejos</li>
+        <li>{{player.balance}} Equilibrio</li>
+      </ul>
+    </div>
+    <div class="attributes_block">
+      <p>POTENCIA</p>
+      <ul>
+        <li>{{player.shot_power}} Potencia</li>
+        <li>{{player.jumping}} Salto</li>
+        <li>{{player.stamina}} Resistencia</li>
+        <li>{{player.strength}} Fuerza</li>
+        <li>{{player.long_shot}} Tiros lejanos</li>
+      </ul>
+    </div>
+    <div class="attributes_block">
+      <p>MENTALIDAD</p>
+      <ul>
+        <li>{{player.aggression}} Agresividad</li>
+        <li>{{player.interceptions}} Intercepciones</li>
+        <li>{{player.positioning}} Colocación</li>
+        <li>{{player.vision}} Vision</li>
+        <li>{{player.penalties}} Penaltis</li>
+        <li>{{player.composure}} Compostura</li>
+  
+      </ul>
+    </div>
+    <div class="attributes_block">
+      <p>DEFENSA</p>
+      <ul>
+        <li>{{player.defense_awareness}} Conciencia defensiva</li>
+        <li>{{player.standing_tackle}} Robos</li>
+        <li>{{player.sliding_tackle}} Entrada agresiva</li>
+      </ul>
+    </div>
+    <div class="attributes_block">
+      <p>PORTERO</p>
+      <ul>
+        <li>{{player.gk_diving}} Estirada</li>
+        <li>{{player.gk_handling}} Paradas</li>
+        <li>{{player.gk_kicking}} Saques</li>
+        <li>{{player.gk_positioning}} Colocación</li>
+        <li>{{player.gk_reflexes}} Reflejos</li>
+      </ul>
+    </div>
+    <div class="attributes_block">
+      <p>RASGOS</p>
+      <ul>
+        <li *ngFor="let trait of player.traits">{{trait}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

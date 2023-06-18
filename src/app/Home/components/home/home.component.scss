@@ -1,0 +1,16 @@
+.form-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+}
+
+mat-header-row {
+  background-color: #3F51B5;
+}
+
+mat-header-cell {
+ color: white;
+ font-weight: bold;
+}

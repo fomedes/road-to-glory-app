@@ -1,0 +1,31 @@
+<div class="form-container">
+  <h1>Introduce tus resultados</h1>
+  <div>
+    <form [formGroup]="resultsForm" (ngSubmit)="sendResults()">
+      <section>
+        <mat-form-field>
+          <mat-label>Select Option</mat-label>
+          <mat-select formControlName="selectedOption" required>
+            <mat-option *ngFor="let game of gameOptions" [value]="game">
+              {{ game }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+    
+      <section>
+        <mat-form-field>
+          <input matInput type="number" formControlName="localGoals" placeholder="Goles Local" required>
+        </mat-form-field>
+      </section>
+    
+      <section>
+        <mat-form-field>
+          <input matInput type="number" formControlName="visitorGoals" placeholder="Goles Visitante" required>
+        </mat-form-field>
+      </section>
+    
+      <button mat-raised-button color="primary" type="submit"  [disabled]="!resultsForm.valid">Submit</button>
+    </form>
+  </div>
+</div>

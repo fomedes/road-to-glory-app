@@ -1,0 +1,26 @@
+ul {
+  list-style-type: none;
+  padding: 0; 
+  margin: 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 10px;}
+
+.attributes-block {
+  border: 1px solid black;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.player-header{
+  display: inline-flex;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+}
+
