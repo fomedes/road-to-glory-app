@@ -51,6 +51,7 @@ export class PlayerService {
   }
 
   sellPlayer(saleData: SoldPlayerDTO): Observable<any> {
+    console.log(this.urlSaleApi);
     return this.http.post<SoldPlayerDTO>(`${this.urlSaleApi}`, saleData);
   }
 }
