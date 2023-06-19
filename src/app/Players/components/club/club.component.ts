@@ -104,7 +104,7 @@ export class ClubComponent {
       selling_date: new Date(),
     };
 
-    this.marketService.bidPlayer(sellData).subscribe(
+    this.playerService.sellPlayer(sellData).subscribe(
       (response) => {
         console.log('Bid placed succesfully:', response);
         // Close Overlay and reset form
