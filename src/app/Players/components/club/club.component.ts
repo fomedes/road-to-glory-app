@@ -29,7 +29,6 @@ export class ClubComponent {
     'weakFoot',
     'skills',
     'sell',
-    'transfer',
   ];
 
   dataSource!: MatTableDataSource<PlayerDTO>;
