@@ -65,10 +65,6 @@ export class ClubComponent {
         ? responsePlayers
         : JSON.parse(responsePlayers);
 
-      console.log(`resp => ${resp}`);
-      console.log(`response => ${responsePlayers}`);
-      console.log(`playerId => ${this.playerIds}`);
-
       for (let id of this.playerIds) {
         this.playerService.getPlayerById(id).subscribe(
           (player) => {
@@ -76,9 +72,6 @@ export class ClubComponent {
             this.dataSource = new MatTableDataSource<PlayerDTO>(
               this.clubPlayers
             );
-            console.log(`player => ${player}`);
-            console.log(`clubPlayer => ${this.clubPlayers}`);
-            console.log(`datasource => ${this.dataSource}`);
           },
           (error: any) => {
             errorResponse = error.error;
