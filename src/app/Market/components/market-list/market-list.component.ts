@@ -131,7 +131,7 @@ export class MarketListComponent {
   private getMarketSettings() {
     let errorResponse: any;
 
-    this.playerIds = [];
+    //this.playerIds = [];
     this.getFunds();
 
     this.marketService.getAuctionPlayers().subscribe((auctionPlayers) => {
