@@ -20,6 +20,14 @@
           <mat-cell *matCellDef="let player"><a href="http://localhost:4200/players/{{player.id}}"><img class="player-list_photo" [src]='player.photo'></a></mat-cell>
         </ng-container>
     
+        <!-- Positions Column -->
+        <ng-container matColumnDef="positions">
+          <mat-header-cell *matHeaderCellDef>Posiciones</mat-header-cell>
+          <mat-cell *matCellDef="let player">
+            <p>{{player.pref_position.join(' ')}}</p>
+          </mat-cell>
+        </ng-container>
+    
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
@@ -29,7 +37,7 @@
         <!-- Price Column -->
         <ng-container matColumnDef="price">
           <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
-          <mat-cell *matCellDef="let player">{{playerPrices[player.overall]}}€</mat-cell>
+          <mat-cell *matCellDef="let player">{{playerPrices[player.overall] | formatNumber }}€</mat-cell>
         </ng-container>
     
         <!-- Overall Column -->
@@ -38,7 +46,7 @@
           <mat-cell *matCellDef="let player">{{ player.overall }}</mat-cell>
         </ng-container>
     
-        <!-- Country Column -->
+        <!-- Country Column // not in use for TFM -->
         <ng-container matColumnDef="country">
           <mat-header-cell *matHeaderCellDef>País</mat-header-cell>
           <mat-cell *matCellDef="let player">{{ player.country }}</mat-cell>
@@ -54,12 +62,6 @@
         <ng-container matColumnDef="skills">
           <mat-header-cell *matHeaderCellDef>Filigranas</mat-header-cell>
           <mat-cell *matCellDef="let player">{{ player.skill_moves+ '&#9733;' }}</mat-cell>
-        </ng-container>
-    
-        <!-- Positions Column -->
-        <ng-container matColumnDef="positions">
-          <mat-header-cell *matHeaderCellDef>Posiciones</mat-header-cell>
-          <mat-cell *matCellDef="let player"><p *ngFor="let pos of player.pref_position">{{pos}}</p></mat-cell>
         </ng-container>
     
         <!-- Actual Club Column -->

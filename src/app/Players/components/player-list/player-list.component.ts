@@ -21,7 +21,6 @@ export class PlayerListComponent {
     'name',
     'price',
     'overall',
-    'country',
     'weakFoot',
     'skills',
     'positions',

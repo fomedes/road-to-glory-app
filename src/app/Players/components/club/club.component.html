@@ -30,7 +30,7 @@
         <!-- Price Column -->
         <ng-container matColumnDef="price">
           <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
-          <mat-cell *matCellDef="let player">{{playerPrices[player.overall]}}€</mat-cell>
+          <mat-cell *matCellDef="let player">{{playerPrices[player.overall] | formatNumber }}€</mat-cell>
         </ng-container>
     
         <!-- Overall Column -->
