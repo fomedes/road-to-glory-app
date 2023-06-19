@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PlayerDTO } from '../models/player.dto';
-import { soldPlayerDTO } from '../models/soldPlayer.dto';
+import { SoldPlayerDTO } from '../models/soldPlayer.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -50,7 +50,7 @@ export class PlayerService {
     return this.http.get<any[]>(this.urlUserApi);
   }
 
-  sellPlayer(saleData: soldPlayerDTO): Observable<any> {
-    return this.http.post<soldPlayerDTO>(`${this.urlSaleApi}`, saleData);
+  sellPlayer(saleData: SoldPlayerDTO): Observable<any> {
+    return this.http.post<SoldPlayerDTO>(`${this.urlSaleApi}`, saleData);
   }
 }
