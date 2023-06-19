@@ -12,7 +12,7 @@ import { PlayerService } from '../../services/player.service';
   styleUrls: ['./club.component.scss'],
 })
 export class ClubComponent {
-  @ViewChild('bidOverlay') sellOverlay!: TemplateRef<any>;
+  @ViewChild('sellOverlay') sellOverlay!: TemplateRef<any>;
 
   players!: PlayerDTO[];
   clubPlayers: any[] = [];
