@@ -143,14 +143,15 @@ export class MarketListComponent {
         (player: selectedPlayerDTO) => player.player_id
       );
 
-      this.auctionedPlayers = this.players.filter((obj) => {
-        return this.playerIds.includes(obj.id);
-      });
-
       console.log(`auction players => ${auctionPlayers}`);
       console.log(`selected => ${this.selectedPlayers}`);
       console.log(`parsed => ${parsedSelectedPlayers}`);
       console.log(`ids => ${this.playerIds}`);
+
+      this.auctionedPlayers = this.players.filter((obj) => {
+        return this.playerIds.includes(obj.id);
+      });
+
       console.log(`auctioned => ${this.auctionedPlayers}`);
 
       this.totalItems = this.auctionedPlayers.length;
