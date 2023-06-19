@@ -147,6 +147,12 @@ export class MarketListComponent {
         return this.playerIds.includes(obj.id);
       });
 
+      console.log(`auction players => ${auctionPlayers}`);
+      console.log(`selected => ${this.selectedPlayers}`);
+      console.log(`parsed => ${parsedSelectedPlayers}`);
+      console.log(`ids => ${this.playerIds}`);
+      console.log(`auctioned => ${this.auctionedPlayers}`);
+
       this.totalItems = this.auctionedPlayers.length;
       this.page = 0;
       this.dataSource = new MatTableDataSource<PlayerDTO>(
