@@ -60,7 +60,7 @@ export class ClubComponent {
     let errorResponse: any;
 
     this.playerService.getClubPlayersByUser().subscribe((resp) => {
-      this.playerIds = JSON.parse(resp.club_players);
+      this.playerIds = resp.club_players;
 
       console.log(`resp => ${resp}`);
       console.log(`playerId => ${this.playerIds}`);
