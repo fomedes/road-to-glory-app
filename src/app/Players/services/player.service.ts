@@ -26,7 +26,7 @@ export class PlayerService {
     this.playerController = 'players';
     this.pricesController = 'prices';
     this.userController = 'users';
-    this.saleController = 'market/sale';
+    this.saleController = 'sale';
 
     this.urlPlayerApi = this.apiUrl + this.playerController;
     this.urlPlayerPricesApi = this.apiUrl + this.pricesController;
