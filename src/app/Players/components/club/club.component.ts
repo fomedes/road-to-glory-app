@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MarketService } from 'src/app/Market/services/market.service';
 import { PlayerDTO } from '../../models/player.dto';
+import { SoldPlayerDTO } from '../../models/soldPlayer.dto';
 import { PlayerService } from '../../services/player.service';
 
 @Component({
@@ -97,13 +98,14 @@ export class ClubComponent {
   public sellPlayer(player: PlayerDTO) {
     const user_id = localStorage.getItem('user_id');
 
-    const sellData: any = {
+    const sellData: SoldPlayerDTO = {
       player_id: player.id,
       selling_club: user_id,
       selling_amount: this.playerPrices[player.overall],
       selling_date: new Date(),
     };
 
+    console.log(sellData);
     this.playerService.sellPlayer(sellData).subscribe(
       (response) => {
         console.log('Player sold succesfully:', response);
