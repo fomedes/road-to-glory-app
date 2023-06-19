@@ -148,18 +148,19 @@ export class MarketListComponent {
       console.log(`parsed => ${parsedSelectedPlayers}`);
       console.log(`ids => ${this.playerIds}`);
 
-      this.auctionedPlayers = this.players.filter((obj) => {
-        return this.playerIds.includes(obj.id);
-      });
-
-      console.log(`auctioned => ${this.auctionedPlayers}`);
-
-      this.totalItems = this.auctionedPlayers.length;
-      this.page = 0;
-      this.dataSource = new MatTableDataSource<PlayerDTO>(
-        this.auctionedPlayers
-      );
-      this.dataSource.paginator = this.paginator;
+      for (let id of this.playerIds) {
+        this.playerService.getPlayerById(id).subscribe(
+          (player) => {
+            this.auctionedPlayers.push(player);
+            this.dataSource = new MatTableDataSource<PlayerDTO>(
+              this.auctionedPlayers
+            );
+          },
+          (error: any) => {
+            errorResponse = error.error;
+          }
+        );
+      }
     });
   }
 
