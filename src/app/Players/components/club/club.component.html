@@ -18,7 +18,9 @@
         <!-- Positions Column -->
         <ng-container matColumnDef="positions">
           <mat-header-cell *matHeaderCellDef>Posiciones</mat-header-cell>
-          <mat-cell *matCellDef="let player"><p *ngFor="let pos of player.pref_position">{{pos}}</p></mat-cell>
+          <mat-cell *matCellDef="let player">
+            <p>{{player.pref_position.join(' ')}}</p>
+          </mat-cell>
         </ng-container>
     
         <!-- Name Column -->

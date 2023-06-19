@@ -18,12 +18,12 @@ export class PlayerListComponent {
   displayedColumns: string[] = [
     'playerId',
     'avatar',
+    'positions',
     'name',
     'price',
     'overall',
     'weakFoot',
     'skills',
-    'positions',
     'currentClub',
   ];
 
