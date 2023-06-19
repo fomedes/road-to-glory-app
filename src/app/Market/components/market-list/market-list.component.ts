@@ -143,11 +143,6 @@ export class MarketListComponent {
         (player: selectedPlayerDTO) => player.player_id
       );
 
-      console.log(`auction players => ${auctionPlayers}`);
-      console.log(`selected => ${this.selectedPlayers}`);
-      console.log(`parsed => ${parsedSelectedPlayers}`);
-      console.log(`ids => ${this.playerIds}`);
-
       for (let id of this.playerIds) {
         this.playerService.getPlayerById(id).subscribe(
           (player) => {
