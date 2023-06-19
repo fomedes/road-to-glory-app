@@ -101,7 +101,7 @@ export class MarketListComponent {
     });
 
     //get players API
-    this.getPlayersApi();
+    //this.getPlayersApi();
 
     this.getMarketSettings();
 
@@ -113,6 +113,7 @@ export class MarketListComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  /*
   private getPlayersApi(): void {
     let errorResponse: any;
 
@@ -125,6 +126,7 @@ export class MarketListComponent {
       }
     );
   }
+  */
 
   private getMarketSettings() {
     let errorResponse: any;
