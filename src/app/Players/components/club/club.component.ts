@@ -101,7 +101,7 @@ export class ClubComponent {
     const sellData: SoldPlayerDTO = {
       player_id: player.id,
       selling_club: user_id,
-      selling_amount: this.playerPrices[player.overall],
+      selling_amount: this.playerPrices[player.overall].toString(),
       selling_date: new Date(),
     };
 
