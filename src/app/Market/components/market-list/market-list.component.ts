@@ -1,4 +1,9 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -68,7 +73,8 @@ export class MarketListComponent {
     private router: Router,
     private paginatorIntl: MatPaginatorIntl,
     private dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.paginatorIntl = new SpanishPaginatorIntl();
     this.loadMarket();
@@ -153,6 +159,7 @@ export class MarketListComponent {
             this.dataSource = new MatTableDataSource<PlayerDTO>(
               this.auctionedPlayers
             );
+            this.changeDetectorRef.detectChanges();
           },
           (error: any) => {
             errorResponse = error.error;
