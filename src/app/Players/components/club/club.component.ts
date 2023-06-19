@@ -62,17 +62,12 @@ export class ClubComponent {
     this.playerService.getClubPlayersByUser().subscribe((resp) => {
       const responsePlayers = resp.club_players;
 
-      const parsedResponsePlayers = Array.isArray(responsePlayers)
+      this.playerIds = Array.isArray(responsePlayers)
         ? responsePlayers
         : JSON.parse(responsePlayers);
 
-      this.playerIds = parsedResponsePlayers.map(
-        (player: any) => player.player_id
-      );
-
       console.log(`resp => ${resp}`);
       console.log(`response => ${responsePlayers}`);
-      console.log(`resp => ${parsedResponsePlayers}`);
       console.log(`playerId => ${this.playerIds}`);
 
       for (let id of this.playerIds) {
