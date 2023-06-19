@@ -106,7 +106,7 @@ export class ClubComponent {
 
     this.playerService.sellPlayer(sellData).subscribe(
       (response) => {
-        console.log('Bid placed succesfully:', response);
+        console.log('Player sold succesfully:', response);
         // Close Overlay and reset form
         this.dialogRef.close();
       },

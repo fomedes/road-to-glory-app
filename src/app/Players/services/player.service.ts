@@ -15,23 +15,23 @@ export class PlayerService {
   private urlPlayerApi: string;
   private urlPlayerPricesApi: string;
   private urlUserApi: string;
-  private urlSellApi: string;
+  private urlSaleApi: string;
 
   private playerController: string;
   private pricesController: string;
   private userController: string;
-  private sellController: string;
+  private saleController: string;
 
   constructor(private http: HttpClient) {
     this.playerController = 'players';
     this.pricesController = 'prices';
     this.userController = 'users';
-    this.sellController = 'market/sale';
+    this.saleController = 'market/sale';
 
     this.urlPlayerApi = this.apiUrl + this.playerController;
     this.urlPlayerPricesApi = this.apiUrl + this.pricesController;
     this.urlUserApi = this.apiUrl + this.userController + '/' + this.userId;
-    this.urlSellApi = this.apiUrl + this.sellController;
+    this.urlSaleApi = this.apiUrl + this.saleController;
   }
 
   getPlayers(): Observable<PlayerDTO[]> {
@@ -50,7 +50,7 @@ export class PlayerService {
     return this.http.get<any[]>(this.urlUserApi);
   }
 
-  sellPlayer(bidData: soldPlayerDTO): Observable<any> {
-    return this.http.post<soldPlayerDTO>(`${this.urlSellApi}`, bidData);
+  sellPlayer(saleData: soldPlayerDTO): Observable<any> {
+    return this.http.post<soldPlayerDTO>(`${this.urlSaleApi}`, saleData);
   }
 }
