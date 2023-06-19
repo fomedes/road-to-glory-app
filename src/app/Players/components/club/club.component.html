@@ -77,7 +77,7 @@
     <img class="player-overlay_photo" [src]='player.photo'>
     <h3>Valor: {{playerPrices[player.overall] | formatNumber }}€</h3>
       <div class="button-container">
-        <button mat-raised-button color="primary" (click)="sellPlayerOverlay(player)" >Vender</button>
+        <button mat-raised-button color="primary" (click)="sellPlayer(player)" >Vender</button>
       </div>
     <button mat-raised-button color="warn" (click)="closeOverlay(dialogRef)">Atrás</button>
   </div>
