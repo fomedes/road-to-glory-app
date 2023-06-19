@@ -215,7 +215,7 @@ export class MarketListComponent {
       bidding_amount: bidAmount,
       bidding_date: new Date(),
     };
-    console.log(bidAmount);
+    console.log(bidData);
 
     this.marketService.bidPlayer(bidData).subscribe(
       (response) => {
