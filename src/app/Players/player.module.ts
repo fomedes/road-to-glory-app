@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { SharedModule } from '../Shared/shared.module';
 import { ClubComponent } from './components/club/club.component';
 import { PlayerItemComponent } from './components/player-item/player-item.component';
 import { PlayerListComponent } from './components/player-list/player-list.component';
@@ -18,6 +19,7 @@ import { PlayerListComponent } from './components/player-list/player-list.compon
     MatInputModule,
     MatPaginatorModule,
     MatButtonModule,
+    SharedModule,
   ],
 })
 export class PlayerModule {}

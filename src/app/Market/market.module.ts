@@ -8,11 +8,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { formatNumberPipe } from '../Shared/Pipes/format-number.pipe';
+import { SharedModule } from '../Shared/shared.module';
 import { MarketListComponent } from './components/market-list/market-list.component';
 
 @NgModule({
-  declarations: [MarketListComponent, formatNumberPipe],
+  declarations: [MarketListComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -24,6 +24,7 @@ import { MarketListComponent } from './components/market-list/market-list.compon
     ReactiveFormsModule,
     MatDialogModule,
     OverlayModule,
+    SharedModule,
   ],
 })
 export class MarketModule {}

@@ -61,17 +61,8 @@
         <ng-container matColumnDef="sell">
           <mat-header-cell *matHeaderCellDef></mat-header-cell>
           <mat-cell *matCellDef="let player">
-            <button  mat-raised-button color="primary"  (click)="sellPlayer()">Vender</button>
+            <button  mat-raised-button color="primary"  (click)="sellPlayerOverlay(player)">Vender</button>
           </mat-cell>
-        </ng-container>
-        <!-- Transfer Column -->
-        <ng-container matColumnDef="transfer">
-          <mat-header-cell *matHeaderCellDef></mat-header-cell>
-          <mat-cell *matCellDef="let player">
-            <button  mat-raised-button color="primary"  (click)="transferable()">Transferible</button>
-
-          </mat-cell>
-
         </ng-container>
     
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -79,3 +70,15 @@
     </table>
   </div>  
 </div>
+
+<ng-template #sellOverlay>
+  <div class="overlay">
+    <h2>{{player.short_name}}</h2>
+    <img class="player-overlay_photo" [src]='player.photo'>
+    <h3>Valor: {{playerPrices[player.overall] | formatNumber }}€</h3>
+      <div class="button-container">
+        <button mat-raised-button color="primary"  type="submit" >Aceptar</button>
+      </div>
+    <button mat-raised-button color="warn" (click)="closeOverlay(dialogRef)">Atrás</button>
+  </div>
+</ng-template>
