@@ -1,24 +1,26 @@
-<div>
-  <mat-toolbar class="d-flex flex-wrap justify-content-between align-items-center" color="primary">
+<div class="vh-10">
+  <mat-toolbar class="d-flex flex-wrap justify-content-between align-items-center h-100 navbar" color="primary">
     <div class="main-div justify-content-start">
       <button mat-button *ngIf="showAuthSection" (click)="navigationTo('club')">
         <span class="d-none d-md-inline">Mi Club</span>
-        <mat-icon class="d-inline d-md-none">group</mat-icon>
+        <mat-icon class="d-inline d-md-none">assignment</mat-icon>
       </button>
       <button mat-button *ngIf="showAuthSection" (click)="navigationTo('market')">
         <span class="d-none d-md-inline">Mercado</span>
-        <mat-icon class="d-inline d-md-none">shopping_cart</mat-icon>
+        <mat-icon class="d-inline d-md-none">add_shopping_cart</mat-icon>
       </button>
       <button mat-button (click)="navigationTo('players')">
         <span class="d-none d-md-inline">Lista de Jugadores</span>
-        <mat-icon class="d-inline d-md-none">list</mat-icon>
+        <mat-icon class="d-inline d-md-none">group</mat-icon>
       </button>
     </div>
+
     <div class="main-div text-center">
-      <a mat-button (click)="navigationTo('home')">
+      <a mat-button (click)="navigationTo('home')" class="h-100">
         <img src="assets/img/road_to_glory.svg" alt="Brand Icon" class="brand-icon">
       </a>
     </div>
+
     <div class="main-div justify-content-end">
       <ng-container *ngIf="showNoAuthSection">
         <button mat-button (click)="navigationTo('login')">

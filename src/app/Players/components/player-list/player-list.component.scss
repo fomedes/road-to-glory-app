@@ -13,12 +13,25 @@ mat-header-cell {
   font-weight: bold;
 }
 
-.table-container {
-  max-width: 70%;
-  width: 70%;
-  margin: 0 auto;
-}
-
 mat-paginator {
   margin-top: 20px;
+}
+
+.page-container {
+  margin: 5vw;
+  overflow-x: hidden;
+  padding-right: 10vw;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.mat-column-name {
+  min-width: 110px;
+}
+
+.mat-column-price {
+  flex: none;
+  width: 100px;
 }

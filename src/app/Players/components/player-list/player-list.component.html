@@ -1,13 +1,16 @@
-<div class="form-container">
-  <h2>Player List</h2>
-  
-  <mat-form-field appearance="fill">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
-  </mat-form-field>
-  
+<div class="container-fluid page-container d-flex flex-column">
+  <div class="text-center">
+    <h2>Player List</h2>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+    </mat-form-field>
+  </div>
+
   <div class='table-container'>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <!-- Id Column -->
         <ng-container matColumnDef="playerId">
           <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
@@ -29,7 +32,7 @@
         </ng-container>
     
         <!-- Name Column -->
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="name" class="mat-column-yourFieldName">
           <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
           <mat-cell *matCellDef="let player"><a href="http://localhost:4200/players/{{player.id}}">{{player.short_name}}</a></mat-cell>
         </ng-container>
@@ -73,9 +76,10 @@
     
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    
-    </table>
+      </table>
+    </div>
   </div>
-  
-  <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+  <div class="d-flex justify-content-center">
+    <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+  </div>
 </div>

@@ -4,7 +4,7 @@
 }
 
 .brand-icon {
-  width: 50px; /* Adjust the width to fit your desired size */
+  width: 10vh; /* Adjust the width to fit your desired size */
   height: auto;
 }
 
@@ -13,5 +13,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+}
+
+.vh-10 {
+  height: 12vh;
+}
+
+.navbar {
+  padding-inline: 5vw;
 }
 
