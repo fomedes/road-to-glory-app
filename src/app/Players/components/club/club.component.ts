@@ -1,4 +1,9 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -21,6 +26,7 @@ export class ClubComponent {
 
   playerPrices!: any[];
   displayedColumns: string[] = [
+    'sell',
     'playerId',
     'avatar',
     'positions',
@@ -29,7 +35,6 @@ export class ClubComponent {
     'overall',
     'weakFoot',
     'skills',
-    'sell',
   ];
 
   dataSource!: MatTableDataSource<PlayerDTO>;
@@ -40,7 +45,8 @@ export class ClubComponent {
     private marketService: MarketService,
     private playerService: PlayerService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.loadClub();
   }
@@ -65,6 +71,8 @@ export class ClubComponent {
       this.playerIds = Array.isArray(responsePlayers)
         ? responsePlayers
         : JSON.parse(responsePlayers);
+
+      this.clubPlayers = [];
 
       for (let id of this.playerIds) {
         this.playerService.getPlayerById(id).subscribe(
@@ -105,13 +113,17 @@ export class ClubComponent {
       selling_date: new Date(),
     };
 
-    console.log(sellData);
     this.playerService.sellPlayer(sellData).subscribe(
       (response) => {
         console.log('Player sold succesfully:', response);
+        // Refresh view
+        this.loadClub();
+
         // Close Overlay and reset form
         this.dialogRef.close();
-        this.getClubPlayers();
+
+        //Trigger update view
+        this.changeDetectorRef.detectChanges();
       },
       (error) => {
         console.error('Bid placement error:', error);

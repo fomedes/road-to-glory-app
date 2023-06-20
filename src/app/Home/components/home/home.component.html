@@ -20,7 +20,7 @@
     <h1>Últimos movimientos de mercado</h1>
 
     <div  class="bg-light border rounded p-3 mb-3">
-      <p *ngFor="let transfer of lastTransfers">{{ transfer.username }} ha {{ transfer.move_type | transferPipe }} a {{ transfer.player_id }} por {{transfer.amount | formatNumber}}€</p>
+      <p *ngFor="let transfer of lastTransfers; let i = index">{{ i + 1 }}. {{ transfer.username }} ha {{ transfer.move_type | transferPipe }} a {{ transfer.player_id }} por {{transfer.amount | formatNumber}}€</p>
     </div>
     <p>
       <button mat-raised-button color="primary" (click)="navigationTo('results')">Introducir resultados</button>
