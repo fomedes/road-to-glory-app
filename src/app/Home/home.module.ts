@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from '../Shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
 import { ResultsComponent } from './components/results/results.component';
 
@@ -20,6 +21,7 @@ import { ResultsComponent } from './components/results/results.component';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    SharedModule,
     BrowserModule,
     MatSortModule,
     MatTableModule,

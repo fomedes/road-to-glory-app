@@ -2,17 +2,17 @@
   <div class="text-center">
   <h1>Mercado de Jugadores</h1>
   </div>
-  <h2 class="market-header">
-      <div>
-        <p>Reinicio del mercado</p>
+  <div class="market-header">
+      <div class="text-center">
+        <h2>Reinicio del mercado</h2>
         <ng-container *ngIf="marketEnding; else Countdown">&lt; 1min</ng-container>
         <ng-template #Countdown>{{ countdown }}</ng-template>
       </div>
       <div>
-        <p>Presupuesto</p>
-        <p>{{ userFunds | formatNumber}}€</p>
+        <h2>Presupuesto</h2>
+        <p class="text-center">{{ userFunds | formatNumber}}€</p>
       </div>
-  </h2>
+  </div>
   
   <div class='table-container'>
     <div class="table-wrapper">

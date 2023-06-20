@@ -18,9 +18,6 @@ export class PlayerItemComponent implements OnInit {
     private router: Router
   ) {
     this.playerId = this.activatedRoute.snapshot.params['id'];
-    /*
-    this.player = new PlayerDTO(0,'','',0,0,0,'','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','',0,0,'','','',false,'',true);
-    */
   }
 
   ngOnInit(): void {

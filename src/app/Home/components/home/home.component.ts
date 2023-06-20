@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PlayerService } from 'src/app/Players/services/player.service';
 import { HeaderMenus } from 'src/app/Shared/services/header-menus.dto';
 import { HeaderMenusService } from 'src/app/Shared/services/header-menus.service';
 import { LocalStorageService } from 'src/app/Shared/services/local-storage.service';
 import { TeamDTO } from '../../models/team.dto';
+import { TransferDTO } from '../../models/transfer.dto';
+import { TransferService } from '../../services/transfer-service.service';
 
 @Component({
   selector: 'app-home',
@@ -104,16 +107,24 @@ export class HomeComponent implements OnInit {
     },
   ];
 
+  lastTransfers: TransferDTO[] = [];
+  lastPlayers: any[] = [];
   showAuthSection: boolean;
   showNoAuthSection: boolean;
 
   constructor(
     private router: Router,
     private headerMenusService: HeaderMenusService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private transferService: TransferService,
+    private playerService: PlayerService
   ) {
     this.showAuthSection = false;
     this.showNoAuthSection = true;
+
+    if ((this.showAuthSection = true)) {
+      this.loadTransfers();
+    }
   }
 
   ngOnInit(): void {
@@ -129,5 +140,15 @@ export class HomeComponent implements OnInit {
 
   navigationTo(route: string): void {
     this.router.navigateByUrl(route);
+  }
+
+  private loadTransfers(): void {
+    let errorResponse: any;
+
+    this.transferService.getTransfers().subscribe((transfers) => {
+      this.lastTransfers = Array.isArray(transfers)
+        ? transfers.slice(Math.max(transfers.length - 20, 0))
+        : [];
+    });
   }
 }

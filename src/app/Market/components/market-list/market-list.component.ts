@@ -49,6 +49,7 @@ export class MarketListComponent {
   page: number = 1;
   playerPrices!: any[];
   displayedColumns: string[] = [
+    'bidAmount',
     'avatar',
     'positions',
     'name',
@@ -56,7 +57,6 @@ export class MarketListComponent {
     'overall',
     'weakFoot',
     'skills',
-    'bidAmount',
   ];
 
   pageSize = 10;

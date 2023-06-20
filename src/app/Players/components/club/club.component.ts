@@ -61,7 +61,7 @@ export class ClubComponent {
 
     this.playerService.getClubPlayersByUser().subscribe((resp) => {
       const responsePlayers = resp.club_players;
-
+      console.log(resp);
       this.playerIds = Array.isArray(responsePlayers)
         ? responsePlayers
         : JSON.parse(responsePlayers);
@@ -111,6 +111,7 @@ export class ClubComponent {
         console.log('Player sold succesfully:', response);
         // Close Overlay and reset form
         this.dialogRef.close();
+        this.getClubPlayers();
       },
       (error) => {
         console.error('Bid placement error:', error);

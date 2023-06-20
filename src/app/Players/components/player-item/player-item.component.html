@@ -5,10 +5,10 @@
       <p>{{player.short_name}}</p>
       <p *ngFor="let pos of player.pref_position">{{pos}}</p>
       <p>{{player.overall}}</p>
-      <p>{{playerPrices[player.overall]}}€</p>
+      <p>{{playerPrices[player.overall] | formatNumber}}€</p>
     </div>
   </div>
-  <div>
+  <div class="player-bio">
     <p>Pierna hábil: {{player.preferred_foot}}</p>
     <p>{{player.weak_foot}}&#9733; Pierna mala</p>
     <p>{{player.skill_moves}}&#9733; Filigranas</p>
@@ -16,11 +16,10 @@
     <p>Tipo de cuerpo: {{player.body_type}}</p>
     <p>Cara real: {{player.real_face}}</p>
     <p>Club Actual: {{player.current_club}}</p>
-  
   </div>
   
   
-  <div class="grid-container">
+  <div class="atributes-container">
     <div class="attributes_block">
       <p>OFENSIVA</p>
       <ul>
