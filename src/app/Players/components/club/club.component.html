@@ -1,8 +1,11 @@
-<div class="form-container">
-  <h1>Plantilla</h1>
+<div class="container-fluid page-container d-flex flex-column">
+  <div class="text-center">
+    <h1>Jugadores del Club</h1>
+  </div>
 
   <div class='table-container'>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <!-- Id Column -->
         <ng-container matColumnDef="playerId">
           <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
@@ -19,7 +22,7 @@
         <ng-container matColumnDef="positions">
           <mat-header-cell *matHeaderCellDef>Posiciones</mat-header-cell>
           <mat-cell *matCellDef="let player">
-            <p>{{player.pref_position.join(' ')}}</p>
+            <p class="positions-text">{{player.pref_position.join(' ')}}</p>
           </mat-cell>
         </ng-container>
     

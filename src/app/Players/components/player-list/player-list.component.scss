@@ -35,3 +35,13 @@ mat-paginator {
   flex: none;
   width: 100px;
 }
+
+.positions-text {
+  margin-bottom: 0;
+}
+
+mat-cell {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}

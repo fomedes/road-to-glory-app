@@ -1,5 +1,7 @@
-<div class="form-container">
+<div class="container-fluid page-container d-flex flex-column">
+  <div class="text-center">
   <h1>Mercado de Jugadores</h1>
+  </div>
   <h2 class="market-header">
       <div>
         <p>Reinicio del mercado</p>
@@ -13,7 +15,9 @@
   </h2>
   
   <div class='table-container'>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <div class="table-wrapper">
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <!-- Id Column // not in use for TFM -->
         <ng-container matColumnDef="playerId">
           <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
@@ -30,7 +34,7 @@
         <ng-container matColumnDef="positions">
           <mat-header-cell *matHeaderCellDef>Posiciones</mat-header-cell>
           <mat-cell *matCellDef="let player">
-            <p>{{player.pref_position.join(' ')}}</p>
+            <p class="positions-text">{{player.pref_position.join(' ')}}</p>
           </mat-cell>
         </ng-container>
     
@@ -83,7 +87,8 @@
     
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </table>
+      </table>
+    </div>
   </div>  
 </div>
 

@@ -1,20 +1,8 @@
-.form-container {
-  margin-left: 20vw;
-  margin-right: 20vw;
-}
-
 .player-list_photo {
   height: 50px;
   width: 50px;
   border-radius: 50%;
 }
-
-.player-overlay_photo {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-}
-
 
 mat-header-row {
    background-color: #3F51B5;
@@ -23,6 +11,39 @@ mat-header-row {
 mat-header-cell {
   color: white;
   font-weight: bold;
+}
+
+mat-paginator {
+  margin-top: 20px;
+}
+
+.page-container {
+  margin: 5vw;
+  overflow-x: hidden;
+  padding-right: 10vw;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.mat-column-name {
+  min-width: 110px;
+}
+
+.mat-column-price {
+  flex: none;
+  width: 100px;
+}
+
+.positions-text {
+  margin-bottom: 0;
+}
+
+mat-cell {
+  height: 60px;
+  display: flex;
+  align-items: center;
 }
 
 .overlay {

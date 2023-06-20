@@ -1,6 +1,6 @@
 <div class="container-fluid page-container d-flex flex-column">
   <div class="text-center">
-    <h2>Player List</h2>
+    <h1>Player List</h1>
 
     <mat-form-field appearance="fill">
       <mat-label>Filter</mat-label>
@@ -27,7 +27,7 @@
         <ng-container matColumnDef="positions">
           <mat-header-cell *matHeaderCellDef>Posiciones</mat-header-cell>
           <mat-cell *matCellDef="let player">
-            <p>{{player.pref_position.join(' ')}}</p>
+            <p class="positions-text">{{player.pref_position.join(' ')}}</p>
           </mat-cell>
         </ng-container>
     
@@ -74,8 +74,8 @@
         </ng-container>
     
     
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
       </table>
     </div>
   </div>
