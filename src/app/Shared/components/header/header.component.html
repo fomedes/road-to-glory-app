@@ -1,17 +1,39 @@
-<div class="container-fluid">
-  <mat-toolbar color="primary">
-    <section>
-      <button mat-button (click)="navigationTo('home')">Inicio</button>
-      <button mat-button *ngIf="showAuthSection" (click)="navigationTo('club')">Mi Club</button>
-      <button mat-button *ngIf="showAuthSection" (click)="navigationTo('market')">Mercado</button>
-      <button mat-button (click)="navigationTo('players')">Lista de Jugadores</button>
-    </section>
-    <div class="d-flex flex-row-reverse">
+<div>
+  <mat-toolbar class="d-flex flex-wrap justify-content-between align-items-center" color="primary">
+    <div class="main-div justify-content-start">
+      <button mat-button *ngIf="showAuthSection" (click)="navigationTo('club')">
+        <span class="d-none d-md-inline">Mi Club</span>
+        <mat-icon class="d-inline d-md-none">group</mat-icon>
+      </button>
+      <button mat-button *ngIf="showAuthSection" (click)="navigationTo('market')">
+        <span class="d-none d-md-inline">Mercado</span>
+        <mat-icon class="d-inline d-md-none">shopping_cart</mat-icon>
+      </button>
+      <button mat-button (click)="navigationTo('players')">
+        <span class="d-none d-md-inline">Lista de Jugadores</span>
+        <mat-icon class="d-inline d-md-none">list</mat-icon>
+      </button>
+    </div>
+    <div class="main-div text-center">
+      <a mat-button (click)="navigationTo('home')">
+        <img src="assets/img/road_to_glory.svg" alt="Brand Icon" class="brand-icon">
+      </a>
+    </div>
+    <div class="main-div justify-content-end">
       <ng-container *ngIf="showNoAuthSection">
-        <button mat-button (click)="navigationTo('login')">Login</button>
-        <button mat-button (click)="navigationTo('register')">Registrarse</button>
+        <button mat-button (click)="navigationTo('login')">
+          <span class="d-none d-md-inline">Login</span>
+          <mat-icon class="d-inline d-md-none">login</mat-icon>
+        </button>
+        <button mat-button (click)="navigationTo('register')">
+          <span class="d-none d-md-inline">Registrarse</span>
+          <mat-icon class="d-inline d-md-none">person_add</mat-icon>
+        </button>
       </ng-container>
-      <button mat-button *ngIf="showAuthSection" (click)="navigationTo('logout')">Logout</button>
+      <button mat-button *ngIf="showAuthSection" (click)="navigationTo('logout')">
+        <span class="d-none d-md-inline">Logout</span>
+        <mat-icon class="d-inline d-md-none">logout</mat-icon>
+      </button>
     </div>
   </mat-toolbar>
 </div>
