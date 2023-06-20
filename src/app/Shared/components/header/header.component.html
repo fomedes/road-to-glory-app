@@ -1,15 +1,17 @@
-<mat-toolbar class="full-width-toolbar" color="primary">
-  <section>
-    <button mat-button (click)="navigationTo('home')">Inicio</button>
-    <button mat-button *ngIf="showAuthSection" (click)="navigationTo('club')">Mi Club</button>
-    <button mat-button *ngIf="showAuthSection" (click)="navigationTo('market')">Mercado</button>
-    <button mat-button (click)="navigationTo('players')">Lista de Jugadores</button>
-  </section>
-  <div class="menu_right">
-    <ng-container *ngIf="showNoAuthSection">
-      <button mat-button (click)="navigationTo('login')">Login</button>
-      <button mat-button (click)="navigationTo('register')">Registrarse</button>
-    </ng-container>
-    <button mat-button *ngIf="showAuthSection" (click)="navigationTo('logout')">Logout</button>
-  </div>
-</mat-toolbar>
+<div class="container-fluid">
+  <mat-toolbar color="primary">
+    <section>
+      <button mat-button (click)="navigationTo('home')">Inicio</button>
+      <button mat-button *ngIf="showAuthSection" (click)="navigationTo('club')">Mi Club</button>
+      <button mat-button *ngIf="showAuthSection" (click)="navigationTo('market')">Mercado</button>
+      <button mat-button (click)="navigationTo('players')">Lista de Jugadores</button>
+    </section>
+    <div class="d-flex flex-row-reverse">
+      <ng-container *ngIf="showNoAuthSection">
+        <button mat-button (click)="navigationTo('login')">Login</button>
+        <button mat-button (click)="navigationTo('register')">Registrarse</button>
+      </ng-container>
+      <button mat-button *ngIf="showAuthSection" (click)="navigationTo('logout')">Logout</button>
+    </div>
+  </mat-toolbar>
+</div>
