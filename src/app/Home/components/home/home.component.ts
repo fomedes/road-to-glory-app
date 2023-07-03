@@ -147,7 +147,7 @@ export class HomeComponent implements OnInit {
 
     this.transferService.getTransfers().subscribe((transfers) => {
       this.lastTransfers = Array.isArray(transfers)
-        ? transfers.slice(Math.max(transfers.length - 20, 0))
+        ? transfers.slice(Math.max(transfers.length - 10, 0))
         : [];
     });
   }
