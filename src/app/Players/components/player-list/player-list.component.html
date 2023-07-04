@@ -20,7 +20,7 @@
         <!-- Avatar Column -->
         <ng-container matColumnDef="avatar">
           <mat-header-cell *matHeaderCellDef colspan="2"></mat-header-cell>
-          <mat-cell *matCellDef="let player"><a href="https://road-to-glory.netlify.app/players/{{player.id}}"><img class="player-list_photo" [src]='player.photo'></a></mat-cell>
+          <mat-cell *matCellDef="let player"><a href="http://localhost:4200/players/{{player.id}}"><img class="player-list_photo" [src]='player.photo'></a></mat-cell>
         </ng-container>
     
         <!-- Positions Column -->
@@ -34,7 +34,7 @@
         <!-- Name Column -->
         <ng-container matColumnDef="name" class="mat-column-yourFieldName">
           <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
-          <mat-cell *matCellDef="let player"><a href="https://road-to-glory.netlify.app/players/{{player.id}}">{{player.short_name}}</a></mat-cell>
+          <mat-cell *matCellDef="let player"><a href="http://localhost:4200/players/{{player.id}}">{{player.short_name}}</a></mat-cell>
         </ng-container>
     
         <!-- Price Column -->

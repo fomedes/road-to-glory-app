@@ -47,10 +47,6 @@ const routes: Routes = [
     path: 'club',
     component: ClubComponent,
   },
-  {
-    path: `user/:id`,
-    component: MarketListComponent,
-  },
 ];
 
 @NgModule({
