@@ -1,0 +1,66 @@
+<div class="page">
+  <div class="form-container">
+    <h1>Registrarse</h1>
+    
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre de usuario:</mat-label>
+        <input type="text" matInput formControlName="username" required>
+        <mat-error *ngIf="username.hasError('required')">
+          El nombre de usuario es obligatorio.
+        </mat-error>
+        <mat-error *ngIf="username.hasError('minlength')">
+          El nombre de usuario debe contener almenos 5 caracteres.
+        </mat-error>
+        <mat-error *ngIf="username.hasError('maxlength')">
+          El nombre de usuario debe contener un máximo de 20 caracteres.
+        </mat-error>      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Correo electrónico:</mat-label>
+        <input type="email" matInput formControlName="email" required
+        placeholder="Ingrese su correo electrónico">
+        <mat-error *ngIf="email.hasError('required')">El correo es obligatorio.</mat-error>
+        <mat-error *ngIf="email.hasError('pattern')">
+          Introduzca un correo válido.
+        </mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Contraseña:</mat-label>
+        <input type="password" matInput formControlName="password" required placeholder="Contraseña">
+        <mat-error *ngIf="password.hasError('required')">
+          La contreseña es obligatoria.
+        </mat-error>
+        <mat-error *ngIf="password.hasError('minlength')"> <!-- add maxlenght -->
+          La contraseña debe contener entre 8 y 20 caracteres
+        </mat-error>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="fill">
+        <mat-label>País:</mat-label>
+        <input type="text" matInput formControlName="country" required
+          placeholder="País">
+      </mat-form-field> -->
+
+      <mat-form-field appearance="fill">
+        <mat-label>Plataforma:</mat-label>
+        <mat-select formControlName="platform" required>
+          <mat-option *ngFor="let platform of platforms" [value]="platform">
+            {{ platform }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="platform.hasError('required')">
+          Debes elegir en qué plataforma juegas.
+        </mat-error>
+
+      </mat-form-field>
+
+      <button
+        type="submit" mat-raised-button color="primary">Registrarse
+      </button>
+    </form>
+  </div>
+</div>

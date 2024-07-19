@@ -1,0 +1,11 @@
+<div class="home-container">
+  <button mat-raised-button color="primary" routerLink="/create-community" class="btn">Nueva Comunidad</button>
+  <h3>Your Communities</h3>
+  <ul class="communities-list">
+    <li *ngFor="let community of joinedCommunities">
+      {{community.name}}
+      <!-- <app-community [name]="community"></app-community> -->
+    </li>
+  </ul>
+
+</div>

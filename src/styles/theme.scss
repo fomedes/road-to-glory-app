@@ -1,0 +1,47 @@
+// @use '@angular/material' as mat;
+
+// // Define your custom primary palette
+// $primary-palette: mat-palette($mat-indigo);
+
+// // Define your custom accent palette
+// $accent-palette: mat-palette($mat-pink, A200, A100, A400);
+
+// // Optionally, define a custom warn palette
+// $warn-palette: mat-palette($mat-red);
+
+// // Create the theme object (light or dark)
+// $custom-theme: mat-light-theme(
+//   (
+//     color: (
+//       primary: $primary-palette,
+//       accent: $accent-palette,
+//       warn: $warn-palette
+//     )
+//   )
+// );
+
+// // Include the theme styles
+// @include angular-material-theme($custom-theme);
+// @include mat.all-component-themes($custom-theme);
+
+// .mdc-text-field--filled {
+//   background-color: rgb(50 50 50) !important;
+// }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s !important;
+    -webkit-text-fill-color: #e0e3e2;  
+  }
+
+// .mdc-floating-label, .mat-mdc-floating-label,.mdc-floating-label--float-above, .mdc-text-field__input, .mat-mdc-input-element, .mat-mdc-form-field-input-control, .mdc-text-field__input, .cdk-text-field-autofill-monitored, .cdk-text-field-autofilled, .ng-touched, .ng-dirty, .ng-valid{
+//   color: white !important;
+// }
+
+.mat-mdc-raised-button.mat-primary {
+  background-color: rgb(244 175 35) !important;
+  color: black  !important;
+}
+

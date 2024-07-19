@@ -1,0 +1,173 @@
+<div class="page">
+  <div class="form-container">
+    <h1>Crear Comunidad</h1>
+
+      <mat-vertical-stepper linear>
+        <!-- Community Bio -->
+        <mat-step [stepControl]="communityForm.get('step1')!">
+          <form [formGroup]="$any(communityForm.get('step1'))">
+            <ng-template matStepLabel>Detalles de la Comunidad</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>Nombre de la Comunidad:</mat-label>
+              <input type="text" matInput formControlName="name" required>
+              <mat-error *ngIf="communityForm.get('step1.name')!.hasError('required')">
+                El nombre de la comunidad es obligatorio.
+              </mat-error>
+              <mat-error *ngIf="communityForm.get('step1.name')!.hasError('minlength')">
+                El nombre de la comunidad debe tener al menos 5 caracteres.
+              </mat-error>
+              <mat-error *ngIf="communityForm.get('step1.name')!.hasError('maxlength')">
+                El nombre de la comunidad debe tener un máximo de 20 caracteres.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Tipo de Comunidad:</mat-label>
+              <mat-select formControlName="isPrivate" required>
+                <mat-option value="true">Privada</mat-option>
+                <mat-option value="false">Pública</mat-option>
+              </mat-select>
+              <mat-error *ngIf="communityForm.get('step1.isPrivate')!.hasError('required')">
+                Elige una modalidad.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" *ngIf="communityForm.get('step1.isPrivate')!.value === 'true'">
+              <mat-label>Contraseña</mat-label>
+              <input type="password" matInput formControlName="password">
+              <mat-error *ngIf="communityForm.get('step1.password')!.hasError('minlength')">
+                La contraseña debe tener entre 8 y 20 caracteres.
+              </mat-error>
+              <mat-error *ngIf="communityForm.get('step1.password')!.hasError('maxlength')">
+                La contraseña debe tener entre 8 y 20 caracteres.
+              </mat-error>
+              <mat-error *ngIf="communityForm.get('step1.password')!.hasError('required')">
+                La contraseña es obligatoria para una comunidad privada.
+              </mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill">
+              <mat-label>Plataforma:</mat-label>
+              <mat-select formControlName="communityPlatforms" multiple required>
+                <mat-option *ngFor="let platform of platforms" [value]="platform">
+                  {{ platform }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="communityForm.get('step1.communityPlatforms')!.hasError('required')">
+                Debes elegir en qué plataforma juegas.
+              </mat-error>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperNext>Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Starting Conditions -->
+        <mat-step [stepControl]="communityForm.get('step2')!">
+          <form [formGroup]="$any(communityForm.get('step2'))">
+            <ng-template matStepLabel>Condiciones Iniciales de los Clubs</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>Presupuesto Inicial:</mat-label>
+              <input type="text" matInput formControlName="startingBudget" required [currencyMask]="{ prefix: '',  suffix: ' €', thousands: '.', precision: 0 }">
+              <mat-error *ngIf="communityForm.get('step2.startingBudget')!.hasError('required')">
+                Debes definir un presupuesto inicial.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Equipo Inicial:</mat-label>
+              <mat-select formControlName="startingTeam" required>
+                <mat-option *ngFor="let option of startingTeamOptions" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="communityForm.get('step2.startingTeam')!.hasError('required')">
+                Elije una modalidad.
+              </mat-error>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Anterior</button>
+              <button mat-button matStepperNext>Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+        
+        <!-- Market Configuration -->
+        <mat-step [stepControl]="communityForm.get('step3')!">
+          <form [formGroup]="$any(communityForm.get('step3'))" (ngSubmit)="createCommunity()">
+            <ng-template matStepLabel>Configuración del Mercado</ng-template>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Jugadores Disponibles:</mat-label>
+              <mat-select formControlName="randomPlayers" required>
+                <mat-option *ngFor="let option of randomPlayerOptions" [value]="option.value">
+                  {{ option.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="communityForm.get('step3.randomPlayers')!.hasError('required')">
+                Elije una modalidad.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Nota Mínima:</mat-label>
+              <input type="number" matInput formControlName="minOvr" required>
+              <mat-error *ngIf="communityForm.get('step3.minOvr')!.hasError('required')">
+                Debes definir un presupuesto inicial.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Nota Mínima:</mat-label>
+              <input type="number" matInput formControlName="maxOvr" required>
+              <mat-error *ngIf="communityForm.get('step3.maxOvr')!.hasError('required')">
+                Debes definir un presupuesto inicial.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Ventanas de Pujas:</mat-label>
+              <mat-select formControlName="bidWindow" required>
+                <mat-option *ngFor="let option of bidWindowOptions" [value]="option.value">
+                  {{ option.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="communityForm.get('step3.bidWindow')!.hasError('required')">
+                Elije una modalidad.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Anuncio de Pujas:</mat-label>
+              <mat-select formControlName="announceBid" required>
+                <mat-option *ngFor="let option of announceBidOptions" [value]="option.value">
+                  {{ option.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="communityForm.get('step3.announceBid')!.hasError('required')">
+                Elije una modalidad.
+              </mat-error>
+            </mat-form-field>
+
+            <div>
+              <button mat-button matStepperPrevious>Anterior</button>
+              <button type="submit" mat-raised-button color="primary" >Crear Comunidad</button>
+            </div>
+          </form>
+        </mat-step>
+
+
+        <!-- <mat-step [stepControl]="communityForm.get('step3')!">
+          <form [formGroup]="$any(communityForm.get('step3'))" (ngSubmit)="createCommunity()">
+            <ng-template matStepLabel>Configuración de jugadores</ng-template>
+            <div>
+              <button mat-button matStepperPrevious>Anterior</button>
+              <button type="submit" mat-raised-button color="primary" >Crear Comunidad</button>
+            </div>
+          </form>
+        </mat-step> -->
+      </mat-vertical-stepper>
+  </div>
+</div>

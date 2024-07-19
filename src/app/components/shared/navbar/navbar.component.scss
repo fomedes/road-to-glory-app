@@ -1,0 +1,39 @@
+.header {
+  background-color: rgb(28,28,28); /* Optional background color */
+  padding: 10px 10px 5px 10px;
+}
+
+.navbar-container {
+  display: flex; /* Arrange elements horizontally */
+  justify-content: space-between; /* Distribute evenly */
+  cursor: pointer;
+  :hover {
+    color: rgba(255,255,255,0.8);
+  }
+
+}
+
+.navbar-item {
+  display: flex; /* Allow stacking icon and text */
+  flex-direction: column; /* Arrange content vertically */
+  align-items: center; /* Center content horizontally */
+  text-decoration: none; /* Remove underline from links */
+  width: 20%; /* Adjust width for 5 equal squares */
+  border-bottom: 5px solid  rgb(28,28,28);
+
+}
+
+.navbar-item.active{
+  border-bottom: 5px solid var(--secondary-color);
+}
+
+
+.icon {
+  font-size: 4em; /* Adjust icon size */
+  margin-bottom: 5px; /* Add space between icon and text */
+}
+
+.navbar-text {
+  font-size: 14px; /* Adjust text size */
+  text-align: center;
+}

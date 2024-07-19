@@ -1,0 +1,18 @@
+app-header {
+  // position: fixed; /* Make navbar fixed-position */
+  top: 0; /* Position it at the bottom */
+  width: 100%; /* Set full width */
+}
+main {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  flex: 1;
+  align-items: center;
+}
+
+app-navbar {
+  // position: fixed; /* Make navbar fixed-position */
+  bottom: 0; /* Position it at the bottom */
+  width: 100%; /* Set full width */
+}

@@ -1,1 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
+@import './styles/cssReset.scss';
+@import './styles/theme.scss';
+@import 'ngx-toastr/toastr';
+@import './styles/colorVariables.scss';
+
+body, app-root{
+  background-color: var(--background-color);
+  color: var(--text-color);
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+// h1 {
+//   font-size: 1.8rem; /* Adjust font size for mobile */
+//   text-align: center;
+// }
+
+// p {
+//   font-size: 1rem; /* Adjust font size for mobile */
+//   text-align: center;
+//   margin-bottom: 20px;
+// }
+
+button {
+  padding: 15px 30px; /* Increase button padding for mobile */
+  margin-bottom: 6px;
+//   border: none;
+//   border-radius: 5px;
+//   cursor: pointer;
+}
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+a :hover {
+  color: var(--secondary-color)
+}
+
+.page { 
+  display: flex; /* Make the landing page a flex container */
+  flex-direction: column;
+  justify-content: center; /* Center elements horizontally */
+  align-items: center; /* Center elements vertically */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 1rem;
+}
+
+
+// form button {
+//   margin-top: 1rem;
+//   background-color: #4CAF50;
+//   color: white;
+//   padding: 0.75rem 1rem;
+//   border: none;
+//   border-radius: 5px;
+//   cursor: pointer;
+// }

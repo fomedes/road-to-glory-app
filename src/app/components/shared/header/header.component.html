@@ -1,0 +1,23 @@
+<header class="header">
+  <div class="header-container">
+    <div class="header-item dropdown" clickOutside (clickOutside)="clickOutside()">
+      <div class="menu-toggler dropdown-menu" (click)="toggleMenu()">
+        Clubs <mat-icon>keyboard_arrow_down</mat-icon>
+      </div>
+      <div class="team-menu" *ngIf="isMenuOpened">
+        <div *ngFor="let club of userClubs" routerLink="/{{club}}" routerLinkActive="active" class="menu-item">
+          <span class="menu-text">{{ club }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="header-item">
+      <mat-icon>sports_volleyball</mat-icon>
+    </div>
+    <div class="header-item">
+      <mat-icon>euro_symbol</mat-icon>
+    </div>
+    <div class="header-item">
+      <mat-icon>account_circle</mat-icon>
+    </div>
+  </div>
+</header>
