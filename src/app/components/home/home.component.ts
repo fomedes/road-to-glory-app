@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { CommunityDTO } from '../../models/community.dto';
+import { AuthService } from '../../services/auth.service';
 import { CommunityService } from '../../services/community.service';
 
 @Component({
@@ -13,18 +15,28 @@ import { CommunityService } from '../../services/community.service';
   imports: [CommonModule, RouterLink, MatButton],
 })
 export class HomeComponent implements OnInit {
-  joinedCommunities: any[] = []; // Replace with actual data fetching
+  userCommunities: any[] = [];
+  user_id = '';
 
-  constructor(private communityService: CommunityService) {}
+  constructor(
+    private communityService: CommunityService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.loadJoinedCommunities();
+    this.user_id = this.authService.getUserId()!;
+    this.loadUserCommunities();
   }
 
-  loadJoinedCommunities() {
-    this.communityService.getJoinedCommunities().subscribe((communities) => {
-      this.joinedCommunities = communities;
-    });
-    console.log(this.joinedCommunities);
+  loadUserCommunities() {
+    this.communityService
+      .getUserCommunities(this.user_id)
+      .subscribe((communities: CommunityDTO[]) => {
+        this.userCommunities = communities.map((community) => ({
+          id: community.id,
+          name: community.name,
+        }));
+        console.log(this.userCommunities); //to be deleted
+      });
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CommunityDTO } from '../models/community.dto';
 
 @Injectable({
@@ -15,17 +15,14 @@ export class CommunityService {
     this.urlApi = 'http://localhost:3000/api/' + this.controller;
   }
 
-  getJoinedCommunities(): Observable<any[]> {
-    return of([
-      {
-        id: 1,
-        name: 'Fifa Legends',
-      },
-      {
-        id: 2,
-        name: 'Granca Hotel',
-      },
-    ]);
+  getUserCommunities(user_id: string): Observable<CommunityDTO[]> {
+    return this.http.get<CommunityDTO[]>(
+      this.urlApi + '/userCommunities/' + user_id
+    );
+  }
+
+  getAllCommunities(): Observable<CommunityDTO[]> {
+    return this.http.get<CommunityDTO[]>(this.urlApi + '/all');
   }
 
   getDefaultPrices(): Observable<any[]> {

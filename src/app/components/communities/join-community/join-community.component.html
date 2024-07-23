@@ -1,0 +1,42 @@
+<h1>Elige una comunidad</h1>
+
+<div class="community-cards">
+  <div class="community-card" *ngFor="let community of communities">
+    <div class="left">
+      <div class="community-header">
+        <h3 class="community-name">{{community.name}}</h3>
+      </div>
+      <div class="community-content">
+        <div>
+          <span class="community-title">Presupuesto</span> 
+          <span class="community-value">{{community.startingBudget | currency: 'EUR':'symbol':'1.0-0' }}</span>
+        </div>
+        <div>
+          <span class="community-title">Equipo Inicial</span> <span class="community-value">{{community.startingTeam}}</span>
+        </div>
+        <div>
+          <span class="community-title">Rango de Ovr</span> <span class="community-value">{{community.market.minOvr}} - {{community.market.maxOvr}}</span>
+        </div>
+        <div>
+          <span class="community-title">Usuarios</span> <span class="community-value">{{community.users.length}}</span>
+        </div>
+      </div>
+      <div class="button-wrapper">
+        <button mat-raised-button color="primary" (click)="joinCommunity(community)">Unirse</button>
+      </div>
+    </div>
+    <div class="right">
+      <div class="community-platforms">
+        <img
+          *ngFor="let platform of community.communityPlatforms"
+          [src]="'assets/images/platform-logos/platform-' + platform.toLowerCase().replace('|', '-') + '.svg'"
+          [alt]="platform"
+          class="platform-logo"
+        />
+      </div>
+      <div class="icon-wrapper">
+        <mat-icon class="community-value private-icon">{{ community.isPrivate ? 'lock' : 'lock_open' }}</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

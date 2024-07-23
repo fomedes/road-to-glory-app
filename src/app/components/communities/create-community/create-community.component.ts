@@ -46,7 +46,7 @@ export class CreateCommunityComponent implements OnInit {
 
   // Form Options
   isPrivateOptions = ['Privada', 'Pública'];
-  platforms = ['PC', 'PS5', 'PS4', 'Xbox S|X', 'Xbox One X'];
+  platforms = ['PC', 'PS5', 'PS4', 'Xbox S|X', 'Xbox One'];
 
   startingTeamOptions = ['Aleatorio', 'Sin Equipo'];
   randomPlayerOptions = [
@@ -149,8 +149,6 @@ export class CreateCommunityComponent implements OnInit {
 
     this.populateNewCommunity(this.communityForm);
 
-    console.log(this.newCommunity);
-
     this.communityService
       .createCommunity(this.newCommunity)
       .pipe(
@@ -164,7 +162,6 @@ export class CreateCommunityComponent implements OnInit {
       .subscribe({
         next: (response) => {
           responseOK = true;
-          console.log(response);
           this.toaster.success(
             `${this.newCommunity.name} se ha creado satisfactoriamente`
           );
@@ -197,6 +194,7 @@ export class CreateCommunityComponent implements OnInit {
     this.newCommunity.market.maxOvr = step3.get('maxOvr')?.value;
     this.newCommunity.market.bidWindow = step3.get('bidWindow')?.value;
     this.newCommunity.market.announceBid = step3.get('announceBid')?.value;
+    this.newCommunity.market.playerPrices = this.defaultPrices;
 
     const user_id = this.getUserId();
     if (user_id) {
@@ -219,7 +217,6 @@ export class CreateCommunityComponent implements OnInit {
     this.communityService.getDefaultPrices().subscribe({
       next: (data) => {
         this.defaultPrices = data;
-        this.communityForm.get('step3.playerPrices')?.patchValue(data);
       },
       error: (error) => {
         console.error('Failed to load default prices', error);

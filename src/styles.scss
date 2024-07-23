@@ -11,10 +11,21 @@ body, app-root{
   display: flex;
   flex-direction: column;
 }
-// h1 {
-//   font-size: 1.8rem; /* Adjust font size for mobile */
-//   text-align: center;
-// }
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+}
+
+h1 {
+  font-size: 2rem !important; /* Adjust font size for mobile */
+  text-align: center;
+}
 
 // p {
 //   font-size: 1rem; /* Adjust font size for mobile */
@@ -24,7 +35,7 @@ body, app-root{
 
 button {
   padding: 15px 30px; /* Increase button padding for mobile */
-  margin-bottom: 6px;
+  // margin-bottom: 6px;
 //   border: none;
 //   border-radius: 5px;
 //   cursor: pointer;

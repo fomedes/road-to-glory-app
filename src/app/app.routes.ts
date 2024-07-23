@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CreateCommunityComponent } from './components/communities/create-community/create-community.component';
+import { JoinCommunityComponent } from './components/communities/join-community/join-community.component';
 import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { LoginComponent } from './components/users/login/login.component';
@@ -28,6 +29,10 @@ export const routes: Routes = [
   {
     path: 'create-community',
     component: CreateCommunityComponent,
+  },
+  {
+    path: 'join-community',
+    component: JoinCommunityComponent,
   },
 ];
 
