@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
           id: community.id,
           name: community.name,
         }));
-        console.log(this.userCommunities); //to be deleted
       });
   }
 }

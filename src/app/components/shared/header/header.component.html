@@ -5,13 +5,14 @@
         Clubs <mat-icon>keyboard_arrow_down</mat-icon>
       </div>
       <div class="team-menu" *ngIf="isMenuOpened">
-        <div *ngFor="let club of userClubs" routerLink="/{{club}}" routerLinkActive="active" class="menu-item">
-          <span class="menu-text">{{ club }}</span>
+        <div *ngFor="let club of userClubs" routerLink="/{{club.team_id}}" routerLinkActive="active" class="menu-item">
+            <img class="menu-crest" src="{{club.team_crest}}" alt="Crest">
+            <span class="menu-text">{{ club.team_name }}</span>
         </div>
       </div>
     </div>
     <div class="header-item">
-      <mat-icon>sports_volleyball</mat-icon>
+      <mat-icon>sports_soccer</mat-icon>
     </div>
     <div class="header-item">
       <mat-icon>euro_symbol</mat-icon>

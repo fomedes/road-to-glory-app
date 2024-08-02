@@ -24,11 +24,6 @@
   text-align: center;
 }
 
-.dropdown {
-  position: relative;
-
-}
-
 .dropdown-menu {
   // position: absolute;
   left: 0;
@@ -48,6 +43,19 @@
   :hover {
     color: rgba(255,255,255,0.8);
   }
+  display: flex;
+  flex-direction: row;
+}
+
+.menu-crest {
+  width: 25px;
+  height: auto;
+  max-height: 30px;
+}
+
+.menu-text {
+  height: 100%;
+  margin: auto;
 }
 
 .overflow-hidden {

@@ -114,7 +114,7 @@ export class RegisterComponent implements OnInit {
         finalize(async () => {
           if (responseOK) {
             this.registerForm.reset();
-            this.router.navigateByUrl('home');
+            this.router.navigateByUrl('');
           }
         })
       )

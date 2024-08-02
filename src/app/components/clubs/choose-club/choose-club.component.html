@@ -1,0 +1,58 @@
+<h1>Elige tu Club</h1>
+
+<form [formGroup]="clubForm" (ngSubmit)="createTeam()" class="club-form">
+
+  <div class="selection-container country-container">
+    <button type="button" (click)="previousOption('country')" class="nav-button previous-option">&#9664;</button>
+    <span class="selection-label">{{ availableCountries[currentCountryIndex]?.country_name }}</span>
+    <button type="button" (click)="nextOption('country')" class="nav-button next-option">&#9654;</button>
+  </div>
+
+  <div class="selection-container club-container">
+    <button type="button" (click)="previousOption('club')" class="nav-button previous-option">&#9664;</button>
+    <div class="club-details">
+      <span class="selection-label">{{ availableClubs[currentClubIndex]?.club_name }}</span>
+      <img [src]="clubCrest" alt="Club Crest" *ngIf="clubCrest" class="club-crest">
+    </div>
+    <button type="button" (click)="nextOption('club')" class="nav-button next-option">&#9654;</button>
+  </div>
+
+  <div class="selection-container club-kits-container">
+    <div class="kit-row">
+      <div class="kit-container">
+        <span>Local</span>
+        <img [src]="clubKitHome" alt="Kit 1" *ngIf="clubKitHome" class="club-kit">
+      </div>
+      <div class="kit-container">
+        <span>Visitante</span>
+        <img [src]="clubKitAway" alt="Kit 2" *ngIf="clubKitAway" class="club-kit">
+      </div>
+      <div class="kit-container">
+        <span>Portero</span>
+        <img [src]="clubKitKeeper" alt="Kit 3" *ngIf="clubKitKeeper" class="club-kit">
+      </div>
+
+    </div>
+    <!-- <div class="kit-row" *ngIf="clubKitThird && clubKitKeeper">
+      <img [src]="clubKitThird" alt="Kit 3" *ngIf="clubKitThird" class="club-kit">
+      <img [src]="clubKitKeeper" alt="Kit 4" *ngIf="clubKitKeeper" class="club-kit">
+    </div>
+    <div class="kit-row" *ngIf="!clubKitThird && clubKitHome && clubKitAway">
+      <img [src]="clubKitKeeper" alt="Kit 3" *ngIf="clubKitKeeper" class="club-kit">
+    </div> -->
+  </div>
+
+  <div class="selection-container league-container">
+    <button type="button" (click)="previousOption('league')" class="nav-button previous-option">&#9664;
+    </button>
+    <span class="selection-label">{{ availableLeagues[currentLeagueIndex]?.league_name }}
+    </span>
+    <button type="button" (click)="nextOption('league')" class="nav-button next-option">&#9654;
+    </button>
+  </div>
+
+  <div class="submit-container">
+    <button type="submit" mat-raised-button color="primary" class="submit-button">Elegir Club</button>
+  </div>
+
+</form>

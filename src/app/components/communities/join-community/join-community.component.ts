@@ -4,7 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { CommunityDTO } from '../../../models/community.dto';
 import { CommunityService } from '../../../services/community.service';
 
 @Component({
@@ -33,7 +34,10 @@ export class JoinCommunityComponent implements OnInit {
 
   communities: any[] = [];
 
-  constructor(private communityService: CommunityService) {}
+  constructor(
+    private communityService: CommunityService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.communityService.getAllCommunities().subscribe((data) => {
@@ -41,7 +45,7 @@ export class JoinCommunityComponent implements OnInit {
     });
   }
 
-  joinCommunity(community: any): void {
-    console.log(`Joining community: ${community.name}`);
+  joinCommunity(community: CommunityDTO): void {
+    this.router.navigate(['/choose-club'], { state: { community } });
   }
 }
