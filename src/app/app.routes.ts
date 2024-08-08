@@ -6,6 +6,7 @@ import { CreateCommunityComponent } from './components/communities/create-commun
 import { JoinCommunityComponent } from './components/communities/join-community/join-community.component';
 import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { PlayerListComponent } from './components/players/player-list/player-list.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { RegisterComponent } from './components/users/register/register.component';
 
@@ -38,6 +39,10 @@ export const routes: Routes = [
   {
     path: 'choose-club',
     component: ChooseClubComponent,
+  },
+  {
+    path: 'market',
+    component: PlayerListComponent,
   },
 ];
 

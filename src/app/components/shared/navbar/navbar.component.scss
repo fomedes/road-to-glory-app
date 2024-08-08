@@ -1,6 +1,8 @@
 .header {
-  background-color: rgb(28,28,28); /* Optional background color */
+  background-color: rgb(28,28,28); 
   padding: 10px 10px 5px 10px;
+  height: 8vh;
+  max-height: 70px;
 }
 
 .navbar-container {
@@ -10,7 +12,7 @@
   :hover {
     color: rgba(255,255,255,0.8);
   }
-
+  height: 100%;
 }
 
 .navbar-item {
@@ -20,7 +22,8 @@
   text-decoration: none; /* Remove underline from links */
   width: 20%; /* Adjust width for 5 equal squares */
   border-bottom: 5px solid  rgb(28,28,28);
-
+  height: 100%;
+  margin-top: auto;
 }
 
 .navbar-item.active{

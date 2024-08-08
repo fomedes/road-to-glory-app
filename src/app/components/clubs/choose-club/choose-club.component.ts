@@ -88,7 +88,7 @@ export class ChooseClubComponent implements OnInit {
     this.extractClubData();
   }
 
-  private getClubData(): Observable<any> {
+  getClubData(): Observable<any> {
     return this.http.get<any[]>(this.clubDataFile);
   }
 

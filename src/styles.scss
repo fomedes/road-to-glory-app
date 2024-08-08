@@ -53,6 +53,9 @@ a :hover {
   flex-direction: column;
   justify-content: center; /* Center elements horizontally */
   align-items: center; /* Center elements vertically */
+  height: 100%;
+  margin-bottom: calc(8vh - 10px);
+  margin-top: calc(8vh - 10px);
 }
 
 form {
