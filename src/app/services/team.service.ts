@@ -20,7 +20,11 @@ export class TeamService {
     return this.http.post<TeamDTO>(this.urlApi + '/create', team);
   }
 
-  getByUser(user_id: string): Observable<TeamDTO[]> {
+  getTeamById(team_id: string): Observable<TeamDTO> {
+    return this.http.get<TeamDTO>(this.urlApi + '/team/' + team_id);
+  }
+
+  getTeamsByUser(user_id: string): Observable<TeamDTO[]> {
     return this.http.get<TeamDTO[]>(this.urlApi + '/user/' + user_id);
   }
 }

@@ -20,43 +20,91 @@
   margin: auto;
 }
 
+.team-budget{
+  width: 50%;
+  align-items: end;
+
+  .budget-amount {
+    font-size: 1.2rem;
+  }
+}
+
 .header-text {
   font-size: 14px; /* Adjust text size */
   text-align: center;
 }
 
 .dropdown-menu {
-  // position: absolute;
   left: 0;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
+  .current-team-crest{
+    width: 45%;
+  }
 }
 
 .team-menu {
+  position: fixed;
+  left: 0;
+  bottom: 0;
   background-color: rgb(28,28,28);
   width: 100%;
-  z-index: 10;
+  padding: 10px;
 }
+
+// Large screen dropdown
+
+// .dropdown-menu {
+//   left: 0;
+//   display: flex;
+//   flex-direction: row;
+// }
+
+// .team-menu {
+//   background-color: rgb(28,28,28);
+//   width: 100%;
+//   z-index: 10;
+// }
 
 .menu-item {
   padding: 5px;
-  :hover {
-    color: rgba(255,255,255,0.8);
-  }
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
+}
+
+.menu-item:hover {
+  color: rgba(255,255,255,0.8);
+  background-color: rgba(255,255,255,0.8);
 }
 
 .menu-crest {
   width: 25px;
   height: auto;
   max-height: 30px;
+  margin-right: 8px;
 }
 
 .menu-text {
   height: 100%;
-  margin: auto;
+}
+
+.menu-club {
+  width: 45%;
+  margin-right: auto;
+  text-align: left;
+}
+
+.menu-community {
+  width: 45%;
+  text-align: right;
+}
+
+.add-new-team {
+  text-align: center;
 }
 
 .overflow-hidden {

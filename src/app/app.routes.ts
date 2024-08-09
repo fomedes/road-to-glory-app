@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ChooseClubComponent } from './components/clubs/choose-club/choose-club.component';
+import { CommunityPageComponent } from './components/communities/community-page/community-page.component';
 import { CreateCommunityComponent } from './components/communities/create-community/create-community.component';
 import { JoinCommunityComponent } from './components/communities/join-community/join-community.component';
 import { HomeComponent } from './components/home/home.component';
@@ -43,6 +44,10 @@ export const routes: Routes = [
   {
     path: 'market',
     component: PlayerListComponent,
+  },
+  {
+    path: 'community/:id',
+    component: CommunityPageComponent,
   },
 ];
 

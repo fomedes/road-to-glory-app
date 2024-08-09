@@ -6,6 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterLink } from '@angular/router';
 import { CommunityDTO } from '../../../models/community.dto';
+import { ToCurrencyPipe } from '../../../pipes/to-currency.pipe';
 import { CommunityService } from '../../../services/community.service';
 
 @Component({
@@ -18,6 +19,7 @@ import { CommunityService } from '../../../services/community.service';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    ToCurrencyPipe,
   ],
   templateUrl: './join-community.component.html',
   styleUrls: ['./join-community.component.scss'],

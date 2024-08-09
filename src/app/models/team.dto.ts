@@ -16,12 +16,14 @@ export class HistoricDTO {
 export class TeamDTO {
   constructor(
     public club_id: string = '',
+    public club_name: string = '',
+    public club_crest: string = '',
     public community_id: string = '',
     public user_id: string = '',
     public budget: number = 0,
     public players: string[] = [],
     public trophies: string[] = [],
     public historic: HistoricDTO = new HistoricDTO(),
-    public playerHistoric: PlayerHistoricDTO[]
+    public playerHistoric: PlayerHistoricDTO[] = []
   ) {}
 }

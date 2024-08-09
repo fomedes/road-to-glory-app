@@ -61,7 +61,7 @@
             </span>
           </div> -->
           <div class="player-price">
-            <h6>{{ getPlayerCost(player.overall_rating) | toCurrency }} €</h6>
+            <h6>{{ getPlayerCost(player.overall_rating) | toCurrency: 'EUR' }}</h6>
           </div>
           <div class="bid-button">
             <button mat-raised-button color="primary" (click)="bidPlayer(player)" class="btn">

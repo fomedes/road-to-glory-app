@@ -18,6 +18,7 @@ import { finalize, Observable } from 'rxjs';
 import { CommunityDTO } from '../../../models/community.dto';
 import { TeamCreationParametersDTO } from '../../../models/teamCreationParameters.dto';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { SharedService } from '../../../services/shared.service';
 import { TeamService } from '../../../services/team.service';
 
 @Component({
@@ -66,7 +67,8 @@ export class ChooseClubComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private localStorageService: LocalStorageService,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private sharedService: SharedService
   ) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
@@ -165,7 +167,8 @@ export class ChooseClubComponent implements OnInit {
         finalize(async () => {
           if (responseOK) {
             this.clubForm.reset();
-            this.router.navigateByUrl('home');
+            const community_id = this.communityParameters.id;
+            this.router.navigateByUrl(`community/${community_id}`);
           }
         })
       )
@@ -173,6 +176,7 @@ export class ChooseClubComponent implements OnInit {
         next: (response) => {
           responseOK = true;
           this.toaster.success('Has fichado por tu nuevo club!');
+          this.sharedService.setCurrentTeam(response);
         },
         error: (error: HttpErrorResponse) => {
           responseOK = false;
@@ -186,19 +190,26 @@ export class ChooseClubComponent implements OnInit {
 
   private setNewTeamData() {
     const user = this.localStorageService.getItem('user');
+    // Set userId
     user
       ? (this.teamCreationParameters.user_id = user.user_id)
       : console.error('Failed to get user ID from AuthService');
-    console.log(this.teamCreationParameters);
 
+    //Set NameId
     this.club ? (this.teamCreationParameters.club_id = this.club.value) : null;
+    //Set NameName
     this.teamCreationParameters.club_name =
       this.availableClubs[this.currentClubIndex]?.club_name;
+    //Set NameCrest
     this.teamCreationParameters.club_crest =
       this.availableClubs[this.currentClubIndex]?.crest;
 
     if (this.communityParameters) {
+      // Set Community Properties
       this.teamCreationParameters.community_id = this.communityParameters.id;
+      this.teamCreationParameters.community_name =
+        this.communityParameters.name;
+
       this.teamCreationParameters.budget = Number(
         this.communityParameters.startingBudget
       );

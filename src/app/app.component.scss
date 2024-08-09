@@ -2,6 +2,8 @@ app-header {
   position: fixed;
   top: 0; /* Position it at the top */
   width: 100%; /* Set full width */
+  z-index: 10
+
 }
 main {
   display: flex;
@@ -15,4 +17,5 @@ app-navbar {
   position: fixed; /* Make navbar fixed-position */
   bottom: 0; /* Position it at the bottom */
   width: 100%; /* Set full width */
+  z-index: 5
 }
