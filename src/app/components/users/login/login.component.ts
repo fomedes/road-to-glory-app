@@ -112,7 +112,7 @@ export class LoginComponent {
 
           this.toaster.success(`Bienvenido ${username}! Empieza tu aventura!`);
 
-          const auth = { token: token, user_id: user_id };
+          const auth = { token: token, user_id: user_id, username: username };
           this.authService.saveUser(auth);
 
           // this.authService.httpInterceptor = (request, next) => {

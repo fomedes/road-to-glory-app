@@ -7,7 +7,7 @@ import { CreateCommunityComponent } from './components/communities/create-commun
 import { JoinCommunityComponent } from './components/communities/join-community/join-community.component';
 import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { PlayerListComponent } from './components/players/player-list/player-list.component';
+import { MarketPlayersComponent } from './components/players/market-players/market-players.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { RegisterComponent } from './components/users/register/register.component';
 
@@ -43,10 +43,10 @@ export const routes: Routes = [
   },
   {
     path: 'market',
-    component: PlayerListComponent,
+    component: MarketPlayersComponent,
   },
   {
-    path: 'community/:id',
+    path: 'community/:communityId',
     component: CommunityPageComponent,
   },
 ];

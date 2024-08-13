@@ -1,3 +1,13 @@
 <div class="page">
-  <p>community-page works!</p>
+  <div class="last-news">
+    <div *ngFor="let date of lastNews | getKeys" class="news-section">
+      <h6 class="news-date">{{ date }}</h6>
+      <div class="news-item" *ngFor="let news of lastNews[date]">
+        <p class="news-content">
+          <span class="news-time">{{ news.createdAt | date:'shortTime' }}</span>
+          <span class="news-message">{{ news.message }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

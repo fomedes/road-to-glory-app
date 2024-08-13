@@ -1,0 +1,81 @@
+<div class="page">
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">&#9664;</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= players.length">&#9654;</button>
+  </div>
+
+  <div class="player-list-container">
+    <div class="player-card" *ngFor="let player of paginatedPlayers">
+      <div class="player-card-bio">
+        <img [src]="player.image" alt="{{ player.name }}" class="player-image">
+        <!-- <p>{{player.dob}}</p> -->
+        <p>{{ player.position }}</p>
+        <p>WF: {{ player.weak_foot }} &#9733;</p>
+        <p>SM: {{ player.skill_moves }} &#9733;</p>
+      </div>
+      <div class="player-card-stats">
+        <div class="player-card-stats-top">
+          <h5>{{ player.name }}</h5>
+          <h5>{{ player.overall_rating }}</h5>
+        </div>
+        <div class="player-card-stats-mid">
+          <div class="player-stat">
+            <p>PAC</p>
+            <p>{{player.sprint_speed}}</p>
+          </div>
+          <div class="player-stat">
+            <p>SHO</p>
+            <p>{{player.shot_power}}</p>
+          </div>
+          <div class="player-stat">
+            <p>PAS</p>
+            <p>{{player.short_passing}}</p>
+          </div>
+          <div class="player-stat">
+            <p>DRI</p>
+            <p>{{player.dribbling}}</p>
+          </div>
+          <div class="player-stat">
+            <p>DEF</p>
+            <p>{{player.defensive_awareness}}</p>
+          </div>
+          <div class="player-stat">
+            <p>PHY</p>
+            <p>{{player.strength}}</p>
+          </div>
+        </div>
+        <div class="player-card-stats-bottom">
+          <!-- <div class="favourite-button">
+            <span mat-icon-button (click)="toggleSelected()">
+              <mat-icon
+                *ngIf="isFavourite"
+                aria-label="Example icon-button with a heart icon">
+                favorite
+              </mat-icon>            
+              <mat-icon
+                *ngIf="!isFavourite"
+                aria-label="Example icon-button with a heart icon">
+                favorite_border
+              </mat-icon>            
+            </span>
+          </div> -->
+          <div class="player-price">
+            <h6>{{ getPlayerCost(player.overall_rating) | toCurrency: 'EUR' }}</h6>
+          </div>
+          <div class="bid-button">
+            <button mat-raised-button color="primary" (click)="bidPlayer(player, getPlayerCost(player.overall_rating))" class="btn">
+              Comprar
+            </button>
+          </div>
+        </div>      
+      </div>
+    </div>
+  </div>
+  
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">&#9664;</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= players.length">&#9654;</button>
+  </div>
+</div>

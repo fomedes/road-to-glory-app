@@ -18,6 +18,7 @@ import { finalize, Observable } from 'rxjs';
 import { CommunityDTO } from '../../../models/community.dto';
 import { TeamCreationParametersDTO } from '../../../models/teamCreationParameters.dto';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { NewsService } from '../../../services/news.service';
 import { SharedService } from '../../../services/shared.service';
 import { TeamService } from '../../../services/team.service';
 
@@ -38,6 +39,8 @@ import { TeamService } from '../../../services/team.service';
 export class ChooseClubComponent implements OnInit {
   toaster = inject(ToastrService);
 
+  user: any = {};
+
   clubDataFile = 'assets/data/clubs/clubs_240702.json';
   clubData: any;
   availableCountries: any = [];
@@ -55,6 +58,7 @@ export class ChooseClubComponent implements OnInit {
   communityParameters: CommunityDTO = new CommunityDTO();
   teamCreationParameters: TeamCreationParametersDTO =
     new TeamCreationParametersDTO();
+  newsDetails: any = {};
 
   chosenClub: any;
   country: FormControl;
@@ -68,7 +72,8 @@ export class ChooseClubComponent implements OnInit {
     private http: HttpClient,
     private localStorageService: LocalStorageService,
     private teamService: TeamService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private newsService: NewsService
   ) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
@@ -168,6 +173,7 @@ export class ChooseClubComponent implements OnInit {
           if (responseOK) {
             this.clubForm.reset();
             const community_id = this.communityParameters.id;
+            this.createNews(this.newsDetails);
             this.router.navigateByUrl(`community/${community_id}`);
           }
         })
@@ -175,6 +181,7 @@ export class ChooseClubComponent implements OnInit {
       .subscribe({
         next: (response) => {
           responseOK = true;
+          this.getNewsDetails();
           this.toaster.success('Has fichado por tu nuevo club!');
           this.sharedService.setCurrentTeam(response);
         },
@@ -189,10 +196,10 @@ export class ChooseClubComponent implements OnInit {
   }
 
   private setNewTeamData() {
-    const user = this.localStorageService.getItem('user');
+    this.user = this.localStorageService.getItem('user');
     // Set userId
-    user
-      ? (this.teamCreationParameters.user_id = user.user_id)
+    this.user
+      ? (this.teamCreationParameters.user_id = this.user.user_id)
       : console.error('Failed to get user ID from AuthService');
 
     //Set NameId
@@ -329,5 +336,40 @@ export class ChooseClubComponent implements OnInit {
         this.onCountryChange({ value: country.country_id });
       }
     }
+  }
+
+  getNewsDetails() {
+    this.newsDetails = {
+      communityId: this.communityParameters.id,
+      userName: this.user.username,
+      clubName: this.teamCreationParameters.club_name,
+      clubCrest: this.teamCreationParameters.club_crest,
+      type: 'newUser',
+    };
+  }
+
+  createNews(newsDetails: any) {
+    let responseOK: boolean = false;
+
+    this.newsService
+      .createNews(this.newsDetails)
+      .pipe(
+        finalize(async () => {
+          if (responseOK) {
+          }
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          responseOK = true;
+        },
+        error: (error: HttpErrorResponse) => {
+          responseOK = false;
+          console.error(error);
+          this.toaster.error(
+            'Ocurrió un error al elegir tu club. Inténtalo de nuevo.'
+          );
+        },
+      });
   }
 }

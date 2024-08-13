@@ -74,7 +74,7 @@ export class PlayerListComponent implements OnInit {
     return Math.ceil(this.players.length / this.itemsPerPage);
   }
 
-  getPlayerPrices() {
+  getPlayerPrices(): void {
     this.playerService.getPlayerPrices(this.playerPricesFile).subscribe({
       next: (data) => {
         this.playerPrices = data;
