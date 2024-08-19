@@ -2,25 +2,38 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatIcon } from '@angular/material/icon';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faCartShopping,
+  faFileSignature,
+  faHeart,
+  faHeartCircleMinus,
+  faHeartCirclePlus,
+} from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { PlayerDTO } from '../../../models/player.dto';
 import { ToCurrencyPipe } from '../../../pipes/to-currency.pipe';
+import { CommunityService } from '../../../services/community.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { MarketService } from '../../../services/market.service';
 import { NewsService } from '../../../services/news.service';
 import { PlayerService } from '../../../services/player.service';
-CommonModule;
 
 @Component({
   selector: 'app-market-players',
   standalone: true,
-  imports: [CommonModule, ToCurrencyPipe, MatIcon],
+  imports: [CommonModule, ToCurrencyPipe, FontAwesomeModule],
   templateUrl: './market-players.component.html',
   styleUrl: './market-players.component.scss',
 })
 export class MarketPlayersComponent implements OnInit {
+  faFileSignature = faFileSignature;
+  faCartShopping = faCartShopping;
+  faHeart = faHeart;
+  faHeartCirclePlus = faHeartCirclePlus;
+  faHeartCircleMinus = faHeartCircleMinus;
+
   playerDataFile = 'assets/data/players/players_test.json';
   playerPricesFile = 'assets/data/prices/player-prices.json';
 
@@ -34,6 +47,7 @@ export class MarketPlayersComponent implements OnInit {
   itemsPerPage: number = 10;
 
   playerPrices: any[] = [];
+  registeredPlayers: any[] = [];
 
   @Input() isFavourite: boolean = false;
   @Output() isFavouriteChange = new EventEmitter<boolean>();
@@ -45,7 +59,8 @@ export class MarketPlayersComponent implements OnInit {
     private playerService: PlayerService,
     private marketService: MarketService,
     private localStorageService: LocalStorageService,
-    private newsService: NewsService
+    private newsService: NewsService,
+    private communityService: CommunityService
   ) {}
 
   ngOnInit() {
@@ -53,6 +68,7 @@ export class MarketPlayersComponent implements OnInit {
     this.getPlayerPrices();
     this.user = this.localStorageService.getItem('user');
     this.currentTeam = this.localStorageService.getItem('currentTeam');
+    this.getRegisteredPlayers();
   }
 
   loadPlayerData() {
@@ -72,15 +88,21 @@ export class MarketPlayersComponent implements OnInit {
     return this.players.slice(start, end);
   }
 
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   nextPage() {
     if (this.currentPage * this.itemsPerPage < this.players.length) {
       this.currentPage++;
+      this.scrollToTop();
     }
   }
 
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
+      this.scrollToTop();
     }
   }
 
@@ -116,6 +138,7 @@ export class MarketPlayersComponent implements OnInit {
         finalize(async () => {
           if (responseOK) {
             this.createNews();
+            this.getRegisteredPlayers();
           }
         })
       )
@@ -148,8 +171,10 @@ export class MarketPlayersComponent implements OnInit {
   }
 
   public toggleSelected() {
-    this.isFavourite = !this.isFavourite;
-    this.isFavouriteChange.emit(this.isFavourite);
+    this.toaster.error('La herramienta de favoritos no está habilitada');
+
+    // this.isFavourite = !this.isFavourite;
+    // this.isFavouriteChange.emit(this.isFavourite);
   }
 
   createNews() {
@@ -176,5 +201,31 @@ export class MarketPlayersComponent implements OnInit {
           );
         },
       });
+  }
+
+  getValueClass(value: string): string {
+    if (Number(value) >= 85) {
+      return 'value-high';
+    } else if (Number(value) >= 70) {
+      return 'value-medium';
+    } else {
+      return 'value-low';
+    }
+  }
+
+  getRegisteredPlayers(): void {
+    this.communityService
+      .getRegisteredPlayers(this.currentTeam.communityId)
+      .subscribe((players: any) => {
+        this.registeredPlayers = players;
+        console.log(this.registeredPlayers);
+      });
+  }
+
+  isPlayerRegistered(playerId: string): string | null {
+    const registeredPlayer = this.registeredPlayers.find(
+      (player) => player.playerId === playerId
+    );
+    return registeredPlayer ? registeredPlayer.clubCrest : null;
   }
 }

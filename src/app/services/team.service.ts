@@ -27,4 +27,8 @@ export class TeamService {
   getTeamsByUser(user_id: string): Observable<TeamDTO[]> {
     return this.http.get<TeamDTO[]>(this.urlApi + '/user/' + user_id);
   }
+
+  getTeamPlayers(teamId: string): Observable<any[]> {
+    return this.http.get<any[]>(this.urlApi + '/players/' + teamId);
+  }
 }

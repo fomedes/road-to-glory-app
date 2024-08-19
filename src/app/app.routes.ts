@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ChooseClubComponent } from './components/clubs/choose-club/choose-club.component';
+import { ClubPageComponent } from './components/clubs/club-page/club-page.component';
 import { CommunityPageComponent } from './components/communities/community-page/community-page.component';
 import { CreateCommunityComponent } from './components/communities/create-community/create-community.component';
 import { JoinCommunityComponent } from './components/communities/join-community/join-community.component';
@@ -48,6 +49,10 @@ export const routes: Routes = [
   {
     path: 'community/:communityId',
     component: CommunityPageComponent,
+  },
+  {
+    path: 'club',
+    component: ClubPageComponent,
   },
 ];
 

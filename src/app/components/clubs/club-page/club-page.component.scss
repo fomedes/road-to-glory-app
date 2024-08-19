@@ -1,0 +1,78 @@
+.option-selector {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.club-players {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  gap: 8px; 
+}
+
+.player {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: rgb(28, 28, 28);
+  gap: 0.5rem;
+  
+}
+
+.player-image {
+  margin-right: 10px;
+}
+
+.player-image img {
+  width: 60px;
+  height: 60px;
+  border-radius: 25%;
+}
+
+.player-left-block,
+.player-right-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.player-left-block {
+  flex: 1; 
+}
+
+.player-positions {
+  font-weight: bold;
+}
+
+.player-name {
+  font-size: 1em;
+  color: #ffffee;
+}
+
+.player-right-block {
+  flex: 0; 
+  text-align: right;
+}
+
+.player-rating {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+button {
+  padding: 0.4rem 0.7rem;
+  background-color: var(--primary-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 8px;
+
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+}
+

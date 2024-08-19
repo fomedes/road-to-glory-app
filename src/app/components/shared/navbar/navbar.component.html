@@ -1,6 +1,6 @@
 <header class="header">
   <div class="navbar-container">
-    <a routerLink="/home" routerLinkActive="active" class="navbar-item">
+    <a routerLink="/community/{{currentTeam.communityId}}" routerLinkActive="active" class="navbar-item">
       <mat-icon>home</mat-icon> 
       <span class="navbar-text">Inicio</span>
     </a>
@@ -8,13 +8,9 @@
       <mat-icon>shield</mat-icon> 
       <span class="navbar-text">Club</span>
     </a>
-    <a routerLink="/stats" routerLinkActive="active" class="navbar-item">
-      <mat-icon>equalizer</mat-icon> 
-      <span class="navbar-text">Estadísticas</span>
-    </a>
-    <a routerLink="/trophies" routerLinkActive="active" class="navbar-item">
-      <mat-icon>emoji_events</mat-icon> 
-      <span class="navbar-text">Trofeos</span>
+    <a (click)="failMessage()" routerLinkActive="active" class="navbar-item">
+      <mat-icon>help</mat-icon> 
+      <span class="navbar-text">????</span>
     </a>
     <a routerLink="/market" routerLinkActive="active" class="navbar-item">
       <mat-icon>sync_alt</mat-icon> 

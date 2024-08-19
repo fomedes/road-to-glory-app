@@ -1,0 +1,24 @@
+<div class="page">
+  <div class="option-selector">
+    <span>JUGADORES</span>
+    <span style="text-decoration: line-through;">ESTADÍSTICAS</span>
+    <span style="text-decoration: line-through;">TROFEOS</span>
+  </div>
+  <div class="club-players">
+    <div class="player" *ngFor="let player of teamPlayers">
+      <div class="player-image">
+        <img [src]="player.image" alt="{{ player.name }}">
+      </div>
+      <div class="player-left-block">
+        <span class="player-positions">{{ player.position }}</span>
+        <span class="player-name">{{ player.name }}</span>
+      </div>
+      <div class="player-right-block">
+        <span class="player-rating">{{ player.overall_rating }}</span>
+        <button mat-raised-button color="primary" (click)="sellPlayer(player)" class="btn">
+          Vender
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

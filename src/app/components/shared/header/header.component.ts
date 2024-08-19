@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
       this.sharedService.currentTeam$.subscribe((team) => {
         if (team) {
           this.currentTeamFullData = team;
-          this.getCurrentTeam(); // Optionally update other related data
+          this.getCurrentTeam();
         }
       })
     );

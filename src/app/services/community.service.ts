@@ -15,6 +15,10 @@ export class CommunityService {
     this.urlApi = 'http://localhost:3000/api/' + this.controller;
   }
 
+  createCommunity(community: CommunityDTO): Observable<CommunityDTO> {
+    return this.http.post<CommunityDTO>(this.urlApi + '/create', community);
+  }
+
   getUserCommunities(user_id: string): Observable<CommunityDTO[]> {
     return this.http.get<CommunityDTO[]>(
       this.urlApi + '/userCommunities/' + user_id
@@ -29,7 +33,9 @@ export class CommunityService {
     return this.http.get<any[]>('assets/data/player-prices.json');
   }
 
-  createCommunity(community: CommunityDTO): Observable<CommunityDTO> {
-    return this.http.post<CommunityDTO>(this.urlApi + '/create', community);
+  getRegisteredPlayers(communityId: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      this.urlApi + '/registeredPlayers/' + communityId
+    );
   }
 }
