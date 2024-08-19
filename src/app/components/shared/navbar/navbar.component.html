@@ -1,6 +1,6 @@
 <header class="header">
   <div class="navbar-container">
-    <a routerLink="/community/{{currentTeam.communityId}}" routerLinkActive="active" class="navbar-item">
+    <a [routerLink]="currentTeam ? '/community/' + currentTeam.communityId : '/default-route'" routerLinkActive="active" class="navbar-item">
       <mat-icon>home</mat-icon> 
       <span class="navbar-text">Inicio</span>
     </a>

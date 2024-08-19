@@ -7,6 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import Cookies from 'js-cookie';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { AuthDTO } from '../models/auth.dto';
 import { SharedService } from './shared.service';
 
@@ -35,9 +36,10 @@ export class AuthService {
     }
     return next.handle(request);
   };
+
   constructor(private http: HttpClient, private sharedService: SharedService) {
     this.controller = 'login';
-    this.urlApi = 'http://localhost:3000/api/' + this.controller;
+    this.urlApi = environment.apiUrl + this.controller;
   }
 
   login(auth: AuthDTO): Observable<AuthToken> {
