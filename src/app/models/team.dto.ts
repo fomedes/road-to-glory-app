@@ -15,11 +15,13 @@ export class HistoricDTO {
 
 export class TeamDTO {
   constructor(
-    public club_id: string = '',
-    public club_name: string = '',
-    public club_crest: string = '',
-    public community_id: string = '',
-    public user_id: string = '',
+    public teamId: string = '',
+    public clubId: string = '',
+    public clubName: string = '',
+    public clubCrest: string = '',
+    public communityId: string = '',
+    public communityName: string = '',
+    public userId: string = '',
     public budget: number = 0,
     public players: string[] = [],
     public trophies: string[] = [],

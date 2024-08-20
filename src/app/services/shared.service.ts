@@ -18,7 +18,7 @@ export class SharedService {
   }
 
   // Team methods
-  setCurrentTeam(currentTeam: TeamDTO) {
+  setCurrentTeam(currentTeam: any) {
     this.localStorageService.setItem('currentTeam', currentTeam);
     this.currentTeamSubject.next(currentTeam); // Notify subscribers about the change
   }

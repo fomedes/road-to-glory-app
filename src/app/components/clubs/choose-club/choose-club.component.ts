@@ -183,7 +183,15 @@ export class ChooseClubComponent implements OnInit {
           responseOK = true;
           this.getNewsDetails();
           this.toaster.success('Has fichado por tu nuevo club!');
-          this.sharedService.setCurrentTeam(response);
+          const currentClub = {
+            clubCrest: response.clubCrest,
+            clubName: response.clubName,
+            teamId: response.teamId,
+            communityId: response.communityId,
+            communityName: response.communityName,
+          };
+
+          this.sharedService.setCurrentTeam(currentClub);
         },
         error: (error: HttpErrorResponse) => {
           responseOK = false;
