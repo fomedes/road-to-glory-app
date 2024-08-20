@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { UserDTO } from '../models/user.dto';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class UserService {
     private http: HttpClient // private sharedService: SharedService
   ) {
     this.controller = 'users';
-    this.urlApi = 'http://localhost:3000/api/' + this.controller;
+    this.urlApi = environment.apiUrl + this.controller;
     // this.urlApi =
     //   'https://api/api/' +
     //   this.controller;

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { TeamDTO } from '../models/team.dto';
 import { TeamCreationParametersDTO } from '../models/teamCreationParameters.dto';
 
@@ -13,7 +14,7 @@ export class TeamService {
 
   constructor(private http: HttpClient) {
     this.controller = 'teams';
-    this.urlApi = 'http://localhost:3000/api/' + this.controller;
+    this.urlApi = environment.apiUrl + this.controller;
   }
 
   createTeam(team: TeamCreationParametersDTO): Observable<TeamDTO> {

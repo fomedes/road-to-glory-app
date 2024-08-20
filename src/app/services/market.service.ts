@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class MarketService {
 
   constructor(private http: HttpClient) {
     this.controller = 'market';
-    this.urlApi = 'http://localhost:3000/api/' + this.controller;
+    this.urlApi = environment.apiUrl + this.controller;
   }
   bidPlayer(bidDetails: any): Observable<any> {
     return this.http.post(this.urlApi + '/bid', bidDetails);

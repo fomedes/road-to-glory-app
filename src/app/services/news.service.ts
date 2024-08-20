@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class NewsService {
 
   constructor(private http: HttpClient) {
     this.controller = 'news';
-    this.urlApi = 'http://localhost:3000/api/' + this.controller;
+    this.urlApi = environment.apiUrl + this.controller;
   }
 
   createNews(newsDetails: any): Observable<any> {
