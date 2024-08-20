@@ -64,10 +64,11 @@ export class MarketPlayersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.currentTeam = this.localStorageService.getItem('currentTeam');
     this.loadPlayerData();
     this.getPlayerPrices();
     this.user = this.localStorageService.getItem('user');
-    this.currentTeam = this.localStorageService.getItem('currentTeam');
+    console.log(this.currentTeam);
     this.getRegisteredPlayers();
   }
 
