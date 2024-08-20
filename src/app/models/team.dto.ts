@@ -15,7 +15,7 @@ export class HistoricDTO {
 
 export class TeamDTO {
   constructor(
-    public teamId: string = '',
+    public id: string = '',
     public clubId: string = '',
     public clubName: string = '',
     public clubCrest: string = '',

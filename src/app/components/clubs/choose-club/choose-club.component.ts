@@ -186,7 +186,7 @@ export class ChooseClubComponent implements OnInit {
           const currentClub = {
             clubCrest: response.clubCrest,
             clubName: response.clubName,
-            teamId: response.teamId,
+            teamId: response.id,
             communityId: response.communityId,
             communityName: response.communityName,
           };
