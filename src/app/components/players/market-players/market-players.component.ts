@@ -68,7 +68,6 @@ export class MarketPlayersComponent implements OnInit {
     this.loadPlayerData();
     this.getPlayerPrices();
     this.user = this.localStorageService.getItem('user');
-    console.log(this.currentTeam);
     this.getRegisteredPlayers();
   }
 
@@ -157,7 +156,7 @@ export class MarketPlayersComponent implements OnInit {
   }
 
   getBidDetails(player: any, bidAmount: number) {
-    (this.bidDetails = {
+    this.bidDetails = {
       buyerId: this.user.user_id,
       buyerName: this.currentTeam.clubName,
       buyerCrest: this.currentTeam.clubCrest,
@@ -167,8 +166,7 @@ export class MarketPlayersComponent implements OnInit {
       communityId: this.currentTeam.communityId,
       teamId: this.currentTeam.teamId,
       type: 'transfer',
-    }),
-      console.log(this.bidDetails);
+    };
   }
 
   public toggleSelected() {
@@ -219,7 +217,6 @@ export class MarketPlayersComponent implements OnInit {
       .getRegisteredPlayers(this.currentTeam.communityId)
       .subscribe((players: any) => {
         this.registeredPlayers = players;
-        console.log(this.registeredPlayers);
       });
   }
 

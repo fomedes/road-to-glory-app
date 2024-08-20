@@ -94,8 +94,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   register(): void {
-    console.log('Registration form submitted!');
-
     let responseOK: boolean = false;
     this.isValidForm = false;
     let errorResponse: any;

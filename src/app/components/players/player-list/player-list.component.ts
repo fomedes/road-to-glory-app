@@ -78,7 +78,6 @@ export class PlayerListComponent implements OnInit {
     this.playerService.getPlayerPrices(this.playerPricesFile).subscribe({
       next: (data) => {
         this.playerPrices = data;
-        console.log(this.playerPrices);
       },
       error: (error) => {
         this.toaster.error('Failed to load player player prices');

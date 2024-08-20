@@ -46,11 +46,9 @@ export class ClubPageComponent implements OnInit {
 
   loadPlayerData() {
     this.http.get<any[]>(this.playerDataFile).subscribe((players) => {
-      console.log(players);
       this.teamPlayers = players.filter((player) =>
         this.teamPlayerIds.includes(player.player_id)
       );
-      console.log(this.teamPlayers);
     });
   }
 
