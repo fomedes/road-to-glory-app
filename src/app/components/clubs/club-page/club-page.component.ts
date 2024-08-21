@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { CommunityService } from '../../../services/community.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { PlayerService } from '../../../services/player.service';
 import { TeamService } from '../../../services/team.service';
@@ -15,7 +16,7 @@ import { ClubPlayersComponent } from '../club-players/club-players.component';
   styleUrl: './club-page.component.scss',
 })
 export class ClubPageComponent implements OnInit {
-  playerDataFile = 'assets/data/players/players_test.json';
+  playerDataFile = '';
 
   teamPlayerIds: any[] = [];
   teamPlayers: any[] = [];
@@ -27,14 +28,27 @@ export class ClubPageComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private http: HttpClient,
     private playerService: PlayerService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private communityService: CommunityService
   ) {}
 
   ngOnInit(): void {
     this.currentTeam = this.localStorageService.getItem('currentTeam');
+    this.getMarketConfig();
     this.getTeamPlayers();
   }
 
+  getMarketConfig(): void {
+    this.communityService.getMarketConfig(this.currentTeam.communityId).subscribe({
+      next: (data) => {
+        this.playerDataFile = data.playerDatabase;
+      },
+      error: (error) => {
+        this.toaster.error('Failed to load market config');
+      },
+    });
+  }
+  
   getTeamPlayers() {
     this.teamService
       .getTeamPlayers(this.currentTeam.teamId)
