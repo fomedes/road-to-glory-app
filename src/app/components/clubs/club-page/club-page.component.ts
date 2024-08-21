@@ -41,7 +41,6 @@ export class ClubPageComponent implements OnInit {
     this.communityService.getMarketConfig(this.currentTeam.communityId).subscribe({
       next: (data) => {
         this.playerDataFile = data.playerDatabase;
-        console.log('playerDataFile', this.playerDataFile);
         this.getTeamPlayers();
       },
       error: (error) => {
@@ -61,9 +60,8 @@ export class ClubPageComponent implements OnInit {
 
   loadPlayerData() {
     this.http.get<any[]>(this.playerDataFile).subscribe((players) => {
-      console.log('players', typeof(players));
       this.teamPlayers = players.filter((player) =>
-        this.teamPlayerIds.includes(player.player_id)
+        this.teamPlayerIds.includes(player.playerId)
       );
     });
   }
