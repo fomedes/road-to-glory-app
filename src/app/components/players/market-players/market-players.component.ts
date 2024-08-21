@@ -188,7 +188,7 @@ export class MarketPlayersComponent implements OnInit {
       buyerId: this.user.user_id,
       buyerName: this.currentTeam.clubName,
       buyerCrest: this.currentTeam.clubCrest,
-      playerId: player.player_id,
+      playerId: player.playerId,
       playerName: player.name,
       bidAmount: bidAmount,
       communityId: this.currentTeam.communityId,
