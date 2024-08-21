@@ -35,13 +35,13 @@ export class ClubPageComponent implements OnInit {
   ngOnInit(): void {
     this.currentTeam = this.localStorageService.getItem('currentTeam');
     this.getMarketConfig();
-    this.getTeamPlayers();
   }
 
   getMarketConfig(): void {
     this.communityService.getMarketConfig(this.currentTeam.communityId).subscribe({
       next: (data) => {
         this.playerDataFile = data.playerDatabase;
+        this.getTeamPlayers();
       },
       error: (error) => {
         this.toaster.error('Failed to load market config');
