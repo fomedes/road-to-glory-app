@@ -39,4 +39,8 @@ export class CommunityService {
       this.urlApi + '/registeredPlayers/' + communityId
     );
   }
+
+  getMarketConfig (communityId: string): Observable<any> {
+    return this.http.get<any>(this.urlApi + '/marketConfig/' + communityId);
+  }
 }

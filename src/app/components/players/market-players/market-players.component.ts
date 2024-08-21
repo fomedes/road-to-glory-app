@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faCartShopping,
@@ -23,7 +23,7 @@ import { PlayerService } from '../../../services/player.service';
 @Component({
   selector: 'app-market-players',
   standalone: true,
-  imports: [CommonModule, ToCurrencyPipe, FontAwesomeModule],
+  imports: [CommonModule, ToCurrencyPipe, FontAwesomeModule, FormsModule],
   templateUrl: './market-players.component.html',
   styleUrl: './market-players.component.scss',
 })
@@ -34,7 +34,7 @@ export class MarketPlayersComponent implements OnInit {
   faHeartCirclePlus = faHeartCirclePlus;
   faHeartCircleMinus = faHeartCircleMinus;
 
-  playerDataFile = 'assets/data/players/players_test.json';
+  playerDataFile: string = '';
   playerPricesFile = 'assets/data/prices/player-prices.json';
 
   user: any = {};
@@ -43,8 +43,13 @@ export class MarketPlayersComponent implements OnInit {
   bidDetails: any;
 
   players: PlayerDTO[] = [];
+  paginatedPlayers: PlayerDTO[] = [];
+  filteredPlayers: PlayerDTO[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 10;
+  totalPages: number = 1;
+  
+  searchQuery: string = '';
 
   playerPrices: any[] = [];
   registeredPlayers: any[] = [];
@@ -65,16 +70,31 @@ export class MarketPlayersComponent implements OnInit {
 
   ngOnInit() {
     this.currentTeam = this.localStorageService.getItem('currentTeam');
-    this.loadPlayerData();
+    this.getMarketConfig();
     this.getPlayerPrices();
     this.user = this.localStorageService.getItem('user');
     this.getRegisteredPlayers();
+  }
+
+  getMarketConfig(): void {
+    this.communityService.getMarketConfig(this.currentTeam.communityId).subscribe({
+      next: (data) => {
+        this.playerDataFile = data.playerDatabase;
+        this.loadPlayerData();
+
+      },
+      error: (error) => {
+        this.toaster.error('Failed to load market config');
+      },
+    });
   }
 
   loadPlayerData() {
     this.playerService.getPlayers(this.playerDataFile).subscribe({
       next: (data) => {
         this.players = data;
+        this.filteredPlayers = this.players;
+        this.updatePaginatedPlayers();
       },
       error: (error) => {
         this.toaster.error('Failed to load player data');
@@ -82,10 +102,20 @@ export class MarketPlayersComponent implements OnInit {
     });
   }
 
-  get paginatedPlayers() {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    return this.players.slice(start, end);
+  updatePaginatedPlayers() {
+    this.totalPages = Math.ceil(this.filteredPlayers.length / this.itemsPerPage);
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedPlayers = this.filteredPlayers.slice(startIndex, endIndex);
+  }
+
+  filterPlayersByName() {
+    const query = this.searchQuery.toLowerCase();
+    this.filteredPlayers = this.players.filter(player =>
+      player.name.toLowerCase().includes(query)
+    );
+    this.currentPage = 1; // Reset to the first page after filtering
+    this.updatePaginatedPlayers();
   }
 
   scrollToTop(): void {
@@ -93,8 +123,9 @@ export class MarketPlayersComponent implements OnInit {
   }
 
   nextPage() {
-    if (this.currentPage * this.itemsPerPage < this.players.length) {
+    if (this.currentPage < this.totalPages) {
       this.currentPage++;
+      this.updatePaginatedPlayers();
       this.scrollToTop();
     }
   }
@@ -102,12 +133,9 @@ export class MarketPlayersComponent implements OnInit {
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
+      this.updatePaginatedPlayers();
       this.scrollToTop();
     }
-  }
-
-  get totalPages() {
-    return Math.ceil(this.players.length / this.itemsPerPage);
   }
 
   getPlayerPrices(): void {
