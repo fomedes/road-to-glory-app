@@ -163,17 +163,17 @@ export class ChooseClubComponent implements OnInit {
 
   createTeam(): void {
     this.setNewTeamData();
+    this.getNewsDetails();
 
     let responseOK: boolean = false;
 
     this.teamService
-      .createTeam(this.teamCreationParameters)
+      .createTeam(this.teamCreationParameters, this.newsDetails)
       .pipe(
         finalize(async () => {
           if (responseOK) {
             this.clubForm.reset();
             const community_id = this.communityParameters.id;
-            this.createNews(this.newsDetails);
             this.router.navigateByUrl(`community/${community_id}`);
           }
         })
@@ -181,7 +181,6 @@ export class ChooseClubComponent implements OnInit {
       .subscribe({
         next: (response) => {
           responseOK = true;
-          this.getNewsDetails();
           this.toaster.success('Has fichado por tu nuevo club!');
           const currentClub = {
             clubCrest: response.clubCrest,

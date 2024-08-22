@@ -25,6 +25,7 @@
   display: flex;
   align-items: center;
   font-size: 0.95em;
+  width: 100%;
 }
 
 .news-time {
@@ -37,6 +38,7 @@
   flex-direction: row;
   flex: 1;
   justify-content: space-between;
+  align-items: center;
 
   .news-display-mid {
     display: inherit;
@@ -50,7 +52,7 @@
 }
 
 .club-crest {
-  max-width: 15vw;
+  max-width: 13vw;
 }
 
 .player-image {
@@ -58,12 +60,15 @@
 }
 
 .negative-value {
-  color: red;
+  color: #D9534F;
+  
 }
 
 .positive-value {
-  color: green;
+  color: #5CB85C;
+  font-size: 1.02rem;
 }
+
 .transfer-line {
   display: flex;
   align-items: center;
