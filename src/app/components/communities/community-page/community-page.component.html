@@ -60,9 +60,7 @@
         <ng-container *ngIf="news.type !== 'transferPurchase' && news.type !== 'transferSale'">
           <div class="news-content">
             <div class="news-time">{{ news.createdAt | date:'shortTime' }}</div>
-            <div>
-              <img src="{{news.clubCrest}}" alt="" class="club-crest">
-            </div>
+            <img src="{{news.clubCrest}}" alt="" class="club-crest">
             <div class="news-message">{{ news.message }}</div>
           </div>
         </ng-container>
