@@ -1,8 +1,3 @@
-.page {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
 .news-section {
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
@@ -18,7 +13,6 @@
 
 .news-item {
   margin-left: 10px;
-  padding: 5px 0;
 }
 
 .news-content {
@@ -31,47 +25,52 @@
 .news-time {
   font-weight: bold;
   margin-right: 10px;
+  flex: 0 0 10%; /* Fixed width for time */
+  text-align: left;
 }
 
 .news-display {
   display: flex;
-  flex-direction: row;
   flex: 1;
   justify-content: space-between;
   align-items: center;
-
-  .news-display-mid {
-    display: inherit;
-    flex-direction: column;
-    align-items: center;
-  } 
-}
-
-.news-message {
-  flex: 1;
 }
 
 .club-crest {
   max-width: 13vw;
+  flex: 0 0 15%; /* Fixed width for club crests */
+  text-align: center;
 }
 
 .player-image {
   max-width: 10vw;
 }
 
+.news-display-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 40%; /* Fixed width for the middle section */
+  text-align: center;
+}
+
 .negative-value {
-  color: #D9534F;
-  
+  color: #D9534F; /* Red for negative values */
 }
 
 .positive-value {
-  color: #5CB85C;
+  color: #5CB85C; /* Green for positive values */
   font-size: 1.02rem;
 }
 
 .transfer-line {
   display: flex;
   align-items: center;
-  justify-content: center; /* Optional, centers horizontally too */
+  justify-content: center;
   max-height: 100%;
+  flex: 0 0 10%; /* Fixed width for chevron icon */
+}
+
+.news-message {
+  flex: 0 0 70%; /* Fixed width for messages in non-transfer news */
 }
