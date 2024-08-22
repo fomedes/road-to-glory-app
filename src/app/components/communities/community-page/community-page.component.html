@@ -1,13 +1,68 @@
 <div class="page">
   <div class="last-news">
+    <h5>Últimas notícias</h5>
     <div *ngFor="let date of lastNews | getKeys" class="news-section">
       <h6 class="news-date">{{ date }}</h6>
       <div class="news-item" *ngFor="let news of lastNews[date]">
-        <p class="news-content">
-          <span class="news-time">{{ news.createdAt | date:'shortTime' }}</span>
-          <span class="news-message">{{ news.message }}</span>
-        </p>
-      </div>
-    </div>
+
+        <!-- Block for type = 'transferPurchase' -->
+        <ng-container *ngIf="news.type === 'transferPurchase'">
+          <div class="news-content">
+            <div class="news-time">{{ news.createdAt | date:'shortTime' }}</div>            
+            <div class="news-display">
+              <div>
+                <img src="{{news.sellerCrest}}" alt="" class="club-crest">
+              </div>
+              <div class="transfer-line">
+                <fa-icon [icon]="faRightChevron"></fa-icon>
+              </div>
+              <div class="news-display-mid">
+                <div><img src="{{news.playerImage}}" alt="" class="player-image"></div>
+                <div class="negative-value">- {{news.transferAmount | toCurrency: 'EUR' }}</div>
+              </div>
+              <div class="transfer-line">
+                <fa-icon [icon]="faRightChevron"></fa-icon>
+              </div>
+              <div> <img src="{{news.buyerCrest}}" alt="" class="club-crest"></div>
+            </div>
+            <!-- <div class="news-message">{{ news.message }}</div> -->
+          </div>
+        </ng-container>
+      
+        <!-- Block for type = 'transferSale' -->
+        <ng-container *ngIf="news.type === 'transferSale'">
+          <div class="news-content">
+            <div class="news-content">
+              <div class="news-time">{{ news.createdAt | date:'shortTime' }}</div>            
+              <div class="news-display">
+                <div>
+                  <img src="{{news.sellerCrest}}" alt="" class="club-crest">
+                </div>
+                <div class="transfer-line">
+                  <fa-icon [icon]="faRightChevron"></fa-icon>
+                </div>
+                <div class="news-display-mid">
+                  <div><img src="{{news.playerImage}}" alt="" class="player-image"></div>
+                  <div class="positive-value">+ {{news.transferAmount | toCurrency: 'EUR' }}</div>
+                </div>
+                <div class="transfer-line">
+                  <fa-icon [icon]="faRightChevron"></fa-icon>
+                </div>
+                <div> <img src="{{news.buyerCrest}}" alt="" class="club-crest"></div>
+              </div>
+              <!-- <div class="news-message">{{ news.message }}</div> -->
+            </div>
+              <!-- Additional content or styling for transferSale type can be added here -->
+          </div>
+        </ng-container>
+      
+        <!-- Block for all other types -->
+        <ng-container *ngIf="news.type !== 'transferPurchase' && news.type !== 'transferSale'">
+          <div class="news-content">
+            <div class="news-time">{{ news.createdAt | date:'shortTime' }}</div>
+            <div class="news-message">{{ news.message }}</div>
+          </div>
+        </ng-container>
+      </div>    </div>
   </div>
 </div>

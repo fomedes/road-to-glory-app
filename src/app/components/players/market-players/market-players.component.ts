@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faCartShopping,
@@ -23,7 +24,7 @@ import { PlayerService } from '../../../services/player.service';
 @Component({
   selector: 'app-market-players',
   standalone: true,
-  imports: [CommonModule, ToCurrencyPipe, FontAwesomeModule, FormsModule],
+  imports: [CommonModule, ToCurrencyPipe, FontAwesomeModule, FormsModule, MatInputModule],
   templateUrl: './market-players.component.html',
   styleUrl: './market-players.component.scss',
 })
@@ -36,6 +37,12 @@ export class MarketPlayersComponent implements OnInit {
 
   playerDataFile: string = '';
   playerPricesFile = 'assets/data/prices/player-prices.json';
+  freeAgent: any = {
+    freeAgentId: '66c76ea075bb6f00380323af',
+    freeAgentName: 'Free Agent',
+    freeAgentCrest: 'assets/images/others/free_agent_crest.png',
+  }
+
 
   user: any = {};
   currentTeam: any = {};
@@ -165,7 +172,6 @@ export class MarketPlayersComponent implements OnInit {
       .pipe(
         finalize(async () => {
           if (responseOK) {
-            this.createNews();
             this.getRegisteredPlayers();
           }
         })
@@ -173,8 +179,14 @@ export class MarketPlayersComponent implements OnInit {
       .subscribe({
         next: () => {
           responseOK = true;
+          const formattedPrice = new Intl.NumberFormat('es-ES', {
+            style: 'currency',
+            currency: 'EUR',
+            minimumFractionDigits: 0
+          }).format(bidAmount);
+
           this.toaster.success(
-            `Successfully bid ${bidAmount} € for ${player.name}`
+            `Has comprado a ${player.name} por ${formattedPrice}`
           );
         },
         error: (error) => {
@@ -185,15 +197,18 @@ export class MarketPlayersComponent implements OnInit {
 
   getBidDetails(player: any, bidAmount: number) {
     this.bidDetails = {
-      buyerId: this.user.user_id,
+      communityId: this.currentTeam.communityId,
+      type: 'transferPurchase',
+      buyerId: this.currentTeam.teamId,
       buyerName: this.currentTeam.clubName,
       buyerCrest: this.currentTeam.clubCrest,
+      sellerId: this.freeAgent.freeAgentId, 
+      sellerName: this.freeAgent.freeAgentName,
+      sellerCrest: this.freeAgent.freeAgentCrest,
       playerId: player.playerId,
       playerName: player.name,
-      bidAmount: bidAmount,
-      communityId: this.currentTeam.communityId,
-      teamId: this.currentTeam.teamId,
-      type: 'transfer',
+      playerImage: player.image,
+      transferAmount: bidAmount,
     };
   }
 
@@ -204,31 +219,6 @@ export class MarketPlayersComponent implements OnInit {
     // this.isFavouriteChange.emit(this.isFavourite);
   }
 
-  createNews() {
-    let responseOK: boolean = false;
-
-    this.newsService
-      .createNews(this.bidDetails)
-      .pipe(
-        finalize(async () => {
-          if (responseOK) {
-            this.bidDetails = {};
-          }
-        })
-      )
-      .subscribe({
-        next: (response) => {
-          responseOK = true;
-        },
-        error: (error: HttpErrorResponse) => {
-          responseOK = false;
-          console.error(error);
-          this.toaster.error(
-            'Ocurrió un error al elegir tu club. Inténtalo de nuevo.'
-          );
-        },
-      });
-  }
 
   getValueClass(value: string): string {
     if (Number(value) >= 85) {

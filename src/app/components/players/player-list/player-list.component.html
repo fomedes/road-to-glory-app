@@ -11,26 +11,26 @@
         <img [src]="player.image" alt="{{ player.name }}" class="player-image">
         <!-- <p>{{player.dob}}</p> -->
         <p>{{ player.position }}</p>
-        <p>WF: {{ player.weak_foot }} &#9733;</p>
-        <p>SM: {{ player.skill_moves }} &#9733;</p>
+        <p>WF: {{ player.weakFoot }} &#9733;</p>
+        <p>SM: {{ player.skillMoves }} &#9733;</p>
       </div>
       <div class="player-card-stats">
         <div class="player-card-stats-top">
           <h5>{{ player.name }}</h5>
-          <h5>{{ player.overall_rating }}</h5>
+          <h5>{{ player.overallRating }}</h5>
         </div>
         <div class="player-card-stats-mid">
           <div class="player-stat">
             <p>PAC</p>
-            <p>{{player.sprint_speed}}</p>
+            <p>{{player.sprintSpeed}}</p>
           </div>
           <div class="player-stat">
             <p>SHO</p>
-            <p>{{player.shot_power}}</p>
+            <p>{{player.shotPower}}</p>
           </div>
           <div class="player-stat">
             <p>PAS</p>
-            <p>{{player.short_passing}}</p>
+            <p>{{player.shortPassing}}</p>
           </div>
           <div class="player-stat">
             <p>DRI</p>
@@ -38,7 +38,7 @@
           </div>
           <div class="player-stat">
             <p>DEF</p>
-            <p>{{player.defensive_awareness}}</p>
+            <p>{{player.defensiveAwareness}}</p>
           </div>
           <div class="player-stat">
             <p>PHY</p>
@@ -61,7 +61,7 @@
             </span>
           </div> -->
           <div class="player-price">
-            <h6>{{ getPlayerCost(player.overall_rating) | toCurrency: 'EUR' }}</h6>
+            <h6>{{ getPlayerCost(player.overallRating) | toCurrency: 'EUR' }}</h6>
           </div>
           <div class="bid-button">
             <button mat-raised-button color="primary" (click)="bidPlayer(player)" class="btn">

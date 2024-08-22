@@ -1,21 +1,33 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faChevronRight
+} from '@fortawesome/free-solid-svg-icons';
 import { GetKeysPipe } from '../../../pipes/get-keys.pipe';
+import { ToCurrencyPipe } from '../../../pipes/to-currency.pipe';
 import { CommunityService } from '../../../services/community.service';
 import { NewsService } from '../../../services/news.service';
 
 @Component({
   selector: 'app-community-page',
   standalone: true,
-  imports: [CommonModule, GetKeysPipe],
+  imports: [CommonModule, GetKeysPipe, ToCurrencyPipe,FontAwesomeModule],
   templateUrl: './community-page.component.html',
   styleUrl: './community-page.component.scss',
 })
 export class CommunityPageComponent implements OnInit {
+  faRightChevron = faChevronRight
+
   communityId: string = '';
   reversedNews: any[] = [];
   lastNews: any = {};
+  freeAgent: any = {
+    freeAgentId: '66c76ea075bb6f00380323af',
+    freeAgentName: 'Free Agent',
+    freeAgentCrest: 'assets/images/others/free_agent_crest.png',
+  }
 
   constructor(
     private communityService: CommunityService,

@@ -13,8 +13,8 @@ import { SharedService } from './shared.service';
 
 export interface AuthToken {
   username: string;
-  user_id: string;
-  access_token: string;
+  userId: string;
+  accessToken: string;
 }
 
 @Injectable({
@@ -28,7 +28,7 @@ export class AuthService {
     request: HttpRequest<any>,
     next: HttpHandler
   ) => Observable<HttpEvent<any>> = (request, next) => {
-    const token = Cookies.get('access_token');
+    const token = Cookies.get('accessToken');
     if (token) {
       request = request.clone({
         setHeaders: { Authorization: `Bearer ${token}` },
@@ -54,7 +54,7 @@ export class AuthService {
       return null;
     }
     const parsedUser = JSON.parse(user);
-    return parsedUser.user_id;
+    return parsedUser.userId;
   }
 
   public getUserId(): string | null {
@@ -64,7 +64,7 @@ export class AuthService {
       return null;
     }
     const parsedUser = JSON.parse(user);
-    return parsedUser.user_id;
+    return parsedUser.userId;
   }
 
   public saveUser(user: {}) {

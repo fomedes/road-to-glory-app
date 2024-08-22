@@ -17,4 +17,8 @@ export class MarketService {
   bidPlayer(bidDetails: any): Observable<any> {
     return this.http.post(this.urlApi + '/bid', bidDetails);
   }
+
+  releasePlayer(saleDetails: any): Observable<any> {
+    return this.http.post(this.urlApi + '/releaseplayer', saleDetails);
+  }
 }

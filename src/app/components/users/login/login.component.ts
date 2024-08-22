@@ -107,16 +107,16 @@ export class LoginComponent {
         next: (resp: AuthToken) => {
           responseOK = true;
           const username = resp.username;
-          const token = resp.access_token;
-          const user_id = resp.user_id;
+          const token = resp.accessToken;
+          const userId = resp.userId;
 
           this.toaster.success(`Bienvenido ${username}! Empieza tu aventura!`);
 
-          const auth = { token: token, user_id: user_id, username: username };
+          const auth = { token: token, userId: userId, username: username };
           this.authService.saveUser(auth);
 
           // this.authService.httpInterceptor = (request, next) => {
-          //   const token = Cookies.get('access_token');
+          //   const token = Cookies.get('accessToken');
           //   if (token) {
           //     console.log('Authorization header added with token:', token);
           //     request = request.clone({

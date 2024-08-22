@@ -1,12 +1,15 @@
 <div class="page">
 
-  <div class="search-bar">
-    <input 
-      type="text" 
-      placeholder="Search players..." 
-      [(ngModel)]="searchQuery" 
-      (input)="filterPlayersByName()"
-    />
+  <div class="search-bar" style="width: 100%;">
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <input
+        matInput
+        type="text"
+        placeholder="Search players..."
+        [(ngModel)]="searchQuery"
+        (input)="filterPlayersByName()"        
+      />
+    </mat-form-field>
   </div>
   
   <div class="pagination-controls">
@@ -28,34 +31,66 @@
           <h6 class="player-name">{{ player.name }}</h6>
         </div>
         <div class="mid-block-mid">
-          <div class="player-stats">
-            <div class="player-stat">
-              <p>RIT</p>
-              <p [ngClass]="getValueClass(player.facePace)">{{player.facePace}}</p>
+          <div *ngIf="player.position[0] !== 'GK'; else goalkeeperStats">
+            <div class="player-stats">
+              <div class="player-stat">
+                <p>RIT</p>
+                <p [ngClass]="getValueClass(player.facePace)">{{player.facePace}}</p>
+              </div>
+              <div class="player-stat">
+                <p>TIR</p>
+                <p [ngClass]="getValueClass(player.faceShooting)">{{player.faceShooting}}</p>
+              </div>
+              <div class="player-stat">
+                <p>PAS</p>
+                <p [ngClass]="getValueClass(player.facePassing)">{{player.facePassing}}</p>
+              </div>
             </div>
-            <div class="player-stat">
-              <p>TIR</p>
-              <p [ngClass]="getValueClass(player.faceShooting)">{{player.faceShooting}}</p>
-            </div>
-            <div class="player-stat">
-              <p>PAS</p>
-              <p [ngClass]="getValueClass(player.facePassing)">{{player.facePassing}}</p>
+            <div class="player-stats">
+              <div class="player-stat">
+                <p>REG</p>
+                <p [ngClass]="getValueClass(player.faceDribbling)">{{player.faceDribbling}}</p>
+              </div>
+              <div class="player-stat">
+                <p>DEF</p>
+                <p [ngClass]="getValueClass(player.faceDefending)">{{player.faceDefending}}</p>
+              </div>
+              <div class="player-stat">
+                <p>FÍS</p>
+                <p [ngClass]="getValueClass(player.facePhysical)">{{player.facePhysical}}</p>
+              </div>
             </div>
           </div>
-          <div class="player-stats">
-            <div class="player-stat">
-              <p>REG</p>
-              <p [ngClass]="getValueClass(player.faceDribbling)">{{player.faceDribbling}}</p>
+          <ng-template #goalkeeperStats>
+            <div class="player-stats">
+              <div class="player-stat">
+                <p>EST</p>
+                <p [ngClass]="getValueClass(player.gkDiving)">{{player.gkDiving}}</p>
+              </div>
+              <div class="player-stat">
+                <p>PAR</p>
+                <p [ngClass]="getValueClass(player.gkHandling)">{{player.gkHandling}}</p>
+              </div>
+              <div class="player-stat">
+                <p>SAQ</p>
+                <p [ngClass]="getValueClass(player.gkKicking)">{{player.gkKicking}}</p>
+              </div>
             </div>
-            <div class="player-stat">
-              <p>DEF</p>
-              <p [ngClass]="getValueClass(player.faceDefending)">{{player.faceDefending}}</p>
+            <div class="player-stats">
+              <div class="player-stat">
+                <p>COL</p>
+                <p [ngClass]="getValueClass(player.gkPositioning)">{{player.gkPositioning}}</p>
+              </div>
+              <div class="player-stat">
+                <p>REF</p>
+                <p [ngClass]="getValueClass(player.gkReflexes)">{{player.gkReflexes}}</p>
+              </div>
+              <div class="player-stat">
+                <p>VEL</p>
+                <p [ngClass]="getValueClass(player.facePace)">{{player.facePace}}</p>
+              </div>
             </div>
-            <div class="player-stat">
-              <p>FÍS</p>
-              <p [ngClass]="getValueClass(player.facePhysical)">{{player.facePhysical}}</p>
-            </div>
-          </div>
+          </ng-template>
         </div>
         <div class="mid-block-bottom">
           <div class="player-price">

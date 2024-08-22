@@ -189,6 +189,7 @@ export class ChooseClubComponent implements OnInit {
             teamId: response.id,
             communityId: response.communityId,
             communityName: response.communityName,
+            userId: this.user.userId
           };
 
           this.sharedService.setCurrentTeam(currentClub);
@@ -207,22 +208,22 @@ export class ChooseClubComponent implements OnInit {
     this.user = this.localStorageService.getItem('user');
     // Set userId
     this.user
-      ? (this.teamCreationParameters.user_id = this.user.user_id)
+      ? (this.teamCreationParameters.userId = this.user.userId)
       : console.error('Failed to get user ID from AuthService');
 
     //Set NameId
-    this.club ? (this.teamCreationParameters.club_id = this.club.value) : null;
+    this.club ? (this.teamCreationParameters.clubId = this.club.value) : null;
     //Set NameName
-    this.teamCreationParameters.club_name =
+    this.teamCreationParameters.clubName =
       this.availableClubs[this.currentClubIndex]?.club_name;
     //Set NameCrest
-    this.teamCreationParameters.club_crest =
+    this.teamCreationParameters.clubCrest =
       this.availableClubs[this.currentClubIndex]?.crest;
 
     if (this.communityParameters) {
       // Set Community Properties
-      this.teamCreationParameters.community_id = this.communityParameters.id;
-      this.teamCreationParameters.community_name =
+      this.teamCreationParameters.communityId = this.communityParameters.id;
+      this.teamCreationParameters.communityName =
         this.communityParameters.name;
 
       this.teamCreationParameters.budget = Number(
@@ -232,7 +233,7 @@ export class ChooseClubComponent implements OnInit {
         this.communityParameters.market.maxOvr;
       this.teamCreationParameters.minOvr =
         this.communityParameters.market.minOvr;
-      this.teamCreationParameters.random_players =
+      this.teamCreationParameters.randomPlayers =
         this.communityParameters.market.randomPlayers;
     }
   }
@@ -350,8 +351,8 @@ export class ChooseClubComponent implements OnInit {
     this.newsDetails = {
       communityId: this.communityParameters.id,
       userName: this.user.username,
-      clubName: this.teamCreationParameters.club_name,
-      clubCrest: this.teamCreationParameters.club_crest,
+      clubName: this.teamCreationParameters.clubName,
+      clubCrest: this.teamCreationParameters.clubCrest,
       type: 'newUser',
     };
   }

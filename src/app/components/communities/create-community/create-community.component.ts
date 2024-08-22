@@ -196,9 +196,9 @@ export class CreateCommunityComponent implements OnInit {
     this.newCommunity.market.announceBid = step3.get('announceBid')?.value;
     this.newCommunity.market.playerPrices = this.defaultPrices;
 
-    const user_id = this.getUserId();
-    if (user_id) {
-      this.newCommunity.admins.push(user_id);
+    const userId = this.getUserId();
+    if (userId) {
+      this.newCommunity.admins.push(userId);
     } else {
       console.error('Failed to get user ID from AuthService');
     }

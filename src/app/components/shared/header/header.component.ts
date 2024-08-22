@@ -28,7 +28,7 @@ import { TeamService } from '../../../services/team.service';
 export class HeaderComponent implements OnInit {
   selectedValue: string = '';
   isMenuOpened: boolean = false;
-  user_id: string = '';
+  userId: string = '';
   userClubs: any[] = [];
   currentTeam: any = {};
   currentTeamFullData: TeamDTO = new TeamDTO();
@@ -42,8 +42,8 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user_id = this.localStorageService.getItem('user').user_id;
-    this.getUserClubs(this.user_id);
+    this.userId = this.localStorageService.getItem('user').userId;
+    this.getUserClubs(this.userId);
     this.subscription.add(
       this.sharedService.currentTeam$.subscribe((team) => {
         if (team) {
@@ -63,14 +63,15 @@ export class HeaderComponent implements OnInit {
     this.getTeamData(this.currentTeam.teamId);
   }
 
-  getTeamData(team_id: string) {
-    this.teamService.getTeamById(team_id).subscribe((team) => {
+  getTeamData(teamId: string) {
+    this.teamService.getTeamById(teamId).subscribe((team) => {
       this.currentTeamFullData = team;
     });
   }
 
   changeCurrentClub(currentClub: any) {
     this.toggleMenu();
+    currentClub.userId = this.userId
     this.sharedService.setCurrentTeam(currentClub);
     this.getCurrentTeam();
   }
@@ -83,8 +84,8 @@ export class HeaderComponent implements OnInit {
     this.isMenuOpened = false;
   }
 
-  private getUserClubs(user_id: string) {
-    this.teamService.getTeamsByUser(user_id).subscribe((teams: any) => {
+  private getUserClubs(userId: string) {
+    this.teamService.getTeamsByUser(userId).subscribe((teams: any) => {
       this.userClubs = teams;
     });
   }

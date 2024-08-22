@@ -21,11 +21,4 @@ export class PlayerService {
   getPlayers(filePath: string): Observable<PlayerDTO[]> {
     return this.http.get<PlayerDTO[]>(filePath);
   }
-
-  sellPlayer(teamId: string, playerId: string): Observable<any> {
-    return this.http.put<any>(
-      `/api/teams/${teamId}/players/${playerId}/sell`,
-      null
-    );
-  }
 }

@@ -7,6 +7,7 @@
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
+  width: 100%;
 }
 
 .news-date {
@@ -31,6 +32,41 @@
   margin-right: 10px;
 }
 
+.news-display {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-between;
+
+  .news-display-mid {
+    display: inherit;
+    flex-direction: column;
+    align-items: center;
+  } 
+}
+
 .news-message {
   flex: 1;
+}
+
+.club-crest {
+  max-width: 15vw;
+}
+
+.player-image {
+  max-width: 10vw;
+}
+
+.negative-value {
+  color: red;
+}
+
+.positive-value {
+  color: green;
+}
+.transfer-line {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Optional, centers horizontally too */
+  max-height: 100%;
 }
