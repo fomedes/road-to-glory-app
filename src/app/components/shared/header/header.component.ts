@@ -32,6 +32,8 @@ export class HeaderComponent implements OnInit {
   userClubs: any[] = [];
   currentTeam: any = {};
   currentTeamFullData: TeamDTO = new TeamDTO();
+  budget: number = 0;
+
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -44,12 +46,19 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.localStorageService.getItem('user').userId;
     this.getUserClubs(this.userId);
+
     this.subscription.add(
       this.sharedService.currentTeam$.subscribe((team) => {
         if (team) {
           this.currentTeamFullData = team;
           this.getCurrentTeam();
         }
+      })
+    );
+
+    this.subscription.add(
+      this.sharedService.currentBudget$.subscribe((budget) => {
+        this.budget = budget;
       })
     );
   }
@@ -66,6 +75,7 @@ export class HeaderComponent implements OnInit {
   getTeamData(teamId: string) {
     this.teamService.getTeamById(teamId).subscribe((team) => {
       this.currentTeamFullData = team;
+      this.sharedService.updateBudget(team.budget);
     });
   }
 

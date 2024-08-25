@@ -4,12 +4,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import {
   faCartShopping,
   faFileSignature,
-  faHeart,
   faHeartCircleMinus,
   faHeartCirclePlus,
+  faHeart as solidHeart,
 } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
@@ -20,11 +21,14 @@ import { LocalStorageService } from '../../../services/local-storage.service';
 import { MarketService } from '../../../services/market.service';
 import { NewsService } from '../../../services/news.service';
 import { PlayerService } from '../../../services/player.service';
+import { SharedService } from '../../../services/shared.service';
+import { TeamService } from '../../../services/team.service';
+import { FavouritePlayersComponent } from '../favourite-players/favourite-players.component';
 
 @Component({
   selector: 'app-market-players',
   standalone: true,
-  imports: [CommonModule, ToCurrencyPipe, FontAwesomeModule, FormsModule, MatInputModule],
+  imports: [CommonModule, ToCurrencyPipe, FontAwesomeModule, FormsModule, MatInputModule, FavouritePlayersComponent],
   templateUrl: './market-players.component.html',
   styleUrl: './market-players.component.scss',
 })
@@ -32,6 +36,7 @@ export class MarketPlayersComponent implements OnInit {
   faFileSignature = faFileSignature;
   faCartShopping = faCartShopping;
   faHeart = faHeart;
+  faSolidHeart = solidHeart;
   faHeartCirclePlus = faHeartCirclePlus;
   faHeartCircleMinus = faHeartCircleMinus;
 
@@ -52,6 +57,8 @@ export class MarketPlayersComponent implements OnInit {
   players: PlayerDTO[] = [];
   paginatedPlayers: PlayerDTO[] = [];
   filteredPlayers: PlayerDTO[] = [];
+  registeredPlayers: any[] = [];
+  favoritePlayers: string[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalPages: number = 1;
@@ -59,7 +66,7 @@ export class MarketPlayersComponent implements OnInit {
   searchQuery: string = '';
 
   playerPrices: any[] = [];
-  registeredPlayers: any[] = [];
+  displayFavorites: boolean = false;
 
   @Input() isFavourite: boolean = false;
   @Output() isFavouriteChange = new EventEmitter<boolean>();
@@ -72,15 +79,64 @@ export class MarketPlayersComponent implements OnInit {
     private marketService: MarketService,
     private localStorageService: LocalStorageService,
     private newsService: NewsService,
-    private communityService: CommunityService
+    private communityService: CommunityService,
+    private teamService: TeamService,
+    private sharedService: SharedService,
   ) {}
 
   ngOnInit() {
     this.currentTeam = this.localStorageService.getItem('currentTeam');
+    this.loadFavorites();
     this.getMarketConfig();
     this.getPlayerPrices();
     this.user = this.localStorageService.getItem('user');
     this.getRegisteredPlayers();
+  }
+
+  loadFavorites() {
+    const teamId = this.currentTeam.teamId;
+    this.teamService.getFavouritePlayers(teamId).subscribe({
+      next: (data) => {
+        this.favoritePlayers = data
+      },
+      error: (error) => {
+        this.toaster.error('Failed to load favorite players');
+      },
+    });
+  }
+
+  toggleFavorite(player: PlayerDTO) {
+    const teamId = this.currentTeam.teamId;
+    const playerId = player.playerId;
+    const index = this.favoritePlayers.indexOf(playerId);
+
+    if (index !== -1) {
+      this.teamService.removePlayerFromFavourites(teamId, playerId).subscribe({
+        next: () => {
+          this.favoritePlayers.splice(index, 1);
+          this.toaster.success(`${player.name} removed from favorites`);
+          if (this.displayFavorites) {
+            this.filterPlayersByFavorites();
+          }
+        },
+        error: (error) => {
+          this.toaster.error('Failed to remove player from favorites');
+        },
+      });
+    } else {
+      this.teamService.addPlayerToFavourites(teamId, playerId).subscribe({
+        next: () => {
+          this.favoritePlayers.push(playerId);
+          this.toaster.success(`${player.name} added to favorites`);
+          if (this.displayFavorites) {
+            this.filterPlayersByFavorites();
+          }
+        },
+        error: (error) => {
+          this.toaster.error('Failed to add player to favorites');
+        },
+      });
+    }
   }
 
   getMarketConfig(): void {
@@ -192,6 +248,11 @@ export class MarketPlayersComponent implements OnInit {
         error: (error) => {
           this.toaster.error('Failed to bid on player');
         },
+        complete: () => {
+          const currentBudget = this.sharedService.getBudget();
+          const newBudget = currentBudget - bidAmount;
+          this.sharedService.updateBudget(newBudget);
+        }
       });
   }
 
@@ -211,14 +272,6 @@ export class MarketPlayersComponent implements OnInit {
       transferAmount: bidAmount,
     };
   }
-
-  public toggleSelected() {
-    this.toaster.error('La herramienta de favoritos no está habilitada');
-
-    // this.isFavourite = !this.isFavourite;
-    // this.isFavouriteChange.emit(this.isFavourite);
-  }
-
 
   getValueClass(value: string): string {
     if (Number(value) >= 85) {
@@ -243,5 +296,27 @@ export class MarketPlayersComponent implements OnInit {
       (player) => player.playerId === playerId
     );
     return registeredPlayer ? registeredPlayer.clubCrest : null;
+  }
+
+  showMarketPlayers() {
+    this.displayFavorites = false;
+    this.filterPlayersByFavorites();
+  }
+
+  showFavorites() {
+    this.displayFavorites = true;
+    this.filterPlayersByFavorites();
+  }
+
+  filterPlayersByFavorites() {
+    if (this.displayFavorites) {
+      this.filteredPlayers = this.players.filter(player =>
+        this.favoritePlayers.includes(player.playerId)
+      );
+    } else {
+      this.filteredPlayers = [...this.players]; // Reset to all players
+    }
+    this.currentPage = 1; // Reset to the first page after filtering
+    this.updatePaginatedPlayers();
   }
 }

@@ -10,6 +10,9 @@ export class SharedService {
   private currentTeamSubject = new BehaviorSubject<TeamDTO | null>(null);
   currentTeam$ = this.currentTeamSubject.asObservable();
 
+  private budgetSource = new BehaviorSubject<number>(0);
+  currentBudget$ = this.budgetSource.asObservable();
+
   constructor(private localStorageService: LocalStorageService) {
     const savedTeam = this.localStorageService.getItem('currentTeam');
     if (savedTeam) {
@@ -25,5 +28,13 @@ export class SharedService {
 
   getCurrentTeam(): TeamDTO | null {
     return this.currentTeamSubject.getValue();
+  }
+
+  updateBudget(newBudget: number) {
+    this.budgetSource.next(newBudget);
+  }
+
+  getBudget(): number {
+    return this.budgetSource.value;
   }
 }

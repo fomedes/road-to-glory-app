@@ -11,6 +11,7 @@
       </div>
       <div class="player-left-block">
         <span class="player-positions">{{ player.position }}</span>
+        <span class="player-name">{{ getPlayerCost(player.overallRating) | toCurrency: 'EUR' }}</span>
         <span class="player-name">{{ player.name }}</span>
       </div>
       <div class="player-right-block">

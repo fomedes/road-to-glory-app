@@ -1,4 +1,9 @@
 <div class="page">
+  <div class="text-menu">
+    <span (click)="showMarketPlayers()" class="clickable">MERCADO</span>
+    <span style="text-decoration: line-through;">TRANSFERIBLES</span>
+    <span (click)="showFavorites()" class="clickable">FAVORITOS</span>
+  </div>
 
   <div class="search-bar" style="width: 100%;">
     <mat-form-field appearance="fill" style="width: 100%;">
@@ -103,11 +108,17 @@
           <h5>{{ player.overallRating }}</h5>
         </div>
         <div class="favourite-button">
-            <span mat-icon-button (click)="toggleSelected()">
-              <fa-icon *ngIf="isFavourite" [icon]="faHeartCircleMinus"></fa-icon>            
-              <fa-icon *ngIf="!isFavourite" [icon]="faHeartCirclePlus"></fa-icon>            
-            </span>
-          </div>
+          <span mat-icon-button (click)="toggleFavorite(player)">
+            <fa-icon
+              *ngIf="favoritePlayers.includes(player.playerId); else notFavoriteIcon"
+              [icon]="faSolidHeart"
+              class="active favorite-button"
+            ></fa-icon>
+            <ng-template #notFavoriteIcon>
+              <fa-icon [icon]="faHeart" class="favorite-button"></fa-icon>
+            </ng-template>
+          </span>
+        </div>
         <div class="bid-button">
           <ng-container *ngIf="isPlayerRegistered(player.playerId); else showBidButton">
             <img [src]="isPlayerRegistered(player.playerId)" alt="Club Crest" class="club-crest-image">
@@ -120,11 +131,12 @@
         </div>
       </div>
     </div>
+    
+    <div class="pagination-controls">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">&#9664;</button>
+      <span>{{ currentPage }} de {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= players.length">&#9654;</button>
+    </div>
   </div>
-  
-  <div class="pagination-controls">
-    <button (click)="previousPage()" [disabled]="currentPage === 1">&#9664;</button>
-    <span>{{ currentPage }} de {{ totalPages }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= players.length">&#9654;</button>
-  </div>
+
 </div>

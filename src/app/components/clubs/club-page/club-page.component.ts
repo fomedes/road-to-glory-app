@@ -3,17 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
+import { ToCurrencyPipe } from '../../../pipes/to-currency.pipe';
 import { CommunityService } from '../../../services/community.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { MarketService } from '../../../services/market.service';
 import { PlayerService } from '../../../services/player.service';
+import { SharedService } from '../../../services/shared.service';
 import { TeamService } from '../../../services/team.service';
 import { ClubPlayersComponent } from '../club-players/club-players.component';
 
 @Component({
   selector: 'app-club-page',
   standalone: true,
-  imports: [CommonModule, ClubPlayersComponent],
+  imports: [CommonModule, ClubPlayersComponent, ToCurrencyPipe],
   templateUrl: './club-page.component.html',
   styleUrl: './club-page.component.scss',
 })
@@ -47,6 +49,7 @@ export class ClubPageComponent implements OnInit {
     private toaster: ToastrService,
     private communityService: CommunityService,
     private marketService: MarketService,
+    private sharedService: SharedService,
   ) {}
 
   ngOnInit(): void {
@@ -154,6 +157,18 @@ export class ClubPageComponent implements OnInit {
             'Ocurrió un error al vender al jugador. Inténtalo de nuevo.'
           );
         },
+        complete: () => {
+          const currentBudget = this.sharedService.getBudget();
+          const newBudget = currentBudget + this.releasePrice;
+          this.sharedService.updateBudget(newBudget);
+        },
       });
+  }
+
+  public getPlayerCost(ovr: string): number {
+    const priceObj = this.playerPrices.find(
+      (price) => price.ovr === Number(ovr)
+    );
+    return priceObj ? priceObj.price : 0;
   }
 }
