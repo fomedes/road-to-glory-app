@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { ToCurrencyPipe } from '../../../pipes/to-currency.pipe';
@@ -15,7 +16,7 @@ import { ClubPlayersComponent } from '../club-players/club-players.component';
 @Component({
   selector: 'app-club-page',
   standalone: true,
-  imports: [CommonModule, ClubPlayersComponent, ToCurrencyPipe],
+  imports: [CommonModule, ClubPlayersComponent, ToCurrencyPipe, RouterModule],
   templateUrl: './club-page.component.html',
   styleUrl: './club-page.component.scss',
 })
@@ -32,13 +33,20 @@ export class ClubPageComponent implements OnInit {
 
   teamPlayerIds: any[] = [];
   teamPlayers: any[] = [];
-  teamId: string = '';
+  urlTeamId: string = '';
   currentTeam: any = {};
-  
+  categorizedPlayers: { [key: string]: any[] } = {
+    'PORTEROS': [],
+    'DEFENSAS': [],
+    'MEDIOS': [],
+    'DELANTEROS': [],
+  };
+
   communityMultiplier: number = 1;
   saleDetails: any = {};
   playerPrices: any[] = [];
   releasePrice: number = 0
+  isUserOwner: boolean = false;
 
 
   constructor(
@@ -50,12 +58,17 @@ export class ClubPageComponent implements OnInit {
     private communityService: CommunityService,
     private marketService: MarketService,
     private sharedService: SharedService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.currentTeam = this.localStorageService.getItem('currentTeam');
-    this.getMarketConfig();
-    this.getPlayerPrices();
+    this.route.paramMap.subscribe((params) => {
+      this.urlTeamId = params.get('teamId') ?? '';
+      this.getMarketConfig();
+      this.getPlayerPrices();
+      this.getIsUserOwner()
+      });
   }
 
   getMarketConfig(): void {
@@ -71,12 +84,18 @@ export class ClubPageComponent implements OnInit {
   }
   
   getTeamPlayers() {
+    const id = this.urlTeamId != '' ? this.urlTeamId : this.currentTeam.teamId;
     this.teamService
-      .getTeamPlayers(this.currentTeam.teamId)
+      .getTeamPlayers(id)
       .subscribe((data) => {
         this.teamPlayerIds = data;
         this.loadPlayerData();
       });
+  }
+
+  getIsUserOwner(): void {
+    this.isUserOwner = (this.urlTeamId === '' || this.urlTeamId === this.currentTeam.teamId ) ? true : false;
+    console.log(this.isUserOwner);
   }
 
   loadPlayerData() {
@@ -84,6 +103,41 @@ export class ClubPageComponent implements OnInit {
       this.teamPlayers = players.filter((player) =>
         this.teamPlayerIds.includes(player.playerId)
       );
+      this.teamPlayers = this.sortPlayersByPosition(this.teamPlayers);
+      this.categorizePlayers();
+    });
+  }
+
+  sortPlayersByPosition(players: any[]): any[] {
+    return players.sort((a, b) => {
+      const positionA = a.position[0].toLowerCase();
+      const positionB = b.position[0].toLowerCase();
+      if (positionA < positionB) return -1;
+      if (positionA > positionB) return 1;
+      return 0;
+    });
+  }
+
+  categorizePlayers() {
+    this.categorizedPlayers = {
+      'PORTEROS': [],
+      'DEFENSAS': [],
+      'MEDIOS': [],
+      'DELANTEROS': [],
+    };
+
+    this.teamPlayers.forEach(player => {
+      const position = player.position[0];
+
+      if (position === 'GK') {
+        this.categorizedPlayers['PORTEROS'].push(player);
+      } else if (['LD', 'CB', 'LI', 'LWB', 'RWB'].includes(position)) {
+        this.categorizedPlayers['DEFENSAS'].push(player);
+      } else if (['CDM', 'CM', 'CAM', 'RM', 'LM'].includes(position)) {
+        this.categorizedPlayers['MEDIOS'].push(player);
+      } else if (['ST', 'CF', 'LW', 'RW', 'LF', 'RF'].includes(position)) {
+        this.categorizedPlayers['DELANTEROS'].push(player);
+      }
     });
   }
 
@@ -171,4 +225,6 @@ export class ClubPageComponent implements OnInit {
     );
     return priceObj ? priceObj.price : 0;
   }
+
+
 }

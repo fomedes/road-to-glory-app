@@ -8,7 +8,7 @@ export class PlayerDTO {
   public heightCm: string = '';
   public weightKg: string = '';
   public dob: string = '';
-  public position: string = '';
+  public position: string[] = [];
   public overallRating: string = '';
   public potential: string = '';
   public value: string = '';

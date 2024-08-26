@@ -53,6 +53,9 @@ export const routes: Routes = [
   {
     path: 'club',
     component: ClubPageComponent,
+  },  {
+    path: 'club/:teamId',
+    component: ClubPageComponent,
   },
 ];
 

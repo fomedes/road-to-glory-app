@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faChevronRight
@@ -13,7 +13,7 @@ import { NewsService } from '../../../services/news.service';
 @Component({
   selector: 'app-community-page',
   standalone: true,
-  imports: [CommonModule, GetKeysPipe, ToCurrencyPipe,FontAwesomeModule],
+  imports: [CommonModule, GetKeysPipe, ToCurrencyPipe,FontAwesomeModule, RouterModule],
   templateUrl: './community-page.component.html',
   styleUrl: './community-page.component.scss',
 })
@@ -56,5 +56,9 @@ export class CommunityPageComponent implements OnInit {
         {}
       );
     });
+  }
+
+  getRouterLink(teamId: string): string[] | null {
+    return teamId === this.freeAgent.freeAgentId ? null : ['/club', teamId];
   }
 }

@@ -5,20 +5,112 @@
     <span style="text-decoration: line-through;">TROFEOS</span>
   </div>
   <div class="club-players">
-    <div class="player" *ngFor="let player of teamPlayers">
+    <!-- <div class="player" *ngFor="let player of teamPlayers">
       <div class="player-image">
         <img [src]="player.image" alt="{{ player.name }}">
       </div>
       <div class="player-left-block">
-        <span class="player-positions">{{ player.position }}</span>
+        <span class="player-positions">{{ player.position[0] }}</span>
         <span class="player-name">{{ getPlayerCost(player.overallRating) | toCurrency: 'EUR' }}</span>
         <span class="player-name">{{ player.name }}</span>
       </div>
       <div class="player-right-block">
         <span class="player-rating">{{ player.overallRating }}</span>
-        <button mat-raised-button color="primary" (click)="releasePlayer(player)" class="btn">
-          Vender
-        </button>
+        <div *ngIf="isUserOwner">
+          <button mat-raised-button color="primary" (click)="releasePlayer(player)" class="btn">
+            Vender
+          </button>
+        </div>
+      </div>
+    </div> -->
+    <div *ngIf="categorizedPlayers['PORTEROS'].length" class="club-players">
+      <h6>PORTEROS</h6>
+      <div class="player" *ngFor="let player of categorizedPlayers['PORTEROS']">
+        <div class="player-image">
+          <img [src]="player.image" alt="{{ player.name }}">
+        </div>
+        <div class="player-left-block">
+          <span class="player-positions">{{ player.position[0] }}</span>
+          <span class="player-name">{{ getPlayerCost(player.overallRating) | toCurrency: 'EUR' }}</span>
+          <span class="player-name">{{ player.name }}</span>
+        </div>
+        <div class="player-right-block">
+          <span class="player-rating">{{ player.overallRating }}</span>
+          <div *ngIf="isUserOwner">
+            <button mat-raised-button color="primary" (click)="releasePlayer(player)" class="btn">
+              Vender
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Defensas -->
+    <div *ngIf="categorizedPlayers['DEFENSAS'].length" class="club-players">
+      <h6>DEFENSAS</h6>
+      <div class="player" *ngFor="let player of categorizedPlayers['DEFENSAS']">
+        <div class="player-image">
+          <img [src]="player.image" alt="{{ player.name }}">
+        </div>
+        <div class="player-left-block">
+          <span class="player-positions">{{ player.position[0] }}</span>
+          <span class="player-name">{{ getPlayerCost(player.overallRating) | toCurrency: 'EUR' }}</span>
+          <span class="player-name">{{ player.name }}</span>
+        </div>
+        <div class="player-right-block">
+          <span class="player-rating">{{ player.overallRating }}</span>
+          <div *ngIf="isUserOwner">
+            <button mat-raised-button color="primary" (click)="releasePlayer(player)" class="btn">
+              Vender
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Medios -->
+    <div *ngIf="categorizedPlayers['MEDIOS'].length" class="club-players">
+      <h6>MEDIOS</h6>
+      <div class="player" *ngFor="let player of categorizedPlayers['MEDIOS']">
+        <div class="player-image">
+          <img [src]="player.image" alt="{{ player.name }}">
+        </div>
+        <div class="player-left-block">
+          <span class="player-positions">{{ player.position[0] }}</span>
+          <span class="player-name">{{ getPlayerCost(player.overallRating) | toCurrency: 'EUR' }}</span>
+          <span class="player-name">{{ player.name }}</span>
+        </div>
+        <div class="player-right-block">
+          <span class="player-rating">{{ player.overallRating }}</span>
+          <div *ngIf="isUserOwner">
+            <button mat-raised-button color="primary" (click)="releasePlayer(player)" class="btn">
+              Vender
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Delanteros -->
+    <div *ngIf="categorizedPlayers['DELANTEROS'].length"  class="club-players">
+      <h6>DELANTEROS</h6>
+      <div class="player" *ngFor="let player of categorizedPlayers['DELANTEROS']">
+        <div class="player-image">
+          <img [src]="player.image" alt="{{ player.name }}">
+        </div>
+        <div class="player-left-block">
+          <span class="player-positions">{{ player.position[0] }}</span>
+          <span class="player-name">{{ getPlayerCost(player.overallRating) | toCurrency: 'EUR' }}</span>
+          <span class="player-name">{{ player.name }}</span>
+        </div>
+        <div class="player-right-block">
+          <span class="player-rating">{{ player.overallRating }}</span>
+          <div *ngIf="isUserOwner">
+            <button mat-raised-button color="primary" (click)="releasePlayer(player)" class="btn">
+              Vender
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
