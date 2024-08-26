@@ -274,12 +274,16 @@ export class MarketPlayersComponent implements OnInit {
   }
 
   getValueClass(value: string): string {
-    if (Number(value) >= 85) {
-      return 'value-high';
+    if (Number(value) >= 80) {
+      return 'value-rank1';
     } else if (Number(value) >= 70) {
-      return 'value-medium';
+      return 'value-rank2';
+    } else if (Number(value) >= 60) {
+      return 'value-rank3';
+    } else if (Number(value) >= 50) {
+      return 'value-rank4';
     } else {
-      return 'value-low';
+      return 'value-rank5';
     }
   }
 

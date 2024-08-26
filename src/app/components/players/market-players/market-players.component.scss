@@ -105,19 +105,30 @@ button {
   margin-block: 1rem;
 }
 
-.value-high {
+.value-rank1 {
   background-color: #2b8a3e;
   color: white;
   border-radius: 4px;
 }
 
-.value-medium {
-  background-color: #fcc419;
-  color: black;
+.value-rank2 {
+  background-color: #66a80f;
+  color: white;
   border-radius: 4px;
 }
 
-.value-low {
+.value-rank3 {
+  background-color: #fcc419;
+  color: white;
+  border-radius: 4px;
+}
+.value-rank4 {
+  background-color: #fd7e14;
+  color: white;
+  border-radius: 4px;
+}
+
+.value-rank5 {
   background-color: #e03131;
   color: white;
   border-radius: 4px;
