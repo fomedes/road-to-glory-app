@@ -95,7 +95,6 @@ export class ClubPageComponent implements OnInit {
 
   getIsUserOwner(): void {
     this.isUserOwner = (this.urlTeamId === '' || this.urlTeamId === this.currentTeam.teamId ) ? true : false;
-    console.log(this.isUserOwner);
   }
 
   loadPlayerData() {
@@ -131,7 +130,7 @@ export class ClubPageComponent implements OnInit {
 
       if (position === 'GK') {
         this.categorizedPlayers['PORTEROS'].push(player);
-      } else if (['LD', 'CB', 'LI', 'LWB', 'RWB'].includes(position)) {
+      } else if (['RB', 'CB', 'LB', 'LWB', 'RWB'].includes(position)) {
         this.categorizedPlayers['DEFENSAS'].push(player);
       } else if (['CDM', 'CM', 'CAM', 'RM', 'LM'].includes(position)) {
         this.categorizedPlayers['MEDIOS'].push(player);
