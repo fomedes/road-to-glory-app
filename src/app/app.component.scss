@@ -11,6 +11,8 @@ main {
   margin: 10px;
   flex: 1;
   align-items: center;
+  max-width: 600px;
+  margin-inline: auto;
 }
 
 app-navbar {

@@ -1,8 +1,8 @@
 .header {
   background-color: rgb(28,28,28);
-  height: 10vh;
-  max-height: 80px;
-  padding-top: 10px;
+  height: 70px;
+  // max-height: 80px;
+  // padding-top: 10px;
 }
 
 .header-container {
@@ -43,7 +43,7 @@
   align-items: center;
 
   .current-team-crest{
-    width: 45%;
+    height: 50px;
   }
 }
 

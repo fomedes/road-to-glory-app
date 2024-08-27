@@ -5,16 +5,38 @@
     <span (click)="showFavorites()" class="clickable">FAVORITOS</span>
   </div>
 
-  <div class="search-bar" style="width: 100%;">
-    <mat-form-field appearance="fill" style="width: 100%;">
-      <input
-        matInput
-        type="text"
-        placeholder="Search players..."
-        [(ngModel)]="searchQuery"
-        (input)="filterPlayersByName()"        
-      />
-    </mat-form-field>
+  <div class="filter-container" style="width: 100%; margin-bottom: 10px;">
+    <div class="search-bar" style="width: 100%;">
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <input
+          matInput
+          type="text"
+          placeholder="Search players..."
+          [(ngModel)]="searchQuery"
+          (input)="filterPlayersByName()"
+        />
+      </mat-form-field>
+    </div>
+    <div class="filter-container" style="width: 100%; margin-bottom: 10px;">
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-select
+          placeholder="Filter by position"
+          [(ngModel)]="selectedPositions"
+          multiple
+          (selectionChange)="filterPlayersByPosition()"
+        >
+          <mat-option *ngFor="let position of availablePositions" [value]="position">
+            {{ position }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <span>
+      <span>        Jugadores Libres:
+      </span>
+      <mat-checkbox [(ngModel)]="filterFreePlayers" (change)="filterPlayers()">
+      </mat-checkbox>
+    </span>
   </div>
   
   <div class="pagination-controls">
@@ -27,7 +49,7 @@
     <div class="player-card" *ngFor="let player of paginatedPlayers">
       <div class="player-card-left-block">
         <img [src]="player.image" alt="{{ player.name }}" class="player-image">
-        <p>{{ player.position }}</p>
+        <p>{{ player.position[0] }}</p>
         <p>WF: {{ player.weakFoot }} &#9733;</p>
         <p>SM: {{ player.skillMoves }} &#9733;</p>
       </div>

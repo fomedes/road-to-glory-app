@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -28,7 +31,7 @@ import { FavouritePlayersComponent } from '../favourite-players/favourite-player
 @Component({
   selector: 'app-market-players',
   standalone: true,
-  imports: [CommonModule, ToCurrencyPipe, FontAwesomeModule, FormsModule, MatInputModule, FavouritePlayersComponent],
+  imports: [CommonModule, ToCurrencyPipe, FontAwesomeModule, FormsModule, MatInputModule, FavouritePlayersComponent, MatFormFieldModule, MatSelectModule, MatCheckboxModule],
   templateUrl: './market-players.component.html',
   styleUrl: './market-players.component.scss',
 })
@@ -63,7 +66,10 @@ export class MarketPlayersComponent implements OnInit {
   itemsPerPage: number = 10;
   totalPages: number = 1;
   
+  availablePositions: string[] = ['GK', 'CB', 'LWB' , 'LB', 'RB', 'RWB', 'CDM', 'CM', 'CAM', 'LM', 'RM', 'LW', 'RW', 'LF' ,'RF' ,'CF', 'ST'];
+  selectedPositions: string[] = [];
   searchQuery: string = '';
+  filterFreePlayers: boolean = false;
 
   playerPrices: any[] = [];
   displayFavorites: boolean = false;
@@ -91,6 +97,7 @@ export class MarketPlayersComponent implements OnInit {
     this.getPlayerPrices();
     this.user = this.localStorageService.getItem('user');
     this.getRegisteredPlayers();
+    this.filterPlayers();
   }
 
   loadFavorites() {
@@ -172,13 +179,26 @@ export class MarketPlayersComponent implements OnInit {
     this.paginatedPlayers = this.filteredPlayers.slice(startIndex, endIndex);
   }
 
-  filterPlayersByName() {
-    const query = this.searchQuery.toLowerCase();
-    this.filteredPlayers = this.players.filter(player =>
-      player.name.toLowerCase().includes(query)
-    );
-    this.currentPage = 1; // Reset to the first page after filtering
+
+  filterPlayers() {
+    this.filteredPlayers = this.players.filter(player => {
+      const matchesSearchQuery = player.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+      const matchesPosition = this.selectedPositions.length === 0 || this.selectedPositions.includes(player.position[0]);
+      const matchesFreePlayers = !this.filterFreePlayers || !this.isPlayerRegistered(player.playerId);
+
+      return matchesSearchQuery && matchesPosition && matchesFreePlayers;
+    });
+
+    this.totalPages = Math.ceil(this.filteredPlayers.length / this.itemsPerPage);
     this.updatePaginatedPlayers();
+  }
+
+  filterPlayersByName() {
+    this.filterPlayers();
+  }
+
+  filterPlayersByPosition() {
+    this.filterPlayers();
   }
 
   scrollToTop(): void {
@@ -188,7 +208,7 @@ export class MarketPlayersComponent implements OnInit {
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
-      this.updatePaginatedPlayers();
+      this.filterPlayers()
       this.scrollToTop();
     }
   }
@@ -196,7 +216,7 @@ export class MarketPlayersComponent implements OnInit {
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.updatePaginatedPlayers();
+      this.filterPlayers()
       this.scrollToTop();
     }
   }

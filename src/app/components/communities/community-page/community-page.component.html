@@ -8,7 +8,7 @@
         <!-- Block for type = 'transferPurchase' -->
         <ng-container *ngIf="news.type === 'transferPurchase'">
           <div class="news-content">
-            <div class="news-time">{{ news.createdAt | date:'shortTime' }}</div>            
+            <div class="news-time">{{ news.createdAt | date:'H:mm' }}</div>            
             <div class="news-display">
               <a [routerLink]="getRouterLink(news.sellerId)">
                 <img src="{{news.sellerCrest}}" alt="" class="club-crest">
@@ -18,6 +18,7 @@
               </div>
               <div class="news-display-mid">
                 <div><img src="{{news.playerImage}}" alt="{{news.playerImage}}" title="{{news.playerImage}}" class="player-image"></div>
+                <span>{{news.playerName}}</span>
                 <div class="negative-value">- {{news.transferAmount | toCurrency: 'EUR' }}</div>
               </div>
               <div class="transfer-line">
