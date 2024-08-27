@@ -70,9 +70,10 @@ export class MarketPlayersComponent implements OnInit {
   selectedPositions: string[] = [];
   searchQuery: string = '';
   filterFreePlayers: boolean = false;
+  displayFavorites: boolean = false;
+
 
   playerPrices: any[] = [];
-  displayFavorites: boolean = false;
 
   @Input() isFavourite: boolean = false;
   @Output() isFavouriteChange = new EventEmitter<boolean>();
@@ -123,7 +124,7 @@ export class MarketPlayersComponent implements OnInit {
           this.favoritePlayers.splice(index, 1);
           this.toaster.success(`${player.name} removed from favorites`);
           if (this.displayFavorites) {
-            this.filterPlayersByFavorites();
+            this.filterPlayers();
           }
         },
         error: (error) => {
@@ -136,7 +137,7 @@ export class MarketPlayersComponent implements OnInit {
           this.favoritePlayers.push(playerId);
           this.toaster.success(`${player.name} added to favorites`);
           if (this.displayFavorites) {
-            this.filterPlayersByFavorites();
+            this.filterPlayers();
           }
         },
         error: (error) => {
@@ -182,16 +183,17 @@ export class MarketPlayersComponent implements OnInit {
 
   filterPlayers() {
     this.filteredPlayers = this.players.filter(player => {
-      const matchesSearchQuery = player.name.toLowerCase().includes(this.searchQuery.toLowerCase());
-      const matchesPosition = this.selectedPositions.length === 0 || this.selectedPositions.includes(player.position[0]);
-      const matchesFreePlayers = !this.filterFreePlayers || !this.isPlayerRegistered(player.playerId);
+        const isFavorite = this.displayFavorites ? this.favoritePlayers.includes(player.playerId) : true;
+        const matchesSearchQuery = player.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+        const matchesPosition = this.selectedPositions.length === 0 || this.selectedPositions.includes(player.position[0]);
+        const matchesFreePlayers = !this.filterFreePlayers || !this.isPlayerRegistered(player.playerId);
 
-      return matchesSearchQuery && matchesPosition && matchesFreePlayers;
+        return isFavorite && matchesSearchQuery && matchesPosition && matchesFreePlayers;
     });
 
     this.totalPages = Math.ceil(this.filteredPlayers.length / this.itemsPerPage);
     this.updatePaginatedPlayers();
-  }
+}
 
   filterPlayersByName() {
     this.filterPlayers();
@@ -208,7 +210,7 @@ export class MarketPlayersComponent implements OnInit {
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
-      this.filterPlayers()
+      this.updatePaginatedPlayers();
       this.scrollToTop();
     }
   }
@@ -216,7 +218,7 @@ export class MarketPlayersComponent implements OnInit {
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.filterPlayers()
+      this.updatePaginatedPlayers();
       this.scrollToTop();
     }
   }
@@ -324,23 +326,14 @@ export class MarketPlayersComponent implements OnInit {
 
   showMarketPlayers() {
     this.displayFavorites = false;
-    this.filterPlayersByFavorites();
+    this.filterPlayers();
   }
 
   showFavorites() {
     this.displayFavorites = true;
-    this.filterPlayersByFavorites();
+    this.currentPage = 1;
+    this.filterPlayers();
   }
 
-  filterPlayersByFavorites() {
-    if (this.displayFavorites) {
-      this.filteredPlayers = this.players.filter(player =>
-        this.favoritePlayers.includes(player.playerId)
-      );
-    } else {
-      this.filteredPlayers = [...this.players]; // Reset to all players
-    }
-    this.currentPage = 1; // Reset to the first page after filtering
-    this.updatePaginatedPlayers();
-  }
+
 }
