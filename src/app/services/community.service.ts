@@ -40,6 +40,12 @@ export class CommunityService {
     );
   }
 
+  getCommunityTeams(communityId: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      this.urlApi + '/communityTeams/' + communityId
+    );
+  }
+
   getMarketConfig (communityId: string): Observable<any> {
     return this.http.get<any>(this.urlApi + '/marketConfig/' + communityId);
   }

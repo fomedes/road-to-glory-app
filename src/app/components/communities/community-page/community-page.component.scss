@@ -1,3 +1,21 @@
+.community-teams {
+  margin-bottom: 16px;
+}
+
+.menu-chevron {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.teams-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  margin-top: 10px;
+  justify-content: center;
+}
+
 .news-section {
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;

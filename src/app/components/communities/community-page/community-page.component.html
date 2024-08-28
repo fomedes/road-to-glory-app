@@ -1,4 +1,21 @@
 <div class="page">
+  <div class="community-teams">
+    <div class="menu-toggler dropdown-menu" (click)="toggleMenu()">
+      <h5>Equipos de la Comunidad</h5>
+      <div class="menu-chevron">
+        <fa-icon [icon]="faChevronDown" *ngIf="!isMenuOpened"></fa-icon>
+        <fa-icon [icon]="faChevronUp" *ngIf="isMenuOpened"></fa-icon>
+      </div>
+    </div>
+
+    <div class="teams-container"  *ngIf="isMenuOpened">
+      <div class="teams" *ngFor="let team of communityTeams">
+        <a class="team" [routerLink]="getRouterLink(team.id)">
+          <img class="club-crest" [src]="team.clubCrest" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
   <div class="last-news">
     <h5>Últimas notícias</h5>
     <div *ngFor="let date of lastNews | getKeys" class="news-section">

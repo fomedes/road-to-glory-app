@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
-  faChevronRight
+  faChevronDown,
+  faChevronRight,
+  faChevronUp
 } from '@fortawesome/free-solid-svg-icons';
 import { GetKeysPipe } from '../../../pipes/get-keys.pipe';
 import { ToCurrencyPipe } from '../../../pipes/to-currency.pipe';
@@ -18,9 +20,14 @@ import { NewsService } from '../../../services/news.service';
   styleUrl: './community-page.component.scss',
 })
 export class CommunityPageComponent implements OnInit {
-  faRightChevron = faChevronRight
+  faRightChevron = faChevronRight;
+  faChevronDown = faChevronDown;
+  faChevronUp = faChevronUp;
 
   communityId: string = '';
+  communityTeams: any[] = [];
+  isMenuOpened: boolean = false;
+
   reversedNews: any[] = [];
   lastNews: any = {};
   freeAgent: any = {
@@ -39,6 +46,7 @@ export class CommunityPageComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.communityId = params.get('communityId') ?? '';
       this.getLastNews();
+      this.getCommunityTeams();
     });
   }
 
@@ -58,7 +66,18 @@ export class CommunityPageComponent implements OnInit {
     });
   }
 
+  getCommunityTeams(): void {
+    this.communityService.getCommunityTeams(this.communityId).subscribe((teams) => {
+      this.communityTeams = teams;
+      console.log(this.communityTeams);
+    });
+  }
+
   getRouterLink(teamId: string): string[] | null {
     return teamId === this.freeAgent.freeAgentId ? null : ['/club', teamId];
+  }
+
+  toggleMenu(): void {
+    this.isMenuOpened = !this.isMenuOpened;
   }
 }
