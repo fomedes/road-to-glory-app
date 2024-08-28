@@ -10,10 +10,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import {
   faCartShopping,
+  faChevronDown,
   faFileSignature,
   faHeartCircleMinus,
   faHeartCirclePlus,
-  faHeart as solidHeart,
+  faTimes,
+  faHeart as solidHeart
 } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
@@ -42,6 +44,8 @@ export class MarketPlayersComponent implements OnInit {
   faSolidHeart = solidHeart;
   faHeartCirclePlus = faHeartCirclePlus;
   faHeartCircleMinus = faHeartCircleMinus;
+  faTimes = faTimes;
+  faChevronDown = faChevronDown;
 
   playerDataFile: string = '';
   playerPricesFile = 'assets/data/prices/player-prices.json';
@@ -59,6 +63,7 @@ export class MarketPlayersComponent implements OnInit {
 
   players: PlayerDTO[] = [];
   paginatedPlayers: PlayerDTO[] = [];
+  isMenuOpened: boolean = false;
   filteredPlayers: PlayerDTO[] = [];
   registeredPlayers: any[] = [];
   favoritePlayers: string[] = [];
@@ -122,26 +127,26 @@ export class MarketPlayersComponent implements OnInit {
       this.teamService.removePlayerFromFavourites(teamId, playerId).subscribe({
         next: () => {
           this.favoritePlayers.splice(index, 1);
-          this.toaster.success(`${player.name} removed from favorites`);
+          this.toaster.success(`${player.name} ha sido removido de Favoritos`);
           if (this.displayFavorites) {
             this.filterPlayers();
           }
         },
         error: (error) => {
-          this.toaster.error('Failed to remove player from favorites');
+          this.toaster.error('Error al eliminar al jugador de la lista Favoritos');
         },
       });
     } else {
       this.teamService.addPlayerToFavourites(teamId, playerId).subscribe({
         next: () => {
           this.favoritePlayers.push(playerId);
-          this.toaster.success(`${player.name} added to favorites`);
+          this.toaster.success(`${player.name} añadido a Favoritos`);
           if (this.displayFavorites) {
             this.filterPlayers();
           }
         },
         error: (error) => {
-          this.toaster.error('Failed to add player to favorites');
+          this.toaster.error('Error al añadir al jugador a Favoritos');
         },
       });
     }
@@ -200,6 +205,17 @@ export class MarketPlayersComponent implements OnInit {
   }
 
   filterPlayersByPosition() {
+    this.filterPlayers();
+  }
+
+  resetSearchQuery() {
+    this.searchQuery = '';
+    this.filterPlayers();
+  }
+
+  resetPositionFilter(event: MouseEvent): void {
+    event.stopPropagation();
+    this.selectedPositions = [];
     this.filterPlayers();
   }
 
@@ -335,5 +351,8 @@ export class MarketPlayersComponent implements OnInit {
     this.filterPlayers();
   }
 
+  toggleMenu(): void {
+    this.isMenuOpened = !this.isMenuOpened;
+  }
 
 }

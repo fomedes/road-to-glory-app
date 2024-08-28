@@ -1,3 +1,11 @@
+.page {
+  width: 328px;
+}
+
+.menu-toggler {
+  cursor: pointer;
+}
+
 .text-menu {
   width: 100%;
   display: flex;
@@ -6,11 +14,22 @@
   margin-bottom: 1rem;
 }
 
+.clear-button {
+  background: none;
+  margin-right: 16px;
+}
+
+.clear-button fa-icon {
+  color: white;
+  font-size: 1rem; 
+}
+
+
 .player-list-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 90vw;
+  width: 100%;
 }
 
 .player-card {
@@ -62,7 +81,7 @@
       justify-content: space-evenly;
 
       .player-stat {
-        width: 10vw;
+        width: 50px;
       }
     }
   }

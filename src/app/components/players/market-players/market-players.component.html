@@ -5,46 +5,68 @@
     <span (click)="showFavorites()" class="clickable">FAVORITOS</span>
   </div>
 
-  <div class="filter-container" style="width: 100%; margin-bottom: 10px;">
-    <div class="search-bar" style="width: 100%;">
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <input
-          matInput
-          type="text"
-          placeholder="Search players..."
-          [(ngModel)]="searchQuery"
-          (input)="filterPlayersByName()"
-        />
-      </mat-form-field>
-    </div>
-    <div class="filter-container" style="width: 100%; margin-bottom: 10px;">
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-select
-          placeholder="Filter by position"
-          [(ngModel)]="selectedPositions"
-          multiple
-          (selectionChange)="filterPlayersByPosition()"
-        >
-          <mat-option *ngFor="let position of availablePositions" [value]="position">
-            {{ position }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <span>
-      <span>        Jugadores Libres:
-      </span>
-      <mat-checkbox [(ngModel)]="filterFreePlayers" (change)="filterPlayers()">
-      </mat-checkbox>
-    </span>
-  </div>
-  
   <div class="pagination-controls">
     <button (click)="previousPage()" [disabled]="currentPage === 1">&#9664;</button>
     <span>{{ currentPage }} de {{ totalPages }}</span>
     <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= players.length">&#9654;</button>
   </div>
 
+  <div class="filter-container" style="width: 100%; margin-bottom: 10px;">
+    <div class="menu-toggler dropdown-menu" (click)="toggleMenu()">
+      <span>Filtros </span>
+      <fa-icon [icon]="faChevronDown"></fa-icon>
+    </div>
+    
+    <div class="filter-menu" *ngIf="isMenuOpened">
+      <div class="search-bar" style="width: 100%; position: relative;">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <input
+            matInput
+            type="text"
+            placeholder="Buscar Jugador..."
+            [(ngModel)]="searchQuery"
+            (input)="filterPlayersByName()"
+          />
+          <div
+            *ngIf="searchQuery"
+            matSuffix
+            (click)="resetSearchQuery()"
+            class="clear-button"
+          >
+            <fa-icon [icon]="faTimes"></fa-icon>
+          </div>
+        </mat-form-field>
+      </div>
+      <div class="filter-container" style="width: 100%; margin-bottom: 10px;">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-select
+            placeholder="Seleccionar Posiciones"
+            [(ngModel)]="selectedPositions"
+            multiple
+            (selectionChange)="filterPlayersByPosition()"
+          >
+            <mat-option *ngFor="let position of availablePositions" [value]="position">
+              {{ position }}
+            </mat-option>
+          </mat-select>
+          <div
+          *ngIf="selectedPositions && selectedPositions.length > 0"
+          matSuffix
+          (click)="resetPositionFilter($event)"
+          class="clear-button"
+          >
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </div>
+        </mat-form-field>
+      </div>
+      <span>
+        <span>Jugadores Libres:</span>
+        <mat-checkbox [(ngModel)]="filterFreePlayers" (change)="filterPlayers()">
+        </mat-checkbox>
+      </span>
+    </div>
+  </div>
+  
   <div class="player-list-container">
     <div class="player-card" *ngFor="let player of paginatedPlayers">
       <div class="player-card-left-block">
