@@ -63,6 +63,7 @@ export class CommunityPageComponent implements OnInit {
         },
         {}
       );
+      console.log(this.lastNews);
     });
   }
 
