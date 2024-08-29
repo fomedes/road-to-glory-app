@@ -20,7 +20,11 @@
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
-  width: 100%;
+  width: 300px;
+}
+
+.news-item {
+  margin-block: 4px;
 }
 
 .news-date {
@@ -48,25 +52,34 @@
   flex: 1;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
 }
 
 .club-crest {
-  width: 60px;
+  width: 40px;
   text-align: center;
+}
+
+.news-display-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .player-image {
-  max-width: 50px;
+  max-width: 80px;
+  height: auto;
 }
 
-.news-display-mid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 120px; 
-  max-width: 200px;
-  text-align: center;
-}
+// .news-display-mid {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 120px; 
+//   max-width: 200px;
+//   text-align: center;
+// }
 
 .negative-value {
   color: #D9534F; /* Red for negative values */
@@ -74,7 +87,28 @@
 
 .positive-value {
   color: #5CB85C; /* Green for positive values */
-  font-size: 1.02rem;
+  font-size: 1.01rem;
+}
+
+.news-display-info {
+  display: flex;
+  flex: 1;
+
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.transfer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-teams {
+  display: flex;
+  flex-direction: row;
 }
 
 .transfer-line {
@@ -82,9 +116,9 @@
   align-items: center;
   justify-content: center;
   max-height: 100%;
-  width: 16px; /* Fixed width for chevron icon */
+  width: 16px; 
 }
 
 .news-message {
-  flex: 0 0 70%; /* Fixed width for messages in non-transfer news */
+  flex: 0 0 70%;
 }
