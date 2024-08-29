@@ -30,12 +30,9 @@
               </div> -->
               <div class="news-display-player">
                 <img src="{{news.playerImage}}" alt="{{news.playerImage}}" title="{{news.playerImage}}" class="player-image">
+                <span>{{news.playerName}}</span>
               </div>
               <div class="news-display-info">
-                <div class="transfer-info">
-                  <span>{{news.playerName}}</span>
-                  <div class="negative-value">{{news.transferAmount | toCurrency: 'EUR' }}</div>
-                </div>
                 <div class="transfer-teams">
                   <a [routerLink]="getRouterLink(news.sellerId)">
                     <img src="{{news.sellerCrest}}" alt="" class="club-crest">
@@ -46,6 +43,9 @@
                   <a [routerLink]="getRouterLink(news.buyerId)">
                     <img src="{{news.buyerCrest}}" alt="" class="club-crest">
                   </a>
+                </div>
+                <div class="transfer-amount">
+                  <div class="negative-value">{{news.transferAmount | toCurrency: 'EUR' }}</div>
                 </div>
               </div>
             </div>
@@ -64,12 +64,9 @@
                 </div> -->
                 <div class="news-display-player">
                   <img src="{{news.playerImage}}" alt="" class="player-image">
+                  <span>{{news.playerName}}</span>
                 </div>
                 <div class="news-display-info">
-                  <div class="transfer-info">
-                    <span>{{news.playerName}}</span>
-                    <div class="positive-value">{{news.transferAmount | toCurrency: 'EUR' }}</div>
-                  </div>
                   <div class="transfer-teams">
                     <a [routerLink]="getRouterLink(news.sellerId)">
                       <img src="{{news.sellerCrest}}" alt="" class="club-crest">
@@ -80,6 +77,9 @@
                     <a [routerLink]="getRouterLink(news.buyerId)">
                       <img src="{{news.buyerCrest}}" alt="" class="club-crest">
                     </a>
+                  </div>
+                  <div class="transfer-amount">
+                    <div class="positive-value">{{news.transferAmount | toCurrency: 'EUR' }}</div>
                   </div>
                 </div>
               </div>

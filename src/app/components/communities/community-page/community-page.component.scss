@@ -62,14 +62,15 @@
 
 .news-display-player {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
+  flex: 1;
 }
 
 .player-image {
-  max-width: 80px;
-  height: auto;
+  height: 50px;
 }
 
 // .news-display-mid {
@@ -87,19 +88,16 @@
 
 .positive-value {
   color: #5CB85C; /* Green for positive values */
-  font-size: 1.01rem;
 }
 
 .news-display-info {
   display: flex;
-  flex: 1;
-
   flex-direction: column;
-  width: 100%;
+  width: 40%;
   align-items: center;
 }
 
-.transfer-info {
+.transfer-amount {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,6 +107,8 @@
 .transfer-teams {
   display: flex;
   flex-direction: row;
+  // align-items: center;
+  // justify-content: center;
 }
 
 .transfer-line {
