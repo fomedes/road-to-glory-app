@@ -27,7 +27,12 @@
       <h6>PORTEROS</h6>
       <div class="player" *ngFor="let player of categorizedPlayers['PORTEROS']">
         <div class="player-image">
-          <img [src]="player.image" alt="{{ player.name }}">
+          <img 
+            [src]="player.image" 
+            alt="{{ player.name }}"
+            title="{{player.name}}"
+            onerror="this.src='assets/images/others/default-player.svg'"
+          >
         </div>
         <div class="player-left-block">
           <span class="player-positions">{{ player.position[0] }}</span>
@@ -50,7 +55,12 @@
       <h6>DEFENSAS</h6>
       <div class="player" *ngFor="let player of categorizedPlayers['DEFENSAS']">
         <div class="player-image">
-          <img [src]="player.image" alt="{{ player.name }}">
+          <img 
+            [src]="player.image" 
+            alt="{{ player.name }}"
+            title="{{player.name}}"
+            onerror="this.src='assets/images/others/default-player.svg'"
+          >
         </div>
         <div class="player-left-block">
           <span class="player-positions">{{ player.position[0] }}</span>
@@ -73,7 +83,12 @@
       <h6>MEDIOS</h6>
       <div class="player" *ngFor="let player of categorizedPlayers['MEDIOS']">
         <div class="player-image">
-          <img [src]="player.image" alt="{{ player.name }}">
+          <img 
+            [src]="player.image" 
+            alt="{{ player.name }}"
+            title="{{player.name}}"
+            onerror="this.src='assets/images/others/default-player.svg'"
+          >
         </div>
         <div class="player-left-block">
           <span class="player-positions">{{ player.position[0] }}</span>
@@ -96,7 +111,12 @@
       <h6>DELANTEROS</h6>
       <div class="player" *ngFor="let player of categorizedPlayers['DELANTEROS']">
         <div class="player-image">
-          <img [src]="player.image" alt="{{ player.name }}">
+          <img 
+            [src]="player.image" 
+            alt="{{ player.name }}"
+            title="{{player.name}}"
+            onerror="this.src='assets/images/others/default-player.svg'"
+          >
         </div>
         <div class="player-left-block">
           <span class="player-positions">{{ player.position[0] }}</span>

@@ -1,14 +1,14 @@
 <div class="page">
   <div class="community-teams">
-    <div class="menu-toggler dropdown-menu" (click)="toggleMenu()">
-      <h5>Equipos de la Comunidad</h5>
+    <div class="menu-toggler dropdown-menu" (click)="toggleMenu('isTeamsMenu')">
+      <h6>Equipos de la Comunidad</h6>
       <div class="menu-chevron">
-        <fa-icon [icon]="faChevronDown" *ngIf="!isMenuOpened"></fa-icon>
-        <fa-icon [icon]="faChevronUp" *ngIf="isMenuOpened"></fa-icon>
+        <fa-icon [icon]="faChevronDown" *ngIf="!isTeamsMenu"></fa-icon>
+        <fa-icon [icon]="faChevronUp" *ngIf="isTeamsMenu"></fa-icon>
       </div>
     </div>
 
-    <div class="teams-container"  *ngIf="isMenuOpened">
+    <div class="teams-container"  *ngIf="isTeamsMenu">
       <div class="teams" *ngFor="let team of communityTeams">
         <a class="team" [routerLink]="getRouterLink(team.id)">
           <img class="club-crest" [src]="team.clubCrest" alt="">
@@ -17,54 +17,34 @@
     </div>
   </div>
   <div class="last-news">
-    <h5>Últimas notícias</h5>
-    <div *ngFor="let date of lastNews | getKeys" class="news-section">
-      <h6 class="news-date">{{ date }}</h6>
-      <div class="news-item" *ngFor="let news of lastNews[date]">
-        <ng-container *ngIf="news.type === 'transferPurchase'">
-          <div class="news-content">
-            <div class="news-time">{{ news.createdAt | date:'H:mm' }}</div>            
-            <div class="news-display">
-              <!-- <div class="transfer-line">
-                <fa-icon [icon]="faRightChevron"></fa-icon>
-              </div> -->
-              <div class="news-display-player">
-                <img src="{{news.playerImage}}" alt="{{news.playerImage}}" title="{{news.playerImage}}" class="player-image">
-                <span>{{news.playerName}}</span>
-              </div>
-              <div class="news-display-info">
-                <div class="transfer-teams">
-                  <a [routerLink]="getRouterLink(news.sellerId)">
-                    <img src="{{news.sellerCrest}}" alt="" class="club-crest">
-                  </a>
-                  <div class="transfer-line">
-                    <fa-icon [icon]="faRightChevron"></fa-icon>
-                  </div>
-                  <a [routerLink]="getRouterLink(news.buyerId)">
-                    <img src="{{news.buyerCrest}}" alt="" class="club-crest">
-                  </a>
-                </div>
-                <div class="transfer-amount">
-                  <div class="negative-value">{{news.transferAmount | toCurrency: 'EUR' }}</div>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="news-message">{{ news.message }}</div> -->
-          </div>
-        </ng-container>
-      
-        <!-- Block for type = 'transferSale' -->
-        <ng-container *ngIf="news.type === 'transferSale'">
-          <div class="news-content">
+    <div class="menu-toggler dropdown-menu" (click)="toggleMenu('isNewsMenu')">
+      <h6>Últimas notícias</h6>
+      <div class="menu-chevron">
+        <fa-icon [icon]="faChevronDown" *ngIf="!isNewsMenu"></fa-icon>
+        <fa-icon [icon]="faChevronUp" *ngIf="isNewsMenu"></fa-icon>
+      </div>
+    </div>
+
+    <div *ngIf="isNewsMenu">
+      <div *ngFor="let date of lastNews | getKeys" class="news-section">
+        <h6 class="news-date">{{ date }}</h6>
+        <div class="news-item" *ngFor="let news of lastNews[date]">
+          <ng-container *ngIf="news.type === 'transferPurchase'">
             <div class="news-content">
-              <div class="news-time">{{ news.createdAt | date:'H:mm' }}</div>            
+              <div class="news-time">{{ news.createdAt | date:'H:mm' }}</div>
               <div class="news-display">
                 <!-- <div class="transfer-line">
                   <fa-icon [icon]="faRightChevron"></fa-icon>
                 </div> -->
                 <div class="news-display-player">
-                  <img src="{{news.playerImage}}" alt="" class="player-image">
-                  <span>{{news.playerName}}</span>
+                  <img
+                  src="{{news.playerImage}}"
+                  alt="{{news.PlayerName}}"
+                  title="{{news.PlayerName}}"
+                  class="player-image"
+                  onerror="this.src='assets/images/others/default-player.svg'"
+                  >
+              <span>{{news.playerName}}</span>
                 </div>
                 <div class="news-display-info">
                   <div class="transfer-teams">
@@ -79,24 +59,66 @@
                     </a>
                   </div>
                   <div class="transfer-amount">
-                    <div class="positive-value">{{news.transferAmount | toCurrency: 'EUR' }}</div>
+                    <div class="negative-value">{{news.transferAmount | toCurrency: 'EUR' }}</div>
                   </div>
                 </div>
               </div>
               <!-- <div class="news-message">{{ news.message }}</div> -->
             </div>
-              <!-- Additional content or styling for transferSale type can be added here -->
-          </div>
-        </ng-container>
+          </ng-container>
       
-        <!-- Block for all other types -->
-        <ng-container *ngIf="news.type !== 'transferPurchase' && news.type !== 'transferSale'">
-          <div class="news-content">
-            <div class="news-time">{{ news.createdAt | date:'H:mm' }}</div>
-            <img src="{{news.clubCrest}}" alt="" class="club-crest">
-            <div class="news-message">{{ news.message }}</div>
-          </div>
-        </ng-container>
-      </div>    </div>
+          <!-- Block for type = 'transferSale' -->
+          <ng-container *ngIf="news.type === 'transferSale'">
+            <div class="news-content">
+              <div class="news-content">
+                <div class="news-time">{{ news.createdAt | date:'H:mm' }}</div>
+                <div class="news-display">
+                  <!-- <div class="transfer-line">
+                    <fa-icon [icon]="faRightChevron"></fa-icon>
+                  </div> -->
+                  <div class="news-display-player">
+                    <img
+                      src="{{news.playerImage}}"
+                      alt="{{news.PlayerName}}"
+                      title="{{news.PlayerName}}"
+                      class="player-image"
+                      onerror="this.src='assets/images/others/default-player.svg'"
+                      >
+                    <span>{{news.playerName}}</span>
+                  </div>
+                  <div class="news-display-info">
+                    <div class="transfer-teams">
+                      <a [routerLink]="getRouterLink(news.sellerId)">
+                        <img src="{{news.sellerCrest}}" alt="" class="club-crest">
+                      </a>
+                      <div class="transfer-line">
+                        <fa-icon [icon]="faRightChevron"></fa-icon>
+                      </div>
+                      <a [routerLink]="getRouterLink(news.buyerId)">
+                        <img src="{{news.buyerCrest}}" alt="" class="club-crest">
+                      </a>
+                    </div>
+                    <div class="transfer-amount">
+                      <div class="positive-value">{{news.transferAmount | toCurrency: 'EUR' }}</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="news-message">{{ news.message }}</div> -->
+              </div>
+                <!-- Additional content or styling for transferSale type can be added here -->
+            </div>
+          </ng-container>
+      
+          <!-- Block for all other types -->
+          <ng-container *ngIf="news.type !== 'transferPurchase' && news.type !== 'transferSale'">
+            <div class="news-content">
+              <div class="news-time">{{ news.createdAt | date:'H:mm' }}</div>
+              <img src="{{news.clubCrest}}" alt="" class="club-crest">
+              <div class="news-message">{{ news.message }}</div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

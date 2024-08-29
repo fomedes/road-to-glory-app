@@ -70,7 +70,13 @@
   <div class="player-list-container">
     <div class="player-card" *ngFor="let player of paginatedPlayers">
       <div class="player-card-left-block">
-        <img [src]="player.image" alt="{{ player.name }}" class="player-image">
+          <img 
+            [src]="player.image" 
+            alt="{{ player.name }}" 
+            title="{{ player.name }}"
+            class="player-image"
+            onerror="this.src='assets/images/others/default-player.svg'"
+          >
         <p>{{ player.position[0] }}</p>
         <p>WF: {{ player.weakFoot }} &#9733;</p>
         <p>SM: {{ player.skillMoves }} &#9733;</p>

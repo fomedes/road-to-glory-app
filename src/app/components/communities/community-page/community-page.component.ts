@@ -26,7 +26,8 @@ export class CommunityPageComponent implements OnInit {
 
   communityId: string = '';
   communityTeams: any[] = [];
-  isMenuOpened: boolean = false;
+  isTeamsMenu: boolean = false;
+  isNewsMenu: boolean = true;
 
   reversedNews: any[] = [];
   lastNews: any = {};
@@ -52,7 +53,7 @@ export class CommunityPageComponent implements OnInit {
 
   getLastNews(): void {
     this.newsService.getNews(this.communityId).subscribe((news: any) => {
-      this.reversedNews = news.slice(-15).reverse();
+      this.reversedNews = news.slice(-20).reverse();
 
       this.lastNews = this.reversedNews.reduce(
         (acc: { [key: string]: any[] }, item: any) => {
@@ -63,14 +64,12 @@ export class CommunityPageComponent implements OnInit {
         },
         {}
       );
-      console.log(this.lastNews);
     });
   }
 
   getCommunityTeams(): void {
     this.communityService.getCommunityTeams(this.communityId).subscribe((teams) => {
       this.communityTeams = teams;
-      console.log(this.communityTeams);
     });
   }
 
@@ -78,7 +77,6 @@ export class CommunityPageComponent implements OnInit {
     return teamId === this.freeAgent.freeAgentId ? null : ['/club', teamId];
   }
 
-  toggleMenu(): void {
-    this.isMenuOpened = !this.isMenuOpened;
-  }
-}
+  toggleMenu(menuKey: string): void {
+    (this as any)[menuKey] = !(this as any)[menuKey];
+  }}
