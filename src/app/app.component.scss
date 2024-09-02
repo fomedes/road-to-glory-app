@@ -5,14 +5,7 @@ app-header {
   z-index: 10;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-  max-width: 600px;
-  margin-inline: auto;
-}
+
 
 app-navbar {
   position: fixed; 

@@ -3,16 +3,23 @@
   flex-direction: column; /* Stack buttons vertically on mobile */
   align-items: center;
   margin: 0 auto; /* Center buttons horizontally on mobile */
+  gap: 8px;
 }
 
-@media (min-width: 768px) { /* Adjust styles for larger screens */
-  .button-container {
-    flex-direction: row; /* Buttons side-by-side on larger screens */
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-
-  .btn {
-    margin-bottom: 0; /* Remove margin between buttons on larger screens */
-  }
+.logo-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+// @media (min-width: 768px) { /* Adjust styles for larger screens */
+//   .button-container {
+//     flex-direction: row; /* Buttons side-by-side on larger screens */
+//     justify-content: space-around;
+//     margin-top: 20px;
+//   }
+
+//   .btn {
+//     margin-bottom: 0; /* Remove margin between buttons on larger screens */
+//   }
+//}

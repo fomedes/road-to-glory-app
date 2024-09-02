@@ -17,8 +17,8 @@ import { ToastrService } from 'ngx-toastr';
 import { finalize, Observable } from 'rxjs';
 import { CommunityDTO } from '../../../models/community.dto';
 import { TeamCreationParametersDTO } from '../../../models/teamCreationParameters.dto';
+import { CommunityService } from '../../../services/community.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
-import { NewsService } from '../../../services/news.service';
 import { SharedService } from '../../../services/shared.service';
 import { TeamService } from '../../../services/team.service';
 
@@ -58,7 +58,8 @@ export class ChooseClubComponent implements OnInit {
   communityParameters: CommunityDTO = new CommunityDTO();
   teamCreationParameters: TeamCreationParametersDTO =
     new TeamCreationParametersDTO();
-  newsDetails: any = {};
+  registeredClubs: any[] = [];  
+  // newsDetails: any = {};
 
   chosenClub: any;
   country: FormControl;
@@ -73,7 +74,7 @@ export class ChooseClubComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private teamService: TeamService,
     private sharedService: SharedService,
-    private newsService: NewsService
+    private communityService: CommunityService
   ) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
@@ -93,11 +94,18 @@ export class ChooseClubComponent implements OnInit {
 
   ngOnInit(): void {
     this.extractClubData();
+    this.getRegisteredClubs();
   }
 
   getClubData(): Observable<any> {
     return this.http.get<any[]>(this.clubDataFile);
   }
+
+  getRegisteredClubs() {
+    this.registeredClubs = this.communityParameters.registeredClubs
+  }
+    
+  
 
   private extractClubData() {
     this.getClubData().subscribe((data) => {
@@ -163,12 +171,12 @@ export class ChooseClubComponent implements OnInit {
 
   createTeam(): void {
     this.setNewTeamData();
-    this.getNewsDetails();
+    // this.getNewsDetails();
 
     let responseOK: boolean = false;
 
     this.teamService
-      .createTeam(this.teamCreationParameters, this.newsDetails)
+      .createTeam(this.teamCreationParameters)
       .pipe(
         finalize(async () => {
           if (responseOK) {
@@ -346,38 +354,42 @@ export class ChooseClubComponent implements OnInit {
     }
   }
 
-  getNewsDetails() {
-    this.newsDetails = {
-      communityId: this.communityParameters.id,
-      userName: this.user.username,
-      clubName: this.teamCreationParameters.clubName,
-      clubCrest: this.teamCreationParameters.clubCrest,
-      type: 'newUser',
-    };
+  isClubRegistered(clubId:any): boolean {
+    return this.registeredClubs.includes(clubId);
   }
 
-  createNews(newsDetails: any) {
-    let responseOK: boolean = false;
+  // getNewsDetails() {
+  //   this.newsDetails = {
+  //     communityId: this.communityParameters.id,
+  //     userName: this.user.username,
+  //     clubName: this.teamCreationParameters.clubName,
+  //     clubCrest: this.teamCreationParameters.clubCrest,
+  //     type: 'newUser',
+  //   };
+  // }
 
-    this.newsService
-      .createNews(this.newsDetails)
-      .pipe(
-        finalize(async () => {
-          if (responseOK) {
-          }
-        })
-      )
-      .subscribe({
-        next: (response) => {
-          responseOK = true;
-        },
-        error: (error: HttpErrorResponse) => {
-          responseOK = false;
-          console.error(error);
-          this.toaster.error(
-            'Ocurrió un error al elegir tu club. Inténtalo de nuevo.'
-          );
-        },
-      });
-  }
+  // createNews(newsDetails: any) {
+  //   let responseOK: boolean = false;
+
+  //   this.newsService
+  //     .createNews(this.newsDetails)
+  //     .pipe(
+  //       finalize(async () => {
+  //         if (responseOK) {
+  //         }
+  //       })
+  //     )
+  //     .subscribe({
+  //       next: (response) => {
+  //         responseOK = true;
+  //       },
+  //       error: (error: HttpErrorResponse) => {
+  //         responseOK = false;
+  //         console.error(error);
+  //         this.toaster.error(
+  //           'Ocurrió un error al elegir tu club. Inténtalo de nuevo.'
+  //         );
+  //       },
+  //     });
+  // }
 }

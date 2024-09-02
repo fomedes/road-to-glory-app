@@ -49,13 +49,24 @@ a :hover {
   color: var(--secondary-color)
 }
 
-.page { 
-  display: flex; /* Make the landing page a flex container */
+main {
+  display: flex;
   flex-direction: column;
-  justify-content: center; /* Center elements horizontally */
-  align-items: center; /* Center elements vertically */
-  height: 100%;
+  flex: 1;
+  align-items: center;
+  max-width: 600px;
+  margin-inline: auto;
   margin-block: 80px;
+  height: 100%;
+
+}
+
+.page { 
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  height: 100%;
   margin-inline: 16px;
 }
 

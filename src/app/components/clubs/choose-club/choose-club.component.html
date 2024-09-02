@@ -52,7 +52,13 @@
   </div>
 
   <div class="submit-container">
-    <button type="submit" mat-raised-button color="primary" class="submit-button">Elegir Club</button>
+    <button *ngIf="!isClubRegistered(availableClubs[currentClubIndex]?.club_id)" type="submit" mat-raised-button color="primary" class="submit-button">Elegir Club
+
+    </button>
+    <button *ngIf="isClubRegistered(availableClubs[currentClubIndex]?.club_id)" disabled mat-raised-button color="primary" class="submit-button">Club no Disponible
+    
+    </button>
+
   </div>
 
 </form>
