@@ -108,7 +108,7 @@ export class MarketPlayersComponent implements OnInit {
 
   loadFavorites() {
     const teamId = this.currentTeam.teamId;
-    this.teamService.getFavouritePlayers(teamId).subscribe({
+    this.teamService.getFavoritePlayers(teamId).subscribe({
       next: (data) => {
         this.favoritePlayers = data
       },
@@ -124,7 +124,7 @@ export class MarketPlayersComponent implements OnInit {
     const index = this.favoritePlayers.indexOf(playerId);
 
     if (index !== -1) {
-      this.teamService.removePlayerFromFavourites(teamId, playerId).subscribe({
+      this.teamService.removePlayerFromFavorites(teamId, playerId).subscribe({
         next: () => {
           this.favoritePlayers.splice(index, 1);
           this.toaster.success(`${player.name} ha sido removido de Favoritos`);
@@ -137,7 +137,7 @@ export class MarketPlayersComponent implements OnInit {
         },
       });
     } else {
-      this.teamService.addPlayerToFavourites(teamId, playerId).subscribe({
+      this.teamService.addPlayerToFavorites(teamId, playerId).subscribe({
         next: () => {
           this.favoritePlayers.push(playerId);
           this.toaster.success(`${player.name} añadido a Favoritos`);
