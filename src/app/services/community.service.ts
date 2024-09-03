@@ -20,6 +20,10 @@ export class CommunityService {
     return this.http.post<CommunityDTO>(this.urlApi + '/create', community);
   }
 
+  getCommunityInfo(communityId: string): Observable<CommunityDTO> {
+    return this.http.get<CommunityDTO>(this.urlApi + '/communityInfo/' + communityId);
+  }
+
   getUserCommunities(user_id: string): Observable<CommunityDTO[]> {
     return this.http.get<CommunityDTO[]>(
       this.urlApi + '/userCommunities/' + user_id
@@ -48,5 +52,9 @@ export class CommunityService {
 
   getMarketConfig (communityId: string): Observable<any> {
     return this.http.get<any>(this.urlApi + '/marketConfig/' + communityId);
+  }
+
+  getCommunityAccess (communityId: string, password: string): Observable<any> {
+    return this.http.post<any>(this.urlApi + '/getAccess/' + communityId, {password});
   }
 }

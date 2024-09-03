@@ -5,11 +5,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faChevronDown,
   faChevronRight,
-  faChevronUp
+  faChevronUp,
+  faGear
 } from '@fortawesome/free-solid-svg-icons';
 import { GetKeysPipe } from '../../../pipes/get-keys.pipe';
 import { ToCurrencyPipe } from '../../../pipes/to-currency.pipe';
 import { CommunityService } from '../../../services/community.service';
+import { LocalStorageService } from '../../../services/local-storage.service';
 import { NewsService } from '../../../services/news.service';
 
 @Component({
@@ -23,11 +25,14 @@ export class CommunityPageComponent implements OnInit {
   faRightChevron = faChevronRight;
   faChevronDown = faChevronDown;
   faChevronUp = faChevronUp;
-
+  faGear = faGear;
   communityId: string = '';
+  communityInfo: any = {};
+  communityAdmins: any[] = [];  
   communityTeams: any[] = [];
   isTeamsMenu: boolean = false;
   isNewsMenu: boolean = true;
+  isUserAdmin: boolean = false;
 
   reversedNews: any[] = [];
   lastNews: any = {};
@@ -40,17 +45,43 @@ export class CommunityPageComponent implements OnInit {
   constructor(
     private communityService: CommunityService,
     private newsService: NewsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.communityId = params.get('communityId') ?? '';
+      this.getCommunityInfo();
       this.getLastNews();
-      this.getCommunityTeams();
+      this.getCommunityTeams();  
     });
   }
 
+  getCommunityInfo(): void {
+    this.communityService.getCommunityInfo(this.communityId).subscribe((community) => {
+      this.communityInfo = community
+      this.getCommunityAdmins();
+    });
+  }
+
+  getCommunityAdmins(): void {
+    this.communityAdmins = this.communityInfo.admins
+    this.checkIsUserAdmin();
+  }
+
+  checkIsUserAdmin(): void {
+    this.isUserAdmin = this.communityInfo.admins.some(
+      (admin: string) => {
+        const currentUser = this.localStorageService.getItem('user');
+        if (currentUser) {
+          return admin === currentUser.userId
+        }
+        return false
+      });
+    console.log(this.isUserAdmin);
+  }
+  
   getLastNews(): void {
     this.newsService.getNews(this.communityId).subscribe((news: any) => {
       this.reversedNews = news.slice(-20).reverse();

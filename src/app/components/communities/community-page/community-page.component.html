@@ -1,7 +1,13 @@
 <div class="page">
+  <div class="community-title">
+    <h6 class="community-name">{{communityInfo.name}}</h6>
+    <div class="community-settings" *ngIf="isUserAdmin">
+      <fa-icon [icon]="faGear"></fa-icon>
+    </div>
+  </div>
   <div class="community-teams">
     <div class="menu-toggler dropdown-menu" (click)="toggleMenu('isTeamsMenu')">
-      <h6>Equipos de la Comunidad</h6>
+      <h6>Equipos</h6>
       <div class="menu-chevron">
         <fa-icon [icon]="faChevronDown" *ngIf="!isTeamsMenu"></fa-icon>
         <fa-icon [icon]="faChevronUp" *ngIf="isTeamsMenu"></fa-icon>
@@ -32,21 +38,21 @@
           <ng-container *ngIf="news.type === 'transferPurchase'">
             <div class="news-content">
               <div class="news-time">{{ news.createdAt | date:'H:mm' }}</div>
-              <div class="news-display">
-                <!-- <div class="transfer-line">
-                  <fa-icon [icon]="faRightChevron"></fa-icon>
-                </div> -->
-                <div class="news-display-player">
-                  <img
-                  src="{{news.playerImage}}"
-                  alt="{{news.PlayerName}}"
-                  title="{{news.PlayerName}}"
-                  class="player-image"
-                  onerror="this.src='assets/images/others/default-player.svg'"
-                  >
-              <span>{{news.playerName}}</span>
+              <div class="news-card">
+                <div class="news-display-message">
+                  <span>{{news.message}}</span>
                 </div>
-                <div class="news-display-info">
+                <div class="news-display">
+                  <div class="news-display-player-image">
+                    <img
+                    src="{{news.playerImage}}"
+                    alt="{{news.PlayerName}}"
+                    title="{{news.PlayerName}}"
+                    class="player-image"
+                    onerror="this.src='assets/images/others/default-player.svg'"
+                    >
+                                <!-- <span>{{news.playerName}}</span> -->
+                  </div>
                   <div class="transfer-teams">
                     <a [routerLink]="getRouterLink(news.sellerId)">
                       <img src="{{news.sellerCrest}}" alt="" class="club-crest">
@@ -61,6 +67,7 @@
                   <div class="transfer-amount">
                     <div class="negative-value">{{news.transferAmount | toCurrency: 'EUR' }}</div>
                   </div>
+
                 </div>
               </div>
               <!-- <div class="news-message">{{ news.message }}</div> -->
@@ -71,39 +78,41 @@
           <ng-container *ngIf="news.type === 'transferSale'">
             <div class="news-content">
               <div class="news-time">{{ news.createdAt | date:'H:mm' }}</div>
-              <div class="news-display">
-                <!-- <div class="transfer-line">
-                  <fa-icon [icon]="faRightChevron"></fa-icon>
-                </div> -->
-                <div class="news-display-player">
-                  <img
+              <div class="news-card">
+                <div class="news-display-message">
+                  <span>{{news.message}}</span>
+                </div>
+                <div class="news-display">
+                  <div class="news-display-player-image">
+                    <img
                     src="{{news.playerImage}}"
                     alt="{{news.PlayerName}}"
                     title="{{news.PlayerName}}"
                     class="player-image"
                     onerror="this.src='assets/images/others/default-player.svg'"
                     >
-                  <span>{{news.playerName}}</span>
-                </div>
-                <div class="news-display-info">
+                                <!-- <span>{{news.playerName}}</span> -->
+                  </div>
                   <div class="transfer-teams">
-                    <a [routerLink]="getRouterLink(news.sellerId)">
-                      <img src="{{news.sellerCrest}}" alt="" class="club-crest">
+                    <a [routerLink]="getRouterLink(news.buyerId)">
+                      <img src="{{news.buyerCrest}}" alt="" class="club-crest">
                     </a>
                     <div class="transfer-line">
                       <fa-icon [icon]="faRightChevron"></fa-icon>
                     </div>
-                    <a [routerLink]="getRouterLink(news.buyerId)">
-                      <img src="{{news.buyerCrest}}" alt="" class="club-crest">
+                    <a [routerLink]="getRouterLink(news.sellerId)">
+                      <img src="{{news.sellerCrest}}" alt="" class="club-crest">
                     </a>
                   </div>
                   <div class="transfer-amount">
                     <div class="positive-value">{{news.transferAmount | toCurrency: 'EUR' }}</div>
                   </div>
+
                 </div>
               </div>
               <!-- <div class="news-message">{{ news.message }}</div> -->
             </div>
+
           </ng-container>
       
           <!-- Block for all other types -->
