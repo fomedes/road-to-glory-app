@@ -1,5 +1,5 @@
 .header {
-  background-color: rgb(28,28,28); 
+  background-color: var(--background-secondary-color); 
   padding: 10px 10px 5px 10px;
   height: 70px;
   max-height: 80px;
@@ -21,7 +21,7 @@
   align-items: center; /* Center content horizontally */
   text-decoration: none; /* Remove underline from links */
   width: 20%; /* Adjust width for 5 equal squares */
-  border-bottom: 5px solid  rgb(28,28,28);
+  border-bottom: 5px solid  var(--background-secondary-color);
   height: 100%;
   margin-top: auto;
 }
