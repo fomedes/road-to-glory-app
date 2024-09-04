@@ -16,9 +16,6 @@ export class UserService {
   ) {
     this.controller = 'users';
     this.urlApi = environment.apiUrl + this.controller;
-    // this.urlApi =
-    //   'https://api/api/' +
-    //   this.controller;
   }
 
   register(user: UserDTO): Observable<UserDTO> {

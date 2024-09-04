@@ -7,8 +7,9 @@
   width: 100%;
   height: 100%;
   padding: 8px;
-  border-radius: 8px;
+  border-radius: 16px;
   background-color: var(--background-secondary-color);
+  // height: calc(93vh - 160px);
 }
 
 .menu-item {
