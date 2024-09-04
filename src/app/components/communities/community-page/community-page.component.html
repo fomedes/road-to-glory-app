@@ -2,7 +2,9 @@
   <div class="community-title">
     <h6 class="community-name">{{communityInfo.name}}</h6>
     <div class="community-settings" *ngIf="isUserAdmin">
-      <fa-icon [icon]="faGear"></fa-icon>
+      <a [routerLink]="['/community/settings', communityInfo.id]">
+        <fa-icon [icon]="faGear"></fa-icon>
+      </a>
     </div>
   </div>
   <div class="community-teams">
@@ -58,7 +60,7 @@
                       <img src="{{news.sellerCrest}}" alt="" class="club-crest">
                     </a>
                     <div class="transfer-line">
-                      <fa-icon [icon]="faRightChevron"></fa-icon>
+                      <fa-icon [icon]="faPersonWalking"></fa-icon>
                     </div>
                     <a [routerLink]="getRouterLink(news.buyerId)">
                       <img src="{{news.buyerCrest}}" alt="" class="club-crest">
@@ -94,14 +96,14 @@
                                 <!-- <span>{{news.playerName}}</span> -->
                   </div>
                   <div class="transfer-teams">
-                    <a [routerLink]="getRouterLink(news.buyerId)">
-                      <img src="{{news.buyerCrest}}" alt="" class="club-crest">
-                    </a>
-                    <div class="transfer-line">
-                      <fa-icon [icon]="faRightChevron"></fa-icon>
-                    </div>
                     <a [routerLink]="getRouterLink(news.sellerId)">
                       <img src="{{news.sellerCrest}}" alt="" class="club-crest">
+                    </a>
+                    <div class="transfer-line">
+                      <fa-icon [icon]="faPersonWalking"></fa-icon>
+                    </div>
+                    <a [routerLink]="getRouterLink(news.buyerId)">
+                      <img src="{{news.buyerCrest}}" alt="" class="club-crest">
                     </a>
                   </div>
                   <div class="transfer-amount">

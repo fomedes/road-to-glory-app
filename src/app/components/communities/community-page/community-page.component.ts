@@ -4,9 +4,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faChevronDown,
-  faChevronRight,
   faChevronUp,
-  faGear
+  faGear, faPersonWalkingArrowRight
 } from '@fortawesome/free-solid-svg-icons';
 import { GetKeysPipe } from '../../../pipes/get-keys.pipe';
 import { ToCurrencyPipe } from '../../../pipes/to-currency.pipe';
@@ -22,7 +21,7 @@ import { NewsService } from '../../../services/news.service';
   styleUrl: './community-page.component.scss',
 })
 export class CommunityPageComponent implements OnInit {
-  faRightChevron = faChevronRight;
+  faPersonWalking = faPersonWalkingArrowRight;
   faChevronDown = faChevronDown;
   faChevronUp = faChevronUp;
   faGear = faGear;
