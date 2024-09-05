@@ -8,6 +8,11 @@ import { CreateCommunityComponent } from './components/communities/create-commun
 import { JoinCommunityComponent } from './components/communities/join-community/join-community.component';
 import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { MenuAdminToolsComponent } from './components/menus/admin/menu-admin-tools/menu-admin-tools.component';
+import { MenuBudgetsComponent } from './components/menus/admin/menu-budgets/menu-budgets.component';
+import { MenuGeneralComponent } from './components/menus/admin/menu-general/menu-general.component';
+import { MenuMarketComponent } from './components/menus/admin/menu-market/menu-market.component';
+import { MenuTeamsComponent } from './components/menus/admin/menu-teams/menu-teams.component';
 import { CommunitySettingsComponent } from './components/menus/community-settings/community-settings.component';
 import { MarketPlayersComponent } from './components/players/market-players/market-players.component';
 import { LoginComponent } from './components/users/login/login.component';
@@ -62,7 +67,28 @@ export const routes: Routes = [
   {
     path: 'community/settings/:communityId',
     component: CommunitySettingsComponent
-  }
+  },
+  {
+    path: 'community/settings/:communityId/general',
+    component: MenuGeneralComponent
+  },
+  {
+    path: 'community/settings/:communityId/teams',
+    component: MenuTeamsComponent
+  },
+  {
+    path: 'community/settings/:communityId/market',
+    component: MenuMarketComponent
+  },
+  {
+    path: 'community/settings/:communityId/budgets',
+    component: MenuBudgetsComponent
+  },
+  {
+    path: 'community/settings/:communityId/admintools',
+    component: MenuAdminToolsComponent
+  },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

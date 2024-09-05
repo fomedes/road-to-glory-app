@@ -1,22 +1,22 @@
-<div class="page">
+<div class="component-wrapper">
   <div class="menu-list">
-    <a class="menu-item">
+    <a class="menu-item" [routerLink]="['/community/settings', communityId, 'general']">
       <span class="menu-title">General</span>
       <span class="menu-description">Nombre de la comunidad, límite de usuarios...</span>
     </a>
-    <a class="menu-item">
+    <a class="menu-item"  [routerLink]="['/community/settings', communityId, 'teams']">
       <span class="menu-title">Clubs</span>
       <span class="menu-description">Número de jugadores por equipo, jugadores iniciales...</span>
     </a>
-    <a class="menu-item">
+    <a class="menu-item"  [routerLink]="['/community/settings', communityId, 'market']">
       <span class="menu-title">Mercado</span>
       <span class="menu-description">Precios de jugadores, formato de mercado, rango de notas disponibles...</span>
     </a>
-    <a class="menu-item">
+    <a class="menu-item"  [routerLink]="['/community/settings', communityId, 'budgets']">
       <span class="menu-title">Presupuestos</span>
       <span class="menu-description">Presupuesto inicial de la comunidad, ingresos por partido jugado...</span>
     </a>
-    <a class="menu-item">
+    <a class="menu-item"  [routerLink]="['/community/settings', communityId, 'admintools']">
       <span class="menu-title">Herramientas de Administrador</span>
       <span class="menu-description">Premios o sanciones, creación de torneos, gestión de usuarios...</span>
     </a>

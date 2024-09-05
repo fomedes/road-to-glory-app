@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TeamEconomyComponent } from './team-economy.component';
+import { MenuMarketComponent } from './menu-market.component';
 
-describe('TeamEconomyComponent', () => {
-  let component: TeamEconomyComponent;
-  let fixture: ComponentFixture<TeamEconomyComponent>;
+describe('MenuMarketComponent', () => {
+  let component: MenuMarketComponent;
+  let fixture: ComponentFixture<MenuMarketComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TeamEconomyComponent]
+      imports: [MenuMarketComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TeamEconomyComponent);
+    fixture = TestBed.createComponent(MenuMarketComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -7,15 +7,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart, faStar } from '@fortawesome/free-regular-svg-icons';
 import {
   faCartShopping,
   faChevronDown,
-  faFileSignature,
-  faHeartCircleMinus,
-  faHeartCirclePlus,
-  faTimes,
-  faHeart as solidHeart
+  faFileSignature, faTimes,
+  faHeart as solidHeart,
+  faStar as solidStar,
 } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
@@ -42,8 +40,8 @@ export class MarketPlayersComponent implements OnInit {
   faCartShopping = faCartShopping;
   faHeart = faHeart;
   faSolidHeart = solidHeart;
-  faHeartCirclePlus = faHeartCirclePlus;
-  faHeartCircleMinus = faHeartCircleMinus;
+  faStar = faStar;
+  faSolidStar = solidStar;
   faTimes = faTimes;
   faChevronDown = faChevronDown;
 

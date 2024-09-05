@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  width: inherit;
   margin-bottom: 16px;
 
   .community-settings{
@@ -17,38 +17,38 @@
 
 .community-teams {
   margin-bottom: 16px;
-  width: 328px;
+  width: inherit;
 }
 
 h6 {
-  width: 100%;
+  width: inherit;
 }
 
 .menu-chevron {
   display: flex;
-  width: 100%;
+  width: inherit;
   justify-content: center;
 }
 
 .teams-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; 
-  margin-top: 10px;
+  gap: 8px; 
+  margin-top: 8px;
   justify-content: center;
 }
 
 .last-news {
-  width: 100%;
+  width: inherit;
 }
 .news-section {
   margin-bottom: 20px;
   padding-bottom: 10px;
-  width: 328px;
+  width: inherit;
 }
 
 .news-item {
-  margin-block: 4px;
+  margin-block: 8px;
 }
 
 .news-date {
@@ -61,7 +61,7 @@ h6 {
   display: flex;
   align-items: center;
   // font-size: 0.85em;
-  width: 100%;
+  width: inherit;
   // border: 1px solid grey;
   border-radius: 8px;
   padding: 8px;
@@ -81,10 +81,17 @@ h6 {
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  width: 100%;
 }
 
+// .img-wrapper {
+//   padding: 8px;
+//   background-color: var(--background-tertiary-color);
+//   border-radius: 50%;
+// }
+
 .club-crest {
-  height: 45px;
+  height: 50px;
   text-align: center;
 }
 
@@ -157,6 +164,6 @@ h6 {
   flex: 0 0 auto;
 }
 
-.news-message {
-  flex: 0 0 70%;
+.news-display-message {
+  width: 100%;
 }

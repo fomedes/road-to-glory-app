@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TeamsComponent } from './teams.component';
+import { MenuAdminToolsComponent } from './menu-admin-tools.component';
 
-describe('TeamsComponent', () => {
-  let component: TeamsComponent;
-  let fixture: ComponentFixture<TeamsComponent>;
+describe('MenuAdminToolsComponent', () => {
+  let component: MenuAdminToolsComponent;
+  let fixture: ComponentFixture<MenuAdminToolsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TeamsComponent]
+      imports: [MenuAdminToolsComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TeamsComponent);
+    fixture = TestBed.createComponent(MenuAdminToolsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -16,7 +16,7 @@ import { NewsService } from '../../../services/news.service';
 @Component({
   selector: 'app-community-page',
   standalone: true,
-  imports: [CommonModule, GetKeysPipe, ToCurrencyPipe,FontAwesomeModule, RouterModule],
+  imports: [CommonModule, GetKeysPipe, ToCurrencyPipe, FontAwesomeModule, RouterModule],
   templateUrl: './community-page.component.html',
   styleUrl: './community-page.component.scss',
 })

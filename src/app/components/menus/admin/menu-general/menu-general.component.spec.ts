@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MarketComponent } from './market.component';
+import { MenuGeneralComponent } from './menu-general.component';
 
-describe('MarketComponent', () => {
-  let component: MarketComponent;
-  let fixture: ComponentFixture<MarketComponent>;
+describe('MenuGeneralComponent', () => {
+  let component: MenuGeneralComponent;
+  let fixture: ComponentFixture<MenuGeneralComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MarketComponent]
+      imports: [MenuGeneralComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MarketComponent);
+    fixture = TestBed.createComponent(MenuGeneralComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
