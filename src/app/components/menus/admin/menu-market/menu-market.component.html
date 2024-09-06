@@ -1,1 +1,28 @@
-<p>menu-market works!</p>
+<div class="component-wrapper">
+  <div class="return-button">
+    <app-return-button></app-return-button>
+  </div>
+  <div class="menu-list">
+    <a class="menu-item">
+      <span class="menu-title">Formato de mercado</span>
+      <span class="menu-description">{{communityData.market.randomPlayers}}</span>
+    </a>
+    <a class="menu-item">
+      <span class="menu-title">Precios de los jugadores</span>
+      <span class="menu-description">{{communityData.market.playerPrices}}</span>
+    </a>
+    <a class="menu-item">
+      <span class="menu-title">jugadores disponibles</span>
+      <span class="menu-description">min:{{communityData.market.minOvr}}  max:{{communityData.market.maxOvr}}</span>
+    </a>
+    <a class="menu-item">
+      <span class="menu-title">Duración periodo de puja</span>
+      <span class="menu-description">{{communityData.market.bidWindow}}</span>
+    </a>
+    <a class="menu-item">
+      <span class="menu-title">Penalización por liberación de jugadores</span>
+      <span class="menu-description">%</span>
+    </a>
+  
+  </div>
+</div>

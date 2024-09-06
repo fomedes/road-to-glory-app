@@ -20,7 +20,7 @@ export class CommunityService {
     return this.http.post<CommunityDTO>(this.urlApi + '/create', community);
   }
 
-  getCommunityInfo(communityId: string): Observable<CommunityDTO> {
+  getCommunityData(communityId: string): Observable<CommunityDTO> {
     return this.http.get<CommunityDTO>(this.urlApi + '/communityInfo/' + communityId);
   }
 

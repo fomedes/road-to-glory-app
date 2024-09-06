@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-community-settings',
@@ -10,11 +10,16 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 })
 export class CommunitySettingsComponent {
   communityId: string ='';
+  communityData: any = {};
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(params => {
       this.communityId = params['communityId'];
     });
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras?.state) {
+      this.communityData = navigation.extras.state['communityData'];
+    }
   }
 
 }

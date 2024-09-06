@@ -26,7 +26,7 @@ export class CommunityPageComponent implements OnInit {
   faChevronUp = faChevronUp;
   faGear = faGear;
   communityId: string = '';
-  communityInfo: any = {};
+  communityData: any = {};
   communityAdmins: any[] = [];  
   communityTeams: any[] = [];
   isTeamsMenu: boolean = false;
@@ -51,26 +51,27 @@ export class CommunityPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.communityId = params.get('communityId') ?? '';
-      this.getCommunityInfo();
+      this.getcommunityData();
       this.getLastNews();
       this.getCommunityTeams();  
     });
   }
 
-  getCommunityInfo(): void {
-    this.communityService.getCommunityInfo(this.communityId).subscribe((community) => {
-      this.communityInfo = community
+  getcommunityData(): void {
+    this.communityService.getCommunityData(this.communityId).subscribe((community) => {
+      this.communityData = community;
+      console.log(this.communityData);
       this.getCommunityAdmins();
     });
   }
 
   getCommunityAdmins(): void {
-    this.communityAdmins = this.communityInfo.admins
+    this.communityAdmins = this.communityData.admins
     this.checkIsUserAdmin();
   }
 
   checkIsUserAdmin(): void {
-    this.isUserAdmin = this.communityInfo.admins.some(
+    this.isUserAdmin = this.communityData.admins.some(
       (admin: string) => {
         const currentUser = this.localStorageService.getItem('user');
         if (currentUser) {
@@ -78,7 +79,6 @@ export class CommunityPageComponent implements OnInit {
         }
         return false
       });
-    console.log(this.isUserAdmin);
   }
   
   getLastNews(): void {

@@ -1,8 +1,11 @@
 <div class="component-wrapper">
   <div class="community-title">
-    <h6 class="community-name">{{communityInfo.name}}</h6>
+    <div>
+      <h6 class="community-name">{{communityData.name}}</h6>
+      <span class="community-season">Temporada {{communityData?.currentSeason?.seasonNumber}}</span>
+    </div>
     <div class="community-settings" *ngIf="isUserAdmin">
-      <a [routerLink]="['/community/settings', communityInfo.id]">
+      <a [routerLink]="['/community/settings', communityData.id]" [state]="{ communityData }">
         <fa-icon [icon]="faGear"></fa-icon>
       </a>
     </div>

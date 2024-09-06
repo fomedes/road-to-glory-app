@@ -3,6 +3,7 @@
 @import 'ngx-toastr/toastr';
 @import './styles/colorVariables.scss';
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import 'styles/menus.scss';
 
 body, app-root{
   background-color: var(--background-color);
@@ -77,6 +78,10 @@ form {
   margin: 0 auto;
   width: fit-content;
   padding: 1rem;
+}
+
+.return-button {
+  margin-bottom: 8px;
 }
 
 
