@@ -62,7 +62,7 @@ export class JoinCommunityComponent implements OnInit {
 
   showPasswordOverlay(community: CommunityDTO): void {
     const dialogRef = this.dialog.open(PasswordOverlayComponent, {
-      width: '328px',
+      width: '334px',
       data: { communityName: community.name }
     });
   
@@ -78,7 +78,8 @@ export class JoinCommunityComponent implements OnInit {
       next: (response) => {
         if (response.message === 'Password is correct') {
           this.router.navigate(['/choose-club'], { state: { community } });
-        } else {
+        } 
+        else {
           this.snackBar.open('Contraseña incorrecta. Inténtalo de nuevo.', 'Cerrar', {
             duration: 3000,
           });

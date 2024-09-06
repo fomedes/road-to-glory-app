@@ -57,4 +57,8 @@ export class CommunityService {
   getCommunityAccess (communityId: string, password: string): Observable<any> {
     return this.http.post<any>(this.urlApi + '/getAccess/' + communityId, {password});
   }
+
+  advanceSeason (communityId: string): Observable<any> {
+    return this.http.post<any>(this.urlApi + '/advanceSeason/' + communityId, {});
+  }
 }

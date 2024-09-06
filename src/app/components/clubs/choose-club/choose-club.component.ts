@@ -174,7 +174,7 @@ export class ChooseClubComponent implements OnInit {
     // this.getNewsDetails();
 
     let responseOK: boolean = false;
-
+    console.log(this.teamCreationParameters)
     this.teamService
       .createTeam(this.teamCreationParameters)
       .pipe(
