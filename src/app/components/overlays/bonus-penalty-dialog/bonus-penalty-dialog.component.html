@@ -1,0 +1,33 @@
+<h5 mat-dialog-title>Bonificar / Penalizar</h5>
+<div mat-dialog-content>
+  <form [formGroup]="bonusPenaltyForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Motivo</mat-label>
+      <textarea matInput formControlName="message" placeholder="Escriba un mensaje"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Acción</mat-label>
+      <mat-select formControlName="actionType">
+        <mat-option value="Bonus">Bonificación</mat-option>
+        <mat-option value="Penalization">Penalización</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Equipo</mat-label>
+      <mat-select formControlName="teamId">
+        <mat-option *ngFor="let team of teams" [value]="team.id">{{ team.clubName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Cantidad</mat-label>
+      <input matInput formControlName="amount" type="text" placeholder="Introducir cantidad" required [currencyMask]="{ prefix: '',  suffix: ' €', thousands: '.', precision: 0 }">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="secondary" (click)="onCancel()">Cancelar</button>
+  <button mat-button color="primary" [disabled]="!bonusPenaltyForm.valid" (click)="onSubmit()">Aceptar</button>
+</div>

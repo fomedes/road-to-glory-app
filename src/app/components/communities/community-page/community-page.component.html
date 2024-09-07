@@ -49,7 +49,7 @@
                   <div class="news-display-message">
                     <span>{{news.message}}</span>
                   </div>
-                  <div class="news-display">
+                  <div class="news-transfer-display">
                     <div class="news-display-player-image img-wrapper">
                       <img
                         src="{{news.playerImage}}"
@@ -90,7 +90,7 @@
                   <div class="news-display-message">
                     <span>{{news.message}}</span>
                   </div>
-                  <div class="news-display">
+                  <div class="news-transfer-display">
                     <div class="news-display-player-image img-wrapper">
                       <img
                         src="{{news.playerImage}}"
@@ -125,11 +125,41 @@
             </ng-container>
 
           </ng-container>
+
+          <!-- Block for budget adjustments -->          
+          <ng-container *ngIf="news.type === 'bonus' || news.type === 'penalization'">
+            <div class="news-content">
+              <div class="news-main-image">
+                <img src="{{news.clubCrest}}" alt="" class="club-crest">
+              </div>
+              <div class="news-display">
+                <div class="news-display-title">
+
+                  <!-- Conditional title for bonuses -->
+                  <ng-container *ngIf="news.type === 'bonus'">
+                    <span>Bonus:</span>
+                    <div class="transfer-amount positive-value">
+                      {{news.amount | toCurrency: 'EUR'}}
+                    </div>
+                  </ng-container>
+                  
+                  <!-- Conditional title for penalizations -->                  
+                  <ng-container *ngIf="news.type === 'penalization'">
+                    <span>Sanción:</span>
+                    <div class="transfer-amount negative-value">
+                      {{news.amount | toCurrency: 'EUR'}}
+                    </div>
+                  </ng-container>
+
+                </div>
+                <div class="news-message">{{ news.message }}</div>
+              </div>
+            </div>
+          </ng-container>
       
           <!-- Block for all other types -->
-          <ng-container *ngIf="news.type !== 'transferPurchase' && news.type !== 'transferSale'">
+          <ng-container *ngIf="news.type === 'newUser' || news.type === 'newSeason'">
             <div class="news-content">
-              <div class="news-time">{{ news.createdAt | date:'H:mm' }}</div>
               <img src="{{news.clubCrest}}" alt="" class="club-crest">
               <div class="news-message">{{ news.message }}</div>
             </div>
