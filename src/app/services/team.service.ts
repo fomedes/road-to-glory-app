@@ -17,12 +17,7 @@ export class TeamService {
     this.urlApi = environment.apiUrl + this.controller;
   }
 
-  createTeam(team: TeamCreationParametersDTO): Observable<TeamDTO> {
-    // const payload = {
-    //   team: team,
-    //   newsDetails: newsDetails
-    // };
-  
+  createTeam(team: TeamCreationParametersDTO): Observable<TeamDTO> {  
     return this.http.post<TeamDTO>(this.urlApi + '/create', team);
   }
 

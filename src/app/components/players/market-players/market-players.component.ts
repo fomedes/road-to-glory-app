@@ -101,7 +101,7 @@ export class MarketPlayersComponent implements OnInit {
     this.getPlayerPrices();
     this.user = this.localStorageService.getItem('user');
     this.getRegisteredPlayers();
-    this.filterPlayers();
+    // this.filterPlayers();
   }
 
   loadFavorites() {
@@ -186,13 +186,14 @@ export class MarketPlayersComponent implements OnInit {
 
   filterPlayers() {
     this.filteredPlayers = this.players.filter(player => {
-        const isFavorite = this.displayFavorites ? this.favoritePlayers.includes(player.playerId) : true;
-        const matchesSearchQuery = player.name.toLowerCase().includes(this.searchQuery.toLowerCase());
-        const matchesPosition = this.selectedPositions.length === 0 || this.selectedPositions.includes(player.position[0]);
-        const matchesFreePlayers = !this.filterFreePlayers || !this.isPlayerRegistered(player.playerId);
-
-        return isFavorite && matchesSearchQuery && matchesPosition && matchesFreePlayers;
+      const isFavorite = this.displayFavorites ? this.favoritePlayers.includes(player.playerId) : true;
+      const matchesSearchQuery = player.name?.toLowerCase().includes(this.searchQuery?.toLowerCase() || '');
+      const matchesPosition = this.selectedPositions.length === 0 || this.selectedPositions.includes(player.position?.[0]);
+      const matchesFreePlayers = !this.filterFreePlayers || !this.isPlayerRegistered(player.playerId);
+  
+      return isFavorite && matchesSearchQuery && matchesPosition && matchesFreePlayers;
     });
+  
 
     this.totalPages = Math.ceil(this.filteredPlayers.length / this.itemsPerPage);
     this.updatePaginatedPlayers();
