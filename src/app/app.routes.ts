@@ -15,6 +15,7 @@ import { MenuMarketComponent } from './components/menus/admin/menu-market/menu-m
 import { MenuTeamsComponent } from './components/menus/admin/menu-teams/menu-teams.component';
 import { CommunitySettingsComponent } from './components/menus/community-settings/community-settings.component';
 import { MarketPlayersComponent } from './components/players/market-players/market-players.component';
+import { TournamentMainComponent } from './components/tournaments/tournament-main/tournament-main.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { RegisterComponent } from './components/users/register/register.component';
 
@@ -87,6 +88,10 @@ export const routes: Routes = [
   {
     path: 'community/settings/:communityId/admintools',
     component: MenuAdminToolsComponent
+  },
+  {
+    path: 'tournament/:tournamentId',
+    component: TournamentMainComponent
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

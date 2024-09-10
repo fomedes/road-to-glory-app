@@ -10,6 +10,7 @@
       </a>
     </div>
   </div>
+
   <div class="community-teams">
     <div class="menu-toggler dropdown-menu" (click)="toggleMenu('isTeamsMenu')">
       <h6>Equipos</h6>
@@ -19,14 +20,33 @@
       </div>
     </div>
 
-    <div class="teams-container"  *ngIf="isTeamsMenu">
+    <div class="teams-container" [ngClass]="{ 'teams-container-visible': isTeamsMenu }" [@toggleMenu]="isTeamsMenu ? 'expanded' : 'collapsed'">
       <div class="teams" *ngFor="let team of communityTeams">
-        <a class="team" [routerLink]="getRouterLink(team.id)">
+        <a class="team" [routerLink]="getRouterLink(team.id, 'club')">
           <img class="club-crest" [src]="team.clubCrest" alt="">
         </a>
       </div>
     </div>
   </div>
+
+  <div class="community-tournaments">
+    <div class="menu-toggler dropdown-menu" (click)="toggleMenu('isTournamentsMenu')">
+      <h6>Torneos</h6>
+      <div class="menu-chevron">
+        <fa-icon [icon]="faChevronDown" *ngIf="!isTournamentsMenu"></fa-icon>
+        <fa-icon [icon]="faChevronUp" *ngIf="isTournamentsMenu"></fa-icon>
+      </div>
+    </div>
+
+    <div class="tournaments-container" [@toggleMenu]="isTournamentsMenu ? 'expanded' : 'collapsed'">
+      <div class="tournaments" *ngFor="let tournament of communityData.tournaments">
+        <a class="tournament" [routerLink]="getRouterLink(tournament.id, 'tournament')">
+          <span class="club-crest" alt="">{{tournament.name}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="last-news">
     <div class="menu-toggler dropdown-menu" (click)="toggleMenu('isNewsMenu')">
       <h6>Últimas notícias</h6>
@@ -36,7 +56,7 @@
       </div>
     </div>
 
-    <div *ngIf="isNewsMenu">
+    <div [@toggleMenu]="isNewsMenu ? 'expanded' : 'collapsed'">
       <div *ngFor="let date of lastNews | getKeys" class="news-section">
         <h6 class="news-date">{{ date }}</h6>
         <div class="news-item" *ngFor="let news of lastNews[date]">
@@ -61,7 +81,7 @@
                     </div>
                     <div class="transfer-teams">
                       <div class="img-wrapper">
-                        <a [routerLink]="getRouterLink(news.sellerId)">
+                        <a [routerLink]="getRouterLink(news.sellerId, 'club')">
                           <img src="{{news.sellerCrest}}" alt="" class="club-crest">
                         </a>
                       </div>
@@ -69,7 +89,7 @@
                         <fa-icon [icon]="faPersonWalking"></fa-icon>
                       </div>
                       <div class="img-wrapper">
-                        <a [routerLink]="getRouterLink(news.buyerId)">
+                        <a [routerLink]="getRouterLink(news.buyerId, 'club')">
                           <img src="{{news.buyerCrest}}" alt="" class="club-crest">
                         </a>
                       </div>
@@ -102,7 +122,7 @@
                     </div>
                     <div class="transfer-teams">
                       <div class="img-wrapper">
-                        <a [routerLink]="getRouterLink(news.sellerId)">
+                        <a [routerLink]="getRouterLink(news.sellerId, 'club')">
                           <img src="{{news.sellerCrest}}" alt="" class="club-crest">
                         </a>
                       </div>
@@ -110,7 +130,7 @@
                         <fa-icon [icon]="faPersonWalking"></fa-icon>
                       </div>
                       <div class="img-wrapper">
-                        <a [routerLink]="getRouterLink(news.buyerId)">
+                        <a [routerLink]="getRouterLink(news.buyerId, 'club')">
                           <img src="{{news.buyerCrest}}" alt="" class="club-crest">
                         </a>
                       </div>
@@ -158,7 +178,7 @@
           </ng-container>
       
           <!-- Block for all other types -->
-          <ng-container *ngIf="news.type === 'newUser' || news.type === 'newSeason'">
+          <ng-container *ngIf="news.type === 'newSeason' || news.type === 'newTournament' || news.type === 'newUser'">
             <div class="news-content">
               <img src="{{news.clubCrest}}" alt="" class="club-crest">
               <div class="news-message">{{ news.message }}</div>

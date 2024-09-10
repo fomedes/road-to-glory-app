@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
@@ -19,6 +20,13 @@ import { NewsService } from '../../../services/news.service';
   imports: [CommonModule, GetKeysPipe, ToCurrencyPipe, FontAwesomeModule, RouterModule],
   templateUrl: './community-page.component.html',
   styleUrl: './community-page.component.scss',
+  animations: [
+    trigger('toggleMenu', [
+      state('collapsed', style({ height: '0px', overflow: 'hidden', opacity: 0 })),
+      state('expanded', style({ height: '*', opacity: 1 })),
+      transition('collapsed <=> expanded', [animate('300ms ease-in-out')]),
+    ])
+  ]
 })
 export class CommunityPageComponent implements OnInit {
   faPersonWalking = faPersonWalkingArrowRight;
@@ -29,8 +37,10 @@ export class CommunityPageComponent implements OnInit {
   communityData: any = {};
   communityAdmins: any[] = [];  
   communityTeams: any[] = [];
+
   isTeamsMenu: boolean = false;
   isNewsMenu: boolean = true;
+  isTournamentsMenu: boolean = false; 
   isUserAdmin: boolean = false;
 
   reversedNews: any[] = [];
@@ -103,8 +113,8 @@ export class CommunityPageComponent implements OnInit {
     });
   }
 
-  getRouterLink(teamId: string): string[] | null {
-    return teamId === this.freeAgent.freeAgentId ? null : ['/club', teamId];
+  getRouterLink(routeId: string, component: string): string[] | null {
+    return routeId === this.freeAgent.freeAgentId ? null : [`/${component}`, routeId];
   }
 
   toggleMenu(menuKey: string): void {

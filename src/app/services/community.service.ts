@@ -21,7 +21,7 @@ export class CommunityService {
   }
 
   getCommunityData(communityId: string): Observable<CommunityDTO> {
-    return this.http.get<CommunityDTO>(this.urlApi + '/communityInfo/' + communityId);
+    return this.http.get<CommunityDTO>(this.urlApi + '/communityData/' + communityId);
   }
 
   getUserCommunities(user_id: string): Observable<CommunityDTO[]> {

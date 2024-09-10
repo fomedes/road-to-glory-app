@@ -15,13 +15,15 @@
   }
 }
 
-.community-teams {
+.community-teams, .last-news, .community-tournaments {
   margin-bottom: 16px;
   width: inherit;
 }
 
-h6 {
-  width: inherit;
+.dropdown-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .menu-chevron {
@@ -34,13 +36,13 @@ h6 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px; 
-  margin-top: 8px;
   justify-content: center;
 }
 
-.last-news {
-  width: inherit;
+.teams-container-visible {
+  margin-top: 16px;
 }
+
 .news-section {
   margin-bottom: 20px;
   padding-bottom: 10px;

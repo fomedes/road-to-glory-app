@@ -6,6 +6,7 @@ import { AdminToolsService } from '../../../../services/admin-tools.service';
 import { CommunityService } from '../../../../services/community.service';
 import { BonusPenaltyDialogComponent } from '../../../overlays/bonus-penalty-dialog/bonus-penalty-dialog.component';
 import { ConfirmationDialogComponent } from '../../../overlays/confirmation-dialog/confirmation-dialog.component';
+import { TournamentCreationComponent } from '../../../overlays/tournament-creation/tournament-creation.component';
 import { ReturnButtonComponent } from '../../../shared/return-button/return-button.component';
 
 @Component({
@@ -81,6 +82,21 @@ export class MenuAdminToolsComponent {
               duration: 3000,
             });
           }
+        });
+      }
+    });
+  }
+
+  createTournament (){
+    const dialogRef = this.dialog.open(TournamentCreationComponent, {
+      data: { communityData: this.communityData }
+    });
+
+    dialogRef.afterClosed().subscribe(newTournament => {
+      console.log(newTournament);
+      if (newTournament) {
+        this.snackBar.open(`Torneo creado con éxito!`, 'Cerrar', {
+          duration: 3000,
         });
       }
     });

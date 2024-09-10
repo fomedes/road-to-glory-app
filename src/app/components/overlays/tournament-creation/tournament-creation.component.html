@@ -1,0 +1,40 @@
+<div>
+  <form [formGroup]="tournamentForm" (ngSubmit)="onSubmit()">
+    <!-- Tournament Name -->
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre del Torneo</mat-label>
+      <input matInput formControlName="name" placeholder="Introduzca el nombre del torneo" required>
+    </mat-form-field>
+
+    <!-- Tournament Type -->
+    <mat-form-field appearance="fill">
+      <mat-label>Formato de Torneo</mat-label>
+      <mat-select formControlName="tournamentType" required>
+        <mat-option *ngFor="let type of tournamentTypes" [value]="type.value">
+          {{ type.displaytext }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Teams (Multiple Selection) -->
+    <mat-form-field appearance="fill">
+      <mat-label>Participantes</mat-label>
+      <mat-select formControlName="teams" multiple required>
+        <mat-option *ngFor="let team of communityData.teams" [value]="team.id">
+          {{ team.clubName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Number of Splits -->
+    <mat-form-field appearance="fill">
+      <mat-label>Número de Vueltas</mat-label>
+      <input type="number" matInput formControlName="numSplits" placeholder="Enter number of splits" required>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="tournamentForm.invalid">Crear</button>
+    </div>
+  </form>
+</div>
