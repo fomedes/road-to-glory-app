@@ -12,14 +12,12 @@
   justify-content: center;
 }
 
-// @media (min-width: 768px) { /* Adjust styles for larger screens */
-//   .button-container {
-//     flex-direction: row; /* Buttons side-by-side on larger screens */
-//     justify-content: space-around;
-//     margin-top: 20px;
-//   }
-
-//   .btn {
-//     margin-bottom: 0; /* Remove margin between buttons on larger screens */
-//   }
-//}
+.message {
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  margin-top: 128px;
+  font-size: 0.8em;
+}

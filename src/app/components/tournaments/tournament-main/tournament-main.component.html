@@ -1,1 +1,31 @@
-<p>La página para los torneos se está desarrollando</p>
+<div class="component-wrapper">
+  <h5></h5>
+  <h6>Calendario</h6>
+  <div class="tournament-fixtures">
+    <div *ngFor="let split of getSplits()" class="split-container">
+      <h6 class="split-title">Vuelta {{ split }}</h6>
+      <div class="matchday-wrapper">
+        <div *ngFor="let matchday of getMatchdays(split)" class="matchday-container">
+          <div class="matchday">
+            <span class="matchday-title">Jornada {{ matchday }}</span>
+            <div *ngFor="let match of calendarMatches[split][matchday]">
+              <div *ngIf="match.home && match.away" class="match-wrapper">
+                <div class="match-container">
+                  <img class="club-crest" [src]="match.home.clubCrest" alt="{{ match.home.clubName }}" />
+                  <div class="result-container">
+                    <span class="goals">{{match.matchStats?.home?.goals ?? '-'}}</span>
+                    <span class="goals">{{match.matchStats?.away?.goals ?? '-'}}</span>
+                  </div>
+                  <img class="club-crest" [src]="match.away.clubCrest" alt="{{ match.away.clubName }}" />
+                </div>
+                <a class="add-result" [ngClass]="{'add-result-hidden': match.home.id !== currentUser.userId && match.away.id !== currentUser.userId}" (click)="consoleMatch(match)">
+                  <span class="results-btn">+</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

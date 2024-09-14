@@ -17,4 +17,8 @@ export class TournamentService {
   createTournament(tournamentData: any): Observable<any> {
     return this.http.post<any>(this.urlApi + '/create',  tournamentData);
   }
+
+  getTournament(tournamentId: string): Observable<any> {
+    return this.http.get<any>(this.urlApi + '/getTournament/' + tournamentId);
+  }
 }

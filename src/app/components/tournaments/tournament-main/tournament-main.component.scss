@@ -1,0 +1,80 @@
+.split-title, .matchday {
+  text-align: center;
+}  
+
+.tournament-fixtures {
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+}
+
+.split-container {
+  margin-bottom: 24px;
+}
+
+.matchday-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+}
+
+.matchday-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--background-secondary-color);
+  padding: 8px;
+  border-radius: 8px;
+  flex-grow: 1;
+  max-width: 164px;
+}
+
+.match-wrapper {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.match-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 100%;
+  margin: 10px 0;
+  background-color: var(--background-tertiary-color);
+  border-radius: 8px;
+  // border: 1px dashed var(--primary-color);
+}
+
+.result-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; 
+  max-width: 200px; 
+  padding: 4px;
+
+  :first-child {
+    border-right: 1px solid var(--text-secondary-color);
+  }
+}
+
+.club-crest {
+  width: 32px;
+  padding: 4px;
+}
+
+.goals {
+  width: 32px; 
+  text-align: center;
+}
+
+.add-result {
+}
+
+.results-btn {
+  margin-left: 8px;
+}
