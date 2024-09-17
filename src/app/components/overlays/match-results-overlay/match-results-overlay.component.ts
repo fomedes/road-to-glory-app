@@ -18,6 +18,7 @@ import { MatchService } from '../../../services/match.service';
 export class MatchResultsOverlayComponent {
   matchResultForm: FormGroup;
   match: any;
+  tournamentId: string;
   matchStats: MatchStatsDTO = new MatchStatsDTO();
 
 
@@ -25,54 +26,54 @@ export class MatchResultsOverlayComponent {
     private fb: FormBuilder,
     private matchService: MatchService,
     private dialogRef: MatDialogRef<MatchResultsOverlayComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: { match: any, tournamentId: string }
   ) {
 
     this.matchResultForm = this.fb.group({
       home: this.fb.group({
-        goals: [data.matchStats?.home?.goals ?? null, Validators.required],
-        possession: [data.matchStats?.home?.possession ?? null],
-        ballRecovery: [data.matchStats?.home?.ballRecovery ?? null],
-        shots: [data.matchStats?.home?.shots ?? null],
-        expectedGoals: [data.matchStats?.home?.expectedGoals ?? null],
-        passes: [data.matchStats?.home?.passes ?? null],
-        tackles: [data.matchStats?.home?.tackles ?? null],
-        tacklesWon: [data.matchStats?.home?.tacklesWon ?? null],
-        interceptions: [data.matchStats?.home?.interceptions ?? null],
-        saves: [data.matchStats?.home?.saves ?? null],
-        foulsCommitted: [data.matchStats?.home?.foulsCommitted ?? null],
-        offsides: [data.matchStats?.home?.offsides ?? null],
-        corners: [data.matchStats?.home?.corners ?? null],
-        freeKicks: [data.matchStats?.home?.freeKicks ?? null],
-        penaltyKicks: [data.matchStats?.home?.penaltyKicks ?? null],
-        yellowCards: [data.matchStats?.home?.yellowCards ?? null],
-        redCards: [data.matchStats?.home?.redCards ?? null],
-        injuries: [data.matchStats?.home?.injuries ?? null],
+        goals: [data.match.matchStats?.home?.goals ?? null, Validators.required],
+        possession: [data.match.matchStats?.home?.possession ?? null],
+        ballRecovery: [data.match.matchStats?.home?.ballRecovery ?? null],
+        shots: [data.match.matchStats?.home?.shots ?? null],
+        expectedGoals: [data.match.matchStats?.home?.expectedGoals ?? null],
+        passes: [data.match.matchStats?.home?.passes ?? null],
+        tackles: [data.match.matchStats?.home?.tackles ?? null],
+        tacklesWon: [data.match.matchStats?.home?.tacklesWon ?? null],
+        interceptions: [data.match.matchStats?.home?.interceptions ?? null],
+        saves: [data.match.matchStats?.home?.saves ?? null],
+        foulsCommitted: [data.match.matchStats?.home?.foulsCommitted ?? null],
+        offsides: [data.match.matchStats?.home?.offsides ?? null],
+        corners: [data.match.matchStats?.home?.corners ?? null],
+        freeKicks: [data.match.matchStats?.home?.freeKicks ?? null],
+        penaltyKicks: [data.match.matchStats?.home?.penaltyKicks ?? null],
+        yellowCards: [data.match.matchStats?.home?.yellowCards ?? null],
+        redCards: [data.match.matchStats?.home?.redCards ?? null],
+        injuries: [data.match.matchStats?.home?.injuries ?? null],
       }),
       away: this.fb.group({
-        goals: [data.matchStats?.away?.goals ?? null, Validators.required],
-        possession: [data.matchStats?.away?.possession ?? null],
-        ballRecovery: [data.matchStats?.away?.ballRecovery ?? null],
-        shots: [data.matchStats?.away?.shots ?? null],
-        expectedGoals: [data.matchStats?.away?.expectedGoals ?? null],
-        passes: [data.matchStats?.away?.passes ?? null],
-        tackles: [data.matchStats?.away?.tackles ?? null],
-        tacklesWon: [data.matchStats?.away?.tacklesWon ?? null],
-        interceptions: [data.matchStats?.away?.interceptions ?? null],
-        saves: [data.matchStats?.away?.saves ?? null],
-        foulsCommitted: [data.matchStats?.away?.foulsCommitted ?? null],
-        offsides: [data.matchStats?.away?.offsides ?? null],
-        corners: [data.matchStats?.away?.corners ?? null],
-        freeKicks: [data.matchStats?.away?.freeKicks ?? null],
-        penaltyKicks: [data.matchStats?.away?.penaltyKicks ?? null],
-        yellowCards: [data.matchStats?.away?.yellowCards ?? null],
-        redCards: [data.matchStats?.away?.redCards ?? null],
-        injuries: [data.matchStats?.away?.injuries ?? null],
+        goals: [data.match.matchStats?.away?.goals ?? null, Validators.required],
+        possession: [data.match.matchStats?.away?.possession ?? null],
+        ballRecovery: [data.match.matchStats?.away?.ballRecovery ?? null],
+        shots: [data.match.matchStats?.away?.shots ?? null],
+        expectedGoals: [data.match.matchStats?.away?.expectedGoals ?? null],
+        passes: [data.match.matchStats?.away?.passes ?? null],
+        tackles: [data.match.matchStats?.away?.tackles ?? null],
+        tacklesWon: [data.match.matchStats?.away?.tacklesWon ?? null],
+        interceptions: [data.match.matchStats?.away?.interceptions ?? null],
+        saves: [data.match.matchStats?.away?.saves ?? null],
+        foulsCommitted: [data.match.matchStats?.away?.foulsCommitted ?? null],
+        offsides: [data.match.matchStats?.away?.offsides ?? null],
+        corners: [data.match.matchStats?.away?.corners ?? null],
+        freeKicks: [data.match.matchStats?.away?.freeKicks ?? null],
+        penaltyKicks: [data.match.matchStats?.away?.penaltyKicks ?? null],
+        yellowCards: [data.match.matchStats?.away?.yellowCards ?? null],
+        redCards: [data.match.matchStats?.away?.redCards ?? null],
+        injuries: [data.match.matchStats?.away?.injuries ?? null],
       })
     });
     
-    this.match = data;
-    console.log('Match:', this.match);
+    this.match = data.match;
+    this.tournamentId = data.tournamentId;
   }
 
   onSubmit() {
@@ -85,6 +86,7 @@ export class MatchResultsOverlayComponent {
 
       const matchData = {
         id: this.match.id,
+        tournamentId: this.tournamentId,
         home: this.match.home.id,
         away: this.match.away.id,
         matchStats: this.matchStats

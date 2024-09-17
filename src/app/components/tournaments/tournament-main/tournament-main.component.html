@@ -18,7 +18,9 @@
                   </div>
                   <img class="club-crest" [src]="match.away.clubCrest" alt="{{ match.away.clubName }}" />
                 </div>
-                <a class="add-result" [ngClass]="{'add-result-hidden': match.home.id !== currentTeam.teamId && match.away.id !== currentTeam.teamId}" (click)="addMatchResult(match)">
+                <a class="add-result" [ngClass]="{
+                  'add-result-hidden': (match.home.id !== currentTeam.teamId && match.away.id !== currentTeam.teamId) || match.status === 'completed',
+                  }" (click)="addMatchResult(match)">
                   <span class="results-btn">+</span>
                 </a>
               </div>

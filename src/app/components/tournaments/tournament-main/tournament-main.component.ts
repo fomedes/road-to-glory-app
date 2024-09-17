@@ -76,7 +76,10 @@ export class TournamentMainComponent implements OnInit{
 
   addMatchResult(match: any) {
     const dialogRef = this.dialog.open(MatchResultsOverlayComponent, {
-      data: match
+      data: { 
+        match: match, 
+        tournamentId: this.tournamentId 
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
