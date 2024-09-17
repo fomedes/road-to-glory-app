@@ -16,6 +16,7 @@ import { MatchResultsOverlayComponent } from '../../overlays/match-results-overl
 export class TournamentMainComponent implements OnInit{
   tournamentId: string = ''
   tournamentData: any
+  standings: any
   calendarMatches: any = {}
   currentTeam: any
 
@@ -38,6 +39,8 @@ export class TournamentMainComponent implements OnInit{
   getTournamentData(){
     this.tournamentService.getTournament(this.tournamentId).subscribe((tournament) => {
       this.tournamentData = tournament;
+      this.standings = tournament.standingsLeague;
+      console.log(this.standings);
       this.organizeMatches(tournament.matches)
     });
  }

@@ -1,7 +1,44 @@
 <div class="component-wrapper">
-  <h5></h5>
-  <h6>Calendario</h6>
+  <div class="table-wrapper">
+    <h6>Clasificación</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th></th>
+          <th>PJ</th>
+          <th>V</th>
+          <th>E</th>
+          <th>D</th>
+          <th>GF</th>
+          <th>GC</th>
+          <th>DF</th>          
+          <th>P</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let team of standings; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td class="crest-container">
+            <img src="{{ team.team.clubCrest }}" alt="Club crest" class="club-crest">
+          </td>
+          <td>{{ team.gamesPlayed }}</td>
+          <td>{{ team.won }}</td>
+          <td>{{ team.tied }}</td>
+          <td>{{ team.lost }}</td>
+          <td>{{ team.goalsFor }}</td>
+          <td>{{ team.goalsAgainst }}</td>
+          <td>{{ team.goalDifference }}</td>
+          <td>{{ team.points }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
   <div class="tournament-fixtures">
+    <h6>Calendario</h6>
     <div *ngFor="let split of getSplits()" class="split-container">
       <h6 class="split-title">Vuelta {{ split }}</h6>
       <div class="matchday-wrapper">

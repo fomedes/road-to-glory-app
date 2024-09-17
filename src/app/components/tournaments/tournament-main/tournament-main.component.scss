@@ -77,10 +77,41 @@
 }
 
 .add-result-hidden {
-  // visibility: hidden;
   display: none;
 }
 
 .results-btn {
   margin-left: 8px;
+}
+
+.table-wrapper {
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.table th {
+  background-color: var(--background-secondary-color);
+  font-weight: bold;
+}
+
+.table .crest-container {
+  display: flex;
+  justify-content: center;  
+  align-items: center; 
+  padding: 0;
+  height: 100%; 
+}
+
+.table .club-crest {
+  width: 45px;
 }
