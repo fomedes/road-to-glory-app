@@ -1,0 +1,31 @@
+<form [formGroup]="matchResultForm" (ngSubmit)="onSubmit()">
+  <div class="match-form">
+    <div class="data-container">
+
+      <div class="data-item title">
+        <div class="data-item-home">
+          <img src="{{ match.home.clubCrest }}" alt="Home club crest" class="club-crest">
+        </div>
+        <span></span>
+        <div class="data-item-away">
+          <img src="{{ match.away.clubCrest }}" alt="Away club crest" class="club-crest">
+        </div>
+      </div>
+
+      <div class="data-item goals">
+        <mat-form-field appearance="fill" class="data-item-home" formGroupName="home">
+          <input matInput formControlName="goals" type="number">
+        </mat-form-field>
+        <div class="data-item-title">
+          <span>Goles</span>
+        </div>
+        <mat-form-field appearance="fill" class="data-item-away" formGroupName="away">
+          <input matInput formControlName="goals" type="number">
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">Guardar Resultado</button>
+  </div>
+</form>

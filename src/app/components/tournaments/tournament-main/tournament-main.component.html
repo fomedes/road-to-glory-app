@@ -10,7 +10,7 @@
             <span class="matchday-title">Jornada {{ matchday }}</span>
             <div *ngFor="let match of calendarMatches[split][matchday]">
               <div *ngIf="match.home && match.away" class="match-wrapper">
-                <div class="match-container">
+                <div class="match-container" [ngClass]="{'user-match-container': match.home.id === currentTeam.teamId || match.away.id === currentTeam.teamId}">
                   <img class="club-crest" [src]="match.home.clubCrest" alt="{{ match.home.clubName }}" />
                   <div class="result-container">
                     <span class="goals">{{match.matchStats?.home?.goals ?? '-'}}</span>
@@ -18,7 +18,7 @@
                   </div>
                   <img class="club-crest" [src]="match.away.clubCrest" alt="{{ match.away.clubName }}" />
                 </div>
-                <a class="add-result" [ngClass]="{'add-result-hidden': match.home.id !== currentUser.userId && match.away.id !== currentUser.userId}" (click)="consoleMatch(match)">
+                <a class="add-result" [ngClass]="{'add-result-hidden': match.home.id !== currentTeam.teamId && match.away.id !== currentTeam.teamId}" (click)="addMatchResult(match)">
                   <span class="results-btn">+</span>
                 </a>
               </div>

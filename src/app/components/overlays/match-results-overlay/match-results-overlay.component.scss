@@ -1,0 +1,44 @@
+/* match-results-overlay.component.css */
+.match-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  gap: 20px;
+}
+
+// .stat-title {
+//   display: flex;
+//   height: 76px;
+//   align-items: center;
+//   // justify-items: center;
+//   // justify-content: center;
+// }
+
+.data-item-home, .data-item-away {
+  width: 80px;
+}
+
+.data-item-title {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.club-crest {
+  width: 60px;
+}
+
+mat-form-field {
+  max-width: 80px;
+}
+
+mat-form-field input {
+  text-align: center;
+}

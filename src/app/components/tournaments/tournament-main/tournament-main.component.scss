@@ -46,8 +46,12 @@
   margin: 10px 0;
   background-color: var(--background-tertiary-color);
   border-radius: 8px;
-  // border: 1px dashed var(--primary-color);
 }
+
+.user-match-container {
+  border: 1px dashed var(--text-secondary-color);
+}
+
 
 .result-container {
   display: flex;
@@ -72,7 +76,9 @@
   text-align: center;
 }
 
-.add-result {
+.add-result-hidden {
+  // visibility: hidden;
+  display: none;
 }
 
 .results-btn {

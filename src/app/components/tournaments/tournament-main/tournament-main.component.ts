@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { TournamentService } from '../../../services/tournament.service';
+import { MatchResultsOverlayComponent } from '../../overlays/match-results-overlay/match-results-overlay.component';
 
 @Component({
   selector: 'app-tournament-main',
@@ -13,21 +15,22 @@ import { TournamentService } from '../../../services/tournament.service';
 })
 export class TournamentMainComponent implements OnInit{
   tournamentId: string = ''
-  tournamentData: any = {}
+  tournamentData: any
   calendarMatches: any = {}
-  currentUser: any
+  currentTeam: any
 
   constructor (
     private tournamentService: TournamentService,
     private route: ActivatedRoute,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.tournamentId = params.get('tournamentId') ?? '';
       this.getTournamentData()
-      this.getUserTeamId()
+      this.getUserTeam()
     });
   }
 
@@ -35,12 +38,12 @@ export class TournamentMainComponent implements OnInit{
   getTournamentData(){
     this.tournamentService.getTournament(this.tournamentId).subscribe((tournament) => {
       this.tournamentData = tournament;
-      console.log(this.tournamentData)
       this.organizeMatches(tournament.matches)
     });
  }
  
   organizeMatches(matches: any){
+    this.calendarMatches = {}
     matches.forEach((match: any) => {
       const split = match.split;
       const matchday = match.matchday;
@@ -66,16 +69,25 @@ export class TournamentMainComponent implements OnInit{
     return Object.keys(this.calendarMatches[split]).map(Number);
   }
 
-  getUserTeamId(){
-    this.currentUser = this.localStorageService.getItem('user');
+  getUserTeam(){
+    this.currentTeam = this.localStorageService.getItem('currentTeam');
   }
 
-  matchBelongsToUserTeam(match: any): boolean {
-    return match.homeTeam === this.currentUser.teamId || match.awayTeam === this.currentUser.teamId
-  }
 
-  consoleMatch(match: any): void {
-    console.log(match)
+  addMatchResult(match: any) {
+    const dialogRef = this.dialog.open(MatchResultsOverlayComponent, {
+      data: match
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const matchIndex = this.tournamentData.matches.findIndex((m: any) => m.id === match.id);
+        if (matchIndex !== -1) {
+          this.tournamentData.matches[matchIndex].matchStats = result.matchStats;
+          this.organizeMatches(this.tournamentData.matches);
+        }
+      }
+    });
   }
 }
 
